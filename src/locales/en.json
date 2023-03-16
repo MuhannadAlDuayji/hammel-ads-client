@@ -62,5 +62,18 @@
     "upload_image": "Upload an Image",
     "to_review": "To Review",
     "save_draft": "Save Draft",
-    "create_campaign_description": "you can create a campaign from here and save it as draft or send it for review."
+    "create_campaign_description": "you can create a campaign from here and save it as draft or send it for review.",
+    "create_account_description": "Create your account now!",
+    "or": "Or",
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "create_account": "Create an account",
+    "forgot_password_question": "Forgot your password?",
+    "remember_me": "Remember me",
+    "login_account_description": "Sign in to your account",
+    "get_started_today": "Get Started Today",
+    "arabic": "Arabic",
+    "english": "English"
 }

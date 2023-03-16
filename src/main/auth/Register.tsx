@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import InvalidInput from "../../components/alerts/InvalidInput";
+import { Header } from "../../components/Header";
 import { register, reset } from "../../redux/auth/authSlice";
 import { AppDispatch } from "../../redux/store";
 import InvalidPasswordModal from "../../utils/InvalidPasswordModal";
@@ -16,6 +18,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
     const { user, isLoading, isError, isSuccess, message } = useSelector(
         (state: any) => state.auth
     );
+    const { t, i18n } = useTranslation();
     const [showPasswordIncorrect, setShowPasswordIncorrect] = useState(false);
     const [popupText, setPopupText] = useState("");
 
@@ -28,6 +31,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
         email: "",
         phoneNumber: "",
         password: "",
+        preferredLanguage: localStorage.getItem("preferredLanguage"),
     });
 
     //// use effect
@@ -99,10 +103,6 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
         dispatch(register(userData));
     };
 
-    const translation = (ar: string, eng: string) => {
-        return lg === "ar" ? ar : eng;
-    };
-
     return isSuccess ? (
         <SuccessModel
             title="Success"
@@ -110,32 +110,22 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
         />
     ) : (
         <>
+            <Header />
             <div
-                className={`flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 ${
-                    lg === "ar" ? "text-right" : ""
-                }`}
+                className={`flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8`}
+                dir={i18n.language === "ar" ? "rtl" : "ltr"}
             >
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                    <Link to={"/"}>
-                        <img
-                            className="mx-auto h-12 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                            alt="Your Company"
-                        />
-                    </Link>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                        {translation(
-                            "قم بإنشاء حساب الآن",
-                            "Create your account now!"
-                        )}
+                        {t("create_account_description")}
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
-                        {translation("أو", "Or")}{" "}
+                        {t("or")}{" "}
                         <Link
                             to="/login"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
-                            {translation("تسجيل الدخول", "sign in")}
+                            {t("sign_in")}
                         </Link>
                     </p>
                 </div>
@@ -158,10 +148,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                         htmlFor="firstname"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        {translation(
-                                            "الاسم الاول",
-                                            "First Name"
-                                        )}
+                                        {t("first_name")}
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -195,10 +182,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                         htmlFor="lastname"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        {translation(
-                                            "اسم العائلة",
-                                            "Last Name"
-                                        )}
+                                        {t("last_name")}
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -232,10 +216,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                         htmlFor="email"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        {translation(
-                                            "البريد الإلكتروني",
-                                            "Email Address"
-                                        )}
+                                        {t("email")}
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -271,10 +252,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                         htmlFor="phonenumber"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        {translation(
-                                            "رقم الهاتف",
-                                            "Phone Number"
-                                        )}
+                                        {t("phone_number")}
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -311,7 +289,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                         htmlFor="password"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        {translation("كلمه السر", "Password")}
+                                        {t("password")}
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -349,10 +327,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                         htmlFor="passwordConfirm"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        {translation(
-                                            "تأكيد كلمة المرور",
-                                            "Confirm Password"
-                                        )}
+                                        {t("confirm_password")}
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -391,7 +366,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                         onClick={signUpHandler}
                                         className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >
-                                        {translation("اشتراك", "Sign Up")}
+                                        {t("sign_up")}
                                     </button>
                                 </div>
                             </form>

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import InvalidInput from "../../components/alerts/InvalidInput";
+import { Header } from "../../components/Header";
 import { login, reset } from "../../redux/auth/authSlice";
 import InvalidPasswordModal from "../../utils/InvalidPasswordModal";
 import LoadingSpinner from "../../utils/LoadingSpinner";
@@ -10,6 +12,7 @@ import SuccessModel from "../../utils/SuccessModel";
 export default function LoginPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { t, i18n } = useTranslation();
     const { user, isLoading, isError, isSuccess, message } = useSelector(
         (state: any) => state.auth
     );
@@ -65,25 +68,22 @@ export default function LoginPage() {
 
     return (
         <>
-            <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <Header />
+            <div
+                className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8"
+                dir={i18n.language === "ar" ? "rtl" : "ltr"}
+            >
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                    <Link to={"/"}>
-                        <img
-                            className="mx-auto h-12 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                            alt="Your Company"
-                        />
-                    </Link>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                        Sign in to your account
+                        {t("login_account_description")}
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
-                        Or{" "}
+                        {t("or")}{" "}
                         <Link
                             to="/register"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
-                            sign up
+                            {t("create_account")}
                         </Link>
                     </p>
                 </div>
@@ -103,7 +103,7 @@ export default function LoginPage() {
                                         htmlFor="email"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Email Address
+                                        {t("email")}
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -141,7 +141,7 @@ export default function LoginPage() {
                                         htmlFor="password"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Password
+                                        {t("password")}
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -183,9 +183,9 @@ export default function LoginPage() {
                                         />
                                         <label
                                             htmlFor="remember-me"
-                                            className="ml-2 block text-sm text-gray-900"
+                                            className="mx-2 block text-sm text-gray-900"
                                         >
-                                            Remember me
+                                            {t("remember_me")}
                                         </label>
                                     </div>
 
@@ -194,7 +194,7 @@ export default function LoginPage() {
                                             to="/forget"
                                             className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >
-                                            Forgot your password?
+                                            {t("forgot_password_question")}
                                         </Link>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@ export default function LoginPage() {
                                         onClick={signInHandler}
                                         className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >
-                                        Sign in
+                                        {t("sign_in")}
                                     </button>
                                 </div>
                             </form>
