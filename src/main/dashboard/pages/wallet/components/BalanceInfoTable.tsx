@@ -1,17 +1,47 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { saveUser } from "../../../../../redux/user/userSlice";
 
 type Props = {};
 
+interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+    balance: number;
+}
+
 const BalanceInfoTable = (props: Props) => {
-    const user = useSelector((state: any) => state.user.user);
+    const token = useSelector((state: any) => state.auth.token);
     const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const language = i18n.language;
+    const [user, setUser] = useState<User>({
+        firstName: "",
+        lastName: "",
+        balance: 0,
+        email: "",
+    });
     useEffect(() => {
         if (!user) return;
     }, [user]);
-    console.log("user from balance", user);
+    useEffect(() => {
+        axios
+            .get(`${process.env.REACT_APP_API_URL}/users/getuser`, {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => {
+                const user = res.data.data.user;
+                setUser(user);
+                dispatch(saveUser(user));
+            });
+    }, []);
     return (
         <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
             <dl className="sm:divide-y sm:divide-gray-200">
