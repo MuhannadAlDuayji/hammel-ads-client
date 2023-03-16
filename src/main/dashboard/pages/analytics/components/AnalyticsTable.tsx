@@ -115,30 +115,35 @@ export default function AnalyticsTable({ from, to, data }: props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((date, i) => (
-                            <tr key={i} className="border-b border-gray-200">
-                                <td className="py-4 pl-4 pr-3 text-sm sm:pl-0">
-                                    <div className="font-normal text-gray-900">
-                                        {formatDate(new Date(date.date))}
-                                    </div>
-                                </td>
-                                <td
-                                    className={`hidden py-4 px-3 text-${textDir} text-sm text-gray-500 sm:table-cell`}
+                        {data
+                            .filter((date) => date.views !== 0)
+                            .map((date, i) => (
+                                <tr
+                                    key={i}
+                                    className="border-b border-gray-200"
                                 >
-                                    {date.views}
-                                </td>
-                                <td
-                                    className={`hidden py-4 px-3 text-${textDir} text-sm text-gray-500 sm:table-cell`}
-                                >
-                                    {date.clicks}
-                                </td>
-                                <td
-                                    className={`py-4 pl-3 pr-4 text-${textDir} text-sm text-gray-500 sm:pr-0`}
-                                >
-                                    {date.clickRate.toFixed(2) + "%"}
-                                </td>
-                            </tr>
-                        ))}
+                                    <td className="py-4 pl-4 pr-3 text-sm sm:pl-0">
+                                        <div className="font-normal text-gray-900">
+                                            {formatDate(new Date(date.date))}
+                                        </div>
+                                    </td>
+                                    <td
+                                        className={`hidden py-4 px-3 text-${textDir} text-sm text-gray-500 sm:table-cell`}
+                                    >
+                                        {date.views}
+                                    </td>
+                                    <td
+                                        className={`hidden py-4 px-3 text-${textDir} text-sm text-gray-500 sm:table-cell`}
+                                    >
+                                        {date.clicks}
+                                    </td>
+                                    <td
+                                        className={`py-4 pl-3 pr-4 text-${textDir} text-sm text-gray-500 sm:pr-0`}
+                                    >
+                                        {date.clickRate.toFixed(2) + "%"}
+                                    </td>
+                                </tr>
+                            ))}
 
                         <tr className="border-b border-gray-200">
                             <td className="py-4 pl-4 pr-3 text-sm sm:pl-0">
