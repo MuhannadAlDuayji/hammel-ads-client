@@ -63,5 +63,18 @@
     "upload_image": "رفع صورة",
     "to_review": "إرسال للمراجعة",
     "save_draft": "حفظ المسودة",
-    "create_campaign_description": "يمكنك إنشاء حملة من هنا وحفظها كمسودة أو إرسالها للمراجعة."
+    "create_campaign_description": "يمكنك إنشاء حملة من هنا وحفظها كمسودة أو إرسالها للمراجعة.",
+    "create_account_description": "قم بإنشاء حساب الآن",
+    "or": "أو",
+    "sign_in": "تسجيل الدخول",
+    "password": "كلمة السر",
+    "confirm_password": "تأكيد كلمة السر",
+    "sign_up": "التسجيل",
+    "create_account": "إنشاء حساب",
+    "forgot_password_question": "هل نسيت كلمة المرور؟",
+    "remember_me": "تذكرني",
+    "login_account_description": "تسجيل الدخول إلى حسابك",
+    "get_started_today": "أنشئ حسابك اليوم",
+    "arabic": "العربية",
+    "english": "الإنجليزية"
 }

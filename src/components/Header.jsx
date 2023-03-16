@@ -8,6 +8,8 @@ import { Container } from "./Container";
 import { Logo } from "./Logo";
 import { NavLink } from "./NavLink";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 function MobileNavLink({ href, children }) {
     return (
@@ -93,33 +95,22 @@ function MobileNavigation() {
 }
 
 export function Header() {
+    const { t, i18n } = useTranslation();
     return (
         <header className="py-10">
             <Container>
                 <nav className="relative z-50 flex justify-between">
                     <div className="flex items-center md:gap-x-12">
-                        <Link to={"/"} aria-label="Home">
-                            <Logo className="h-10 w-auto" />
-                        </Link>
-                        <div className="hidden md:flex md:gap-x-6">
-                            <NavLink href="#features">Features</NavLink>
-                            <NavLink href="#testimonials">Testimonials</NavLink>
-                            <NavLink href="#pricing">Pricing</NavLink>
-                        </div>
+                        <LanguageSwitcher />
                     </div>
+
                     <div className="flex items-center gap-x-5 md:gap-x-8">
                         <div className="hidden md:block">
-                            <Link to="/login">Sign in</Link>
+                            <Link to="/login">{t("sign_in")}</Link>
                         </div>
                         <Button href="/register" color="blue">
-                            <span>
-                                Get started{" "}
-                                <span className="hidden lg:inline">today</span>
-                            </span>
+                            <span>{t("get_started_today")}</span>
                         </Button>
-                        <div className="-mr-1 md:hidden">
-                            <MobileNavigation />
-                        </div>
                     </div>
                 </nav>
             </Container>

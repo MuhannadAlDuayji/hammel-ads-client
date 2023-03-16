@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import {
+    BrowserRouter,
+    Navigate,
+    redirect,
+    Route,
+    Routes,
+    useNavigate,
+} from "react-router-dom";
 import Login from "./main/auth/Login";
 import Register from "./main/auth/Register";
 import Home from "./main/Home";
@@ -168,7 +175,7 @@ function MainRoutes() {
 
 const Application: React.FunctionComponent<IApplicationProps> = (props) => {
     const [language] = useState(
-        localStorage.getItem("preferredLanguage") || "en"
+        localStorage.getItem("preferredLanguage") || "ar"
     );
 
     const resources = {
@@ -183,7 +190,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
     i18n.use(initReactI18next).init({
         resources,
         lng: language,
-        fallbackLng: "en",
+        fallbackLng: "ar",
     });
 
     return (
@@ -191,7 +198,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             <Provider store={store}>
                 <I18nextProvider i18n={i18n}>
                     <Routes>
-                        <Route path="/" element={<Home />} />
+                        <Route path="/" element={<Navigate to="/login" />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/confirm" element={<ConfirmEmail />} />
