@@ -400,7 +400,7 @@ function AdminEditCampaignPage({}: Props) {
                                                 </div>
                                                 <p className="text-xs text-gray-500">
                                                     2090*1284 PNG, JPG, JPEG up
-                                                    to 10MB
+                                                    to 4MB
                                                 </p>
                                             </div>
                                         </div>

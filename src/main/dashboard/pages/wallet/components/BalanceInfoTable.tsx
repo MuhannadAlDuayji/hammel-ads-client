@@ -21,10 +21,10 @@ const BalanceInfoTable = (props: Props) => {
     const dispatch = useDispatch();
     const language = i18n.language;
     const [user, setUser] = useState<User>({
-        firstName: "",
-        lastName: "",
+        firstName: "-",
+        lastName: "-",
         balance: 0,
-        email: "",
+        email: "-",
     });
     useEffect(() => {
         if (!user) return;
