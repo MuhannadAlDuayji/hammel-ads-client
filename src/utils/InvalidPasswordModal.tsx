@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Transition } from "@headlessui/react";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/20/solid";
+import { useTranslation } from "react-i18next";
 
 interface IncorrectPasswordModalProps {
     showPasswordIncorrect: boolean;
@@ -14,12 +15,14 @@ export default function InvalidPasswordModal({
     showPasswordIncorrect,
     title,
 }: IncorrectPasswordModalProps) {
+    const { t, i18n } = useTranslation();
     return (
         <>
             {/* Global notification live region, render this permanently at the end of the document */}
             <div
                 aria-live="assertive"
                 className="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 mt-24"
+                dir={i18n.language === "ar" ? "rtl" : "ltr"}
             >
                 <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
                     {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
@@ -42,7 +45,7 @@ export default function InvalidPasswordModal({
                                             aria-hidden="true"
                                         />
                                     </div>
-                                    <div className="ml-3 w-0 flex-1 pt-0.5">
+                                    <div className="mx-3 w-0 flex-1 pt-0.5">
                                         <p className="text-sm font-medium text-gray-900">
                                             {title}
                                         </p>
@@ -56,7 +59,7 @@ export default function InvalidPasswordModal({
                                             }}
                                         >
                                             <span className="sr-only">
-                                                Close
+                                                {t("close")}
                                             </span>
                                             <XMarkIcon
                                                 className="h-5 w-5"

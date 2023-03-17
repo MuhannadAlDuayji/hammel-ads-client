@@ -58,7 +58,8 @@ export default function LoginPage() {
                 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
             )
         ) {
-            setErrorMessage("invalid email address");
+            const errorMessage: string = t("invalid_email_message");
+            setErrorMessage(errorMessage);
             return;
         }
 
@@ -220,8 +221,8 @@ export default function LoginPage() {
                 showPasswordIncorrect={showPasswordIncorrect}
                 title={
                     message.toLowerCase().includes("user")
-                        ? "No user found with that email adress"
-                        : "Incorrect Password"
+                        ? t("no_user_found_email_message")
+                        : t("incorrect_password")
                 }
             />
         </>

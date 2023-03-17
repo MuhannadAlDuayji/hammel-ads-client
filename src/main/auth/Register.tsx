@@ -34,6 +34,8 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
         preferredLanguage: localStorage.getItem("preferredLanguage"),
     });
 
+    const [unvalidProperties, setUnvalidProperties] = useState<string[]>([]);
+
     //// use effect
     useEffect(() => {
         dispatch(reset());
@@ -51,14 +53,26 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
 
         if (isError) {
             setShowPasswordIncorrect(true);
-            if (message.toLowerCase().includes("invalid email"))
-                setPopupText("invalid email address");
-            if (message.toLowerCase().includes("invalid phonenumber"))
-                setPopupText("invalid phone number");
-            if (message.toLowerCase().includes("email already"))
-                setPopupText(message);
-            if (message.toLowerCase().includes("phonenumber already"))
-                setPopupText(message);
+            if (message.toLowerCase().includes("invalid email")) {
+                const errorMessage = t("invalid_email_message");
+                setUnvalidProperties(["email"]);
+                setPopupText(errorMessage);
+            }
+            if (message.toLowerCase().includes("invalid phonenumber")) {
+                const errorMessage = t("invalid_phone_number");
+                setUnvalidProperties(["phonenumber"]);
+                setPopupText(errorMessage);
+            }
+            if (message.toLowerCase().includes("email already")) {
+                const errorMessage = t("email_already_in_use");
+                setUnvalidProperties(["email"]);
+                setPopupText(errorMessage);
+            }
+            if (message.toLowerCase().includes("phonenumber already")) {
+                const errorMessage = t("phonenumber_already_in_use");
+                setUnvalidProperties(["phonenumber"]);
+                setPopupText(errorMessage);
+            }
         }
     }, [user, isError, isLoading, isSuccess, message]);
 
@@ -72,10 +86,14 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
         e.preventDefault();
 
         if (userData.firstName.length < 3) {
-            return setErrorMessage("invalid first name");
+            const errorMessage = t("invalid_first_name_message");
+            setUnvalidProperties(["firstname"]);
+            return setErrorMessage(errorMessage);
         }
         if (userData.lastName.length < 3) {
-            return setErrorMessage("invalid last name");
+            const errorMessage = t("invalid_last_name_message");
+            setUnvalidProperties(["lastname"]);
+            return setErrorMessage(errorMessage);
         }
 
         if (
@@ -83,21 +101,28 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
             )
         ) {
-            return setErrorMessage("invalid email address");
+            const errorMessage = t("invalid_email_message");
+            setUnvalidProperties(["email"]);
+            return setErrorMessage(errorMessage);
         }
 
         if (userData.phoneNumber.length < 8) {
-            return setErrorMessage("invalid phone number");
+            const errorMessage = t("invalid_phone_number");
+            setUnvalidProperties(["phonenumber"]);
+            return setErrorMessage(errorMessage);
         }
 
         if (!validPassword.test(userData.password)) {
-            return setErrorMessage(
-                "password must be at least eight characters long and contain numbers"
-            );
+            const errorMessage = t("invalid_password_message");
+
+            setUnvalidProperties(["password"]);
+            return setErrorMessage(errorMessage);
         }
 
         if (userData.password !== passwordConfirm) {
-            return setErrorMessage("passwords do not match!");
+            const errorMessage = t("passwords_not_match_message");
+            setUnvalidProperties(["passwords"]);
+            return setErrorMessage(errorMessage);
         }
         //@ts-ignore
         dispatch(register(userData));
@@ -105,8 +130,8 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
 
     return isSuccess ? (
         <SuccessModel
-            title="Success"
-            description="your accont have been create successfully"
+            title={t("success_message")}
+            description={t("account_created_message")}
         />
     ) : (
         <>
@@ -168,8 +193,8 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                             }`}
                                             style={{
                                                 backgroundColor:
-                                                    errorMessage.includes(
-                                                        "first name"
+                                                    unvalidProperties.includes(
+                                                        "firstname"
                                                     )
                                                         ? "#FEF2F2"
                                                         : "",
@@ -202,8 +227,8 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                             }`}
                                             style={{
                                                 backgroundColor:
-                                                    errorMessage.includes(
-                                                        "last name"
+                                                    unvalidProperties.includes(
+                                                        "lastname"
                                                     )
                                                         ? "#FEF2F2"
                                                         : "",
@@ -237,7 +262,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                             }`}
                                             style={{
                                                 backgroundColor:
-                                                    errorMessage.includes(
+                                                    unvalidProperties.includes(
                                                         "email"
                                                     ) ||
                                                     popupText.includes("email")
@@ -273,7 +298,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                             }`}
                                             style={{
                                                 backgroundColor:
-                                                    errorMessage.includes(
+                                                    unvalidProperties.includes(
                                                         "phone"
                                                     ) ||
                                                     popupText.includes("phone")
@@ -310,7 +335,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                             }`}
                                             style={{
                                                 backgroundColor:
-                                                    errorMessage.includes(
+                                                    unvalidProperties.includes(
                                                         "password"
                                                     ) ||
                                                     popupText.includes(
@@ -347,7 +372,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
                                             }`}
                                             style={{
                                                 backgroundColor:
-                                                    errorMessage.includes(
+                                                    unvalidProperties.includes(
                                                         "password"
                                                     ) ||
                                                     popupText.includes(

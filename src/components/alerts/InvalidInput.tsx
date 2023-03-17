@@ -17,7 +17,7 @@ export default function InvalidInput({ content }: InvalidInputProps) {
                         aria-hidden="true"
                     />
                 </div>
-                <div className="ml-3">
+                <div className="mx-3">
                     <h3 className="text-sm font-medium text-red-800 text-left">
                         {content}
                     </h3>

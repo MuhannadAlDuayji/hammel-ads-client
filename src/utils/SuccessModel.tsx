@@ -4,6 +4,7 @@ import { CheckIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { reset } from "../redux/auth/authSlice";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 interface SuccessModelProps {
     title: string;
@@ -19,6 +20,7 @@ export default function SuccessModel({
     const [open, setOpen] = useState(true);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { t } = useTranslation();
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={() => {}}>
@@ -80,7 +82,7 @@ export default function SuccessModel({
                                             );
                                         }}
                                     >
-                                        Go to dashboard
+                                        {t("go_to_dashboard")}
                                     </button>
                                 </div>
                             </Dialog.Panel>

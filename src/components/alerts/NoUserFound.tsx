@@ -1,8 +1,10 @@
 import { XCircleIcon } from "@heroicons/react/20/solid";
+import { useTranslation } from "react-i18next";
 interface props {
     show: boolean;
 }
 export default function NoUserFound({ show }: props) {
+    const { t } = useTranslation();
     return (
         <div
             className="rounded-md bg-red-50 p-4"
@@ -17,7 +19,7 @@ export default function NoUserFound({ show }: props) {
                 </div>
                 <div className="ml-3">
                     <h3 className="text-sm font-medium text-red-800">
-                        No user Found with that email address
+                        {t("no_user_found_email_message")}
                     </h3>
                 </div>
             </div>
