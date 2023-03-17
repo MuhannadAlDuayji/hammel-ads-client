@@ -31,8 +31,8 @@ export default function LanguageSwitcher() {
     const [query, setQuery] = useState("");
     const { t, i18n } = useTranslation();
     const languages: Language[] = [
-        { id: 1, value: "ar", name: t("arabic") },
-        { id: 2, value: "en", name: t("english") },
+        { id: 1, value: "ar", name: "arabic" },
+        { id: 2, value: "en", name: "english" },
     ];
 
     let language = languages.find(
@@ -68,7 +68,7 @@ export default function LanguageSwitcher() {
                     className="w-28 rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     disabled={true}
                     onChange={(event) => setQuery(event.target.value)}
-                    displayValue={(language: Language) => language?.name}
+                    displayValue={(language: Language) => t(language?.name)}
                 />
                 <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                     <ChevronUpDownIcon
@@ -99,7 +99,7 @@ export default function LanguageSwitcher() {
                                             selected && "font-semibold"
                                         )}
                                     >
-                                        {language.name}
+                                        {t(language.name)}
                                     </span>
 
                                     {selected && (
