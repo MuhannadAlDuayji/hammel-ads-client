@@ -23,6 +23,7 @@ export default function LoginPage() {
     });
     const [showPasswordIncorrect, setShowPasswordIncorrect] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [unvalidProperties, setUnvalidProperties] = useState<string[]>([]);
 
     //// use effect
     useEffect(() => {
@@ -43,6 +44,7 @@ export default function LoginPage() {
 
         if (isError) {
             setShowPasswordIncorrect(true);
+            setUnvalidProperties(["password"]);
         }
         if (isSuccess) {
             navigate("/dashboard");
@@ -59,6 +61,7 @@ export default function LoginPage() {
             )
         ) {
             const errorMessage: string = t("invalid_email_message");
+            setUnvalidProperties(["email"]);
             setErrorMessage(errorMessage);
             return;
         }
@@ -124,8 +127,8 @@ export default function LoginPage() {
                                             className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                             style={{
                                                 backgroundColor:
-                                                    errorMessage.includes(
-                                                        "user"
+                                                    unvalidProperties.includes(
+                                                        "email"
                                                     ) ||
                                                     message
                                                         .toLowerCase()
@@ -161,7 +164,7 @@ export default function LoginPage() {
                                             className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                             style={{
                                                 backgroundColor:
-                                                    errorMessage.includes(
+                                                    unvalidProperties.includes(
                                                         "password"
                                                     ) ||
                                                     message
