@@ -99,8 +99,8 @@ export function Header() {
     return (
         <header className="py-10">
             <Container>
-                <nav className="relative z-50 flex justify-between">
-                    <div className="flex items-center md:gap-x-12">
+                <nav className="relative z-5 flex justify-between items-center">
+                    <div className="h-full flex items-center pb-2">
                         <LanguageSwitcher />
                     </div>
 

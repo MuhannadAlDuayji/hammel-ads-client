@@ -2,10 +2,12 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Example() {
     const [open, setOpen] = useState(true);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -46,16 +48,13 @@ export default function Example() {
                                             as="h3"
                                             className="text-lg font-medium leading-6 text-gray-900"
                                         >
-                                            You need to verify your email
-                                            address
+                                            {t("email_verification_title")}
                                         </Dialog.Title>
                                         <div className="mt-2">
                                             <p className="text-sm text-gray-500">
-                                                You need to verify your email
-                                                address before being able to use
-                                                our website, this is for
-                                                security reasons and to keep our
-                                                users safe.
+                                                {t(
+                                                    "email_verification_description"
+                                                )}
                                             </p>
                                         </div>
                                     </div>
@@ -68,7 +67,7 @@ export default function Example() {
                                             navigate("/");
                                         }}
                                     >
-                                        Go back to homepage
+                                        {t("go_to_homepage")}
                                     </button>
                                 </div>
                             </Dialog.Panel>
