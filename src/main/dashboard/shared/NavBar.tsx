@@ -17,7 +17,7 @@ interface NavBarProps {
 export default function NavBar({ index }: NavBarProps) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const token = useSelector((state: any) => state.auth.token);
     const user = useSelector((state: any) => state.user.user);
@@ -49,7 +49,10 @@ export default function NavBar({ index }: NavBarProps) {
 
     return (
         <>
-            <div className="min-h-full sticky top-0 z-50 opacity-95 ">
+            <div
+                className="min-h-full sticky top-0 z-50 opacity-95 "
+                dir={i18n.language === "ar" ? "rtl" : "ltr"}
+            >
                 <Disclosure
                     as="nav"
                     className="border-b border-gray-200 bg-white"
@@ -59,7 +62,7 @@ export default function NavBar({ index }: NavBarProps) {
                             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                                 <div className="flex h-16 justify-between">
                                     <div className="flex">
-                                        <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
+                                        <div className="hidden sm:-my-px  sm:flex gap-6 ">
                                             {navigation.map((item) => (
                                                 <Link
                                                     key={item.name}
@@ -234,26 +237,11 @@ export default function NavBar({ index }: NavBarProps) {
                                                 alt=""
                                             />
                                         </div>
-                                        <div className="ml-3">
-                                            <div className="text-base font-medium text-gray-800">
-                                                {user?.name}
-                                            </div>
+                                        <div className="mx-3">
                                             <div className="text-sm font-medium text-gray-500">
                                                 {user?.email}
                                             </div>
                                         </div>
-                                        <button
-                                            type="button"
-                                            className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                        >
-                                            <span className="sr-only">
-                                                View notifications
-                                            </span>
-                                            <BellIcon
-                                                className="h-6 w-6"
-                                                aria-hidden="true"
-                                            />
-                                        </button>
                                     </div>
                                     <div className="mt-3 space-y-1">
                                         {userNavigation.map((item) => (

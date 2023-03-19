@@ -4,6 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const adminNavigation = [
     { name: "Admin Dashboard", href: "/admin/dashboard", current: false },
@@ -29,6 +30,7 @@ export default function AdminNavBar({ index }: AdminNavBarProps) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { t, i18n } = useTranslation();
 
     const token = useSelector((state: any) => state.auth.token);
     const user = useSelector((state: any) => state.user.user);
@@ -56,18 +58,6 @@ export default function AdminNavBar({ index }: AdminNavBarProps) {
                             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                                 <div className="flex h-16 justify-between">
                                     <div className="flex">
-                                        <div className="flex flex-shrink-0 items-center">
-                                            <img
-                                                className="block h-8 w-auto lg:hidden"
-                                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                                alt="Your Company"
-                                            />
-                                            <img
-                                                className="hidden h-8 w-auto lg:block"
-                                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                                alt="Your Company"
-                                            />
-                                        </div>
                                         <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                                             {adminNavigation.map((item) => (
                                                 <Link
@@ -230,18 +220,6 @@ export default function AdminNavBar({ index }: AdminNavBarProps) {
                                                 {user?.email}
                                             </div>
                                         </div>
-                                        <button
-                                            type="button"
-                                            className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                        >
-                                            <span className="sr-only">
-                                                View notifications
-                                            </span>
-                                            <BellIcon
-                                                className="h-6 w-6"
-                                                aria-hidden="true"
-                                            />
-                                        </button>
                                     </div>
                                     <div className="mt-3 space-y-1">
                                         {userNavigation.map((item) => (
