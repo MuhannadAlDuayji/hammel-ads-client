@@ -1,8 +1,17 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import CampaignsAPI from "../api";
+import { useSelector } from "react-redux";
 
 interface CampaignsTableRowProps {
     campaign: any;
+}
+
+function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(" ");
 }
 
 function dateFormater(date: Date, separator: string) {
@@ -49,9 +58,61 @@ function statusStyles(status: string): string {
             return "text-gray-800 bg-gray-100";
     }
 }
+function formatDate(date: string) {
+    // yyyy-mm-dd -> dd/mm/yyyy
+    console.log(date);
+    const dateString = date.split("T")[0];
+    const [y, m, d] = dateString.split("-");
+
+    console.log("formatted date: " + `${m}/${d}/${y}`);
+    return `${m}/${d}/${y}`;
+}
 
 export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
+    const token = useSelector((state: any) => state.auth.token);
     const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
+
+    const editBtnClickHandler = () => {
+        navigate(`/dashboard/campaigns/${campaign._id}`);
+    };
+
+    const stopBtnClickHandler = async () => {
+        try {
+            console.log(campaign);
+            const response = await CampaignsAPI.updateCampaign(
+                {
+                    ...campaign,
+                    startDate: formatDate(campaign.startDate),
+                    endDate: formatDate(campaign.endDate),
+                    status: "stopped",
+                },
+                campaign._id,
+                token
+            );
+            navigate(0);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    const resumeBtnClickHandler = async () => {
+        try {
+            console.log(campaign);
+            const response = await CampaignsAPI.updateCampaign(
+                {
+                    ...campaign,
+                    startDate: formatDate(campaign.startDate),
+                    endDate: formatDate(campaign.endDate),
+                    status: "ready",
+                },
+                campaign._id,
+                token
+            );
+            navigate(0);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <tr key={campaign.email}>
@@ -111,12 +172,100 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                 </span>
             </td>
             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                <Link
+                {/* <Link
                     to={`/dashboard/campaigns/${campaign._id}`}
                     className="text-indigo-600 hover:text-indigo-900"
                 >
                     Edit<span className="sr-only">, {campaign.name}</span>
-                </Link>
+                </Link> */}
+                <Menu as="div" className="relative inline-block text-left">
+                    <div>
+                        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                            Options
+                            <ChevronDownIcon
+                                className="-mr-1 h-5 w-5 text-gray-400"
+                                aria-hidden="true"
+                            />
+                        </Menu.Button>
+                    </div>
+
+                    <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                    >
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-24 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="py-1">
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <button
+                                            onClick={editBtnClickHandler}
+                                            className={classNames(
+                                                active
+                                                    ? "bg-gray-100 text-gray-900"
+                                                    : "text-gray-700",
+                                                "block px-4 py-2 text-sm w-full text-left"
+                                            )}
+                                        >
+                                            edit
+                                        </button>
+                                    )}
+                                </Menu.Item>
+                                {[
+                                    "active",
+                                    "ready",
+                                    "stopped",
+                                    "waiting for funds",
+                                ].includes(campaign.status.toLowerCase()) && (
+                                    <Menu.Item>
+                                        {({ active }) => {
+                                            return [
+                                                "active",
+                                                "ready",
+                                                "waiting for funds",
+                                            ].includes(
+                                                campaign.status.toLowerCase()
+                                            ) ? (
+                                                <button
+                                                    onClick={
+                                                        stopBtnClickHandler
+                                                    }
+                                                    className={classNames(
+                                                        active
+                                                            ? "bg-gray-100 text-gray-900"
+                                                            : "text-gray-700",
+                                                        "block px-4 py-2 text-sm text-orange-700 w-full text-left"
+                                                    )}
+                                                >
+                                                    stop
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={
+                                                        resumeBtnClickHandler
+                                                    }
+                                                    className={classNames(
+                                                        active
+                                                            ? "bg-gray-100 text-gray-900"
+                                                            : "text-gray-700",
+                                                        "block px-4 py-2 text-sm text-orange-700 w-full text-left"
+                                                    )}
+                                                >
+                                                    resume
+                                                </button>
+                                            );
+                                        }}
+                                    </Menu.Item>
+                                )}
+                                {/* active or ready => stop, stopped => resume  */}
+                            </div>
+                        </Menu.Items>
+                    </Transition>
+                </Menu>
             </td>
         </tr>
     );

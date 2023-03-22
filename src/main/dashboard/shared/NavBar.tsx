@@ -45,8 +45,6 @@ export default function NavBar({ index }: NavBarProps) {
         return <></>;
     }
 
-    console.log("user from navbar", user);
-
     return (
         <>
             <div
@@ -185,27 +183,6 @@ export default function NavBar({ index }: NavBarProps) {
 
                             <Disclosure.Panel className="sm:hidden">
                                 <div className="space-y-1 pt-2 pb-3">
-                                    {/* {!user?.isAdmin &&
-                                        navigation.map((item) => (
-                                            <Disclosure.Button
-                                                key={item.name}
-                                                as="a"
-                                                href={item.href}
-                                                className={classNames(
-                                                    item.current
-                                                        ? "bg-indigo-50 border-indigo-500 text-indigo-700"
-                                                        : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800",
-                                                    "block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                                                )}
-                                                aria-current={
-                                                    item.current
-                                                        ? "page"
-                                                        : undefined
-                                                }
-                                            >
-                                                {item.name}
-                                            </Disclosure.Button>
-                                        ))} */}
                                     {navigation.map((item) => (
                                         <Disclosure.Button
                                             key={item.name}
