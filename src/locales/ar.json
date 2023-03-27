@@ -96,5 +96,9 @@
     "invalid_password_message": "يجب أن يتكون كلمة المرور من ثمانية أحرف على الأقل وتحتوي على أرقام",
     "passwords_not_match_message": "كلمتا المرور غير متطابقتين",
     "invalid_first_name_message": "الاسم الأول غير صالح",
-    "invalid_last_name_message": "اسم العائلة غير صالح"
+    "invalid_last_name_message": "اسم العائلة غير صالح",
+    "stop": "إيقاف",
+    "edit": "تعديل",
+    "resume": "استئناف",
+    "options": "الإعدادات"
 }

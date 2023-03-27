@@ -82,9 +82,9 @@ export default function CampaignsTable({ campaigns }: CampaignTableProps) {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 bg-white">
-                                {campaigns.map((campaign: any) => (
+                                {campaigns.map((campaign: any, i: number) => (
                                     <CampaignTableRow
-                                        key={campaign._id}
+                                        key={i}
                                         campaign={campaign}
                                     />
                                 ))}
