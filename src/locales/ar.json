@@ -109,5 +109,9 @@
     "withdrawal": "سحب",
     "deposit": "شحن",
     "no_transactions_yet": "لا توجد معاملات حتى الآن",
-    "publish": "نشر"
+    "publish": "نشر",
+    "email_confirmed": "البريد الإلكتروني",
+    "email_confirmed_description": "تم تأكيد بريدك الإلكتروني بنجاح",
+    "password_changed": "كلمة المرور",
+    "password_changed_description": "تم تغيير كلمة المرور بنجاح"
 }

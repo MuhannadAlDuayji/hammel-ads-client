@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoadingSpinner from "../../utils/LoadingSpinner";
@@ -9,6 +10,7 @@ type Props = {};
 
 const ConfirmEmail = (props: Props) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [queryParameters] = useSearchParams();
 
@@ -36,8 +38,8 @@ const ConfirmEmail = (props: Props) => {
     ) : (
         <>
             <SuccessModel
-                title="Email Confirmed"
-                description="your email have been confirmed successfully"
+                title={t("email_confirmed")}
+                description={t("email_confirmed_description")}
             />
         </>
     );

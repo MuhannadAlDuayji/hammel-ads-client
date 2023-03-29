@@ -35,13 +35,24 @@ import AdminCampaigns from "./main/admin/pages/campaign/AdminCampaigns";
 import TransactionsManagement from "./main/admin/pages/transactions/TransactionsManagement";
 import AdminSettings from "./main/admin/pages/settings/Settings";
 import AddBalancePage from "./main/dashboard/pages/wallet/pages/AddBalancePage";
-import { I18nextProvider } from "react-i18next";
+import { I18nextProvider, useTranslation } from "react-i18next";
 import { initReactI18next } from "react-i18next";
 import translationEN from "./locales/en.json";
 import translationAR from "./locales/ar.json";
 import i18n from "i18next";
 
 export interface IApplicationProps {}
+
+function PasswordChangedComponent() {
+    const { t } = useTranslation();
+    return (
+        <SuccessModel
+            title={t("password_changed")}
+            description={t("password_changed_description")}
+            type="register"
+        />
+    );
+}
 
 function AdminRoutes() {
     const token = useSelector((state: any) => state.auth.token);
@@ -246,13 +257,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
                                     />
                                     <Route
                                         path="/changed"
-                                        element={
-                                            <SuccessModel
-                                                title="Password Changed"
-                                                description="your password have changed successfully"
-                                                type="register"
-                                            />
-                                        }
+                                        element={<PasswordChangedComponent />}
                                     />
                                 </Routes>
                             }
@@ -266,9 +271,3 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
 };
 
 export default Application;
-
-/* 
-
-
-
-*/
