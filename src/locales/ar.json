@@ -21,6 +21,7 @@
     "clicks": "النقرات",
     "views": "المشاهدات",
     "account_balance": "رصيد الحساب",
+    "payment_method": "طريقة الدفع",
     "your_payment_methods": "طرق الدفع",
     "new_payment_method": "طريقة دفع جديدة",
     "no_payment_methods": "ليس لديك أي وسائل دفع حتى الآن.",
@@ -100,5 +101,10 @@
     "stop": "إيقاف",
     "edit": "تعديل",
     "resume": "استئناف",
-    "options": "الإعدادات"
+    "options": "الإعدادات",
+    "transaction_type": "نوع المعاملة",
+    "transactions": "المعاملات",
+    "withdrawal": "سحب",
+    "deposit": "شحن",
+    "no_transactions_yet": "لا توجد معاملات حتى الآن"
 }

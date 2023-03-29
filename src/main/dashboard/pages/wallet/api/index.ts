@@ -11,6 +11,16 @@ const WalletAPI = {
             }
         );
     },
+    getTransactions: function (token: string) {
+        return axios.get(
+            `${process.env.REACT_APP_API_URL}/payments/transactions`,
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            }
+        );
+    },
     executePaymentUsingCard: function (
         token: string,
         cardDetails: any,

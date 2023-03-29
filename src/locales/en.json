@@ -21,8 +21,10 @@
     "clicks": "Clicks",
     "views": "Views",
     "account_balance": "Account Balance",
+    "payment_method": "Payment Method",
     "your_payment_methods": "Your Payment Methods",
     "new_payment_method": "New Payment Method",
+    "payment_method": "New Payment Method",
     "no_payment_methods": "you don't have any payment methods yet",
     "add_balance": "Add Balance",
     "date": "Date",
@@ -99,5 +101,10 @@
     "stop": "Stop",
     "edit": "Edit",
     "resume": "Resume",
-    "options": "Options"
+    "options": "Options",
+    "transaction_type": "type",
+    "transactions": "Transactions",
+    "withdrawal": "withdrawal",
+    "deposit": "deposit",
+    "no_transactions_yet": "No transactions yet"
 }
