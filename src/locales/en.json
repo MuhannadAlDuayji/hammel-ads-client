@@ -109,5 +109,9 @@
     "withdrawal": "withdrawal",
     "deposit": "deposit",
     "no_transactions_yet": "No transactions yet",
-    "publish": "Publish"
+    "publish": "Publish",
+    "email_confirmed": "Email Confirmed",
+    "email_confirmed_description": "your email have been confirmed successfully",
+    "password_changed": "Password Changed",
+    "password_changed_description": "Your password has been changed successfully"
 }
