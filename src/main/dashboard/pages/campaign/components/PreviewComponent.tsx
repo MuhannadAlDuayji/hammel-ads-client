@@ -1,11 +1,13 @@
-import preview from "../../../../images/PhonePreviewImage.png";
-import closeIcon from "../../../../images/closeTabForPreview.png";
+import preview from "../../../../../images/PhonePreviewImage.png";
+import closeIcon from "../../../../../images/closeTabForPreview.png";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     photoPath?: string;
 };
 
 function PreviewComponent({ photoPath }: Props) {
+    const { t, i18n } = useTranslation();
     return (
         <div className="relative">
             <img
@@ -18,23 +20,25 @@ function PreviewComponent({ photoPath }: Props) {
 
             <img
                 src={photoPath}
-                className="absolute rounded-lg"
+                className={`absolute rounded-lg ${
+                    i18n.language == "ar" ? "right-[118px]" : "left-[131px]"
+                }`}
                 style={{
                     height: "348px",
                     width: "213px",
                     top: "190px",
-                    left: "131px",
                     display: !photoPath ? "none" : "inherit",
                 }}
             />
             <img
                 src={closeIcon}
-                className="absolute"
+                className={`absolute ${
+                    i18n.language == "ar" ? "right-[120px]" : "left-[325px]"
+                }`}
                 style={{
                     height: "15px",
                     width: "15px",
-                    top: "192px",
-                    left: "325px",
+                    top: "193px",
                     display: !photoPath ? "none" : "inherit",
                 }}
             />

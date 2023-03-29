@@ -7,7 +7,7 @@ import LoadingSpinner from "../../../../utils/LoadingSpinner";
 import NavBar from "../../shared/NavBar";
 import UpdateSuccess from "../../shared/UpdateSuccess";
 import CampaignsAPI from "./api";
-import PreviewComponent from "./PreviewComponent";
+import PreviewComponent from "./components/PreviewComponent";
 import countryList from "./staticData/countryList";
 
 type Props = {};
