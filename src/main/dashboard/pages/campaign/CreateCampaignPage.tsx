@@ -126,7 +126,6 @@ function CreateCampaignPage({}: Props) {
             setTimeout(() => {
                 navigate("/dashboard/campaigns");
             }, 1000);
-            console.log(response, "response");
         } catch (err: any) {
             setLoading(false);
             setErrorMessage(err.message);
@@ -213,13 +212,12 @@ function CreateCampaignPage({}: Props) {
                                             min="2024-30-01"
                                             max="2050-01-01"
                                             value={campaignInfo.startDate}
-                                            onChange={(e) => {
-                                                console.log(e.target.value);
+                                            onChange={(e) =>
                                                 setCampaignInfo({
                                                     ...campaignInfo,
                                                     startDate: e.target.value,
-                                                });
-                                            }}
+                                                })
+                                            }
                                             className=" max-w-lg  border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-600"
                                         ></input>
                                     </div>

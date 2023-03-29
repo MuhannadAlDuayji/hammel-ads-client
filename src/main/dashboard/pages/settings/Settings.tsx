@@ -1,16 +1,13 @@
 import { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import axios from "axios";
 import NavBar from "../../shared/NavBar";
 import LoadingSpinner from "../../../../utils/LoadingSpinner";
 import InvalidInput from "../../../../components/alerts/InvalidInput";
 import UpdateSuccess from "../../shared/UpdateSuccess";
 import { saveUser } from "../../../../redux/user/userSlice";
 import SettingsAPI from "./api/index";
-import { text } from "stream/consumers";
 import { useTranslation } from "react-i18next";
 
 type SettingsProps = {};
@@ -112,7 +109,6 @@ export default function Settings({}: SettingsProps) {
                 token
             );
 
-            console.log(response);
             dispatch(
                 saveUser({
                     ...user,
@@ -125,14 +121,12 @@ export default function Settings({}: SettingsProps) {
             setShowSuccessUpdate(true);
             setLoading(false);
         } catch (err: any) {
-            console.log(err.response.data.message);
             setLoading(false);
             if (
                 err.response.data.message.includes("invalid") ||
                 err.response.data.message.includes("email") ||
                 err.response.data.message.includes("phone")
             ) {
-                console.log("heey");
                 setErrorMessage(err.response.data.message);
             }
         }

@@ -42,15 +42,6 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(`
-        user: ${user}
-        isLoading: ${isLoading}
-        isSuccess: ${isSuccess}
-        isError: ${isError}
-        message: ${message}
-
-        `);
-
         if (isError) {
             setShowPasswordIncorrect(true);
             if (message.toLowerCase().includes("invalid email")) {

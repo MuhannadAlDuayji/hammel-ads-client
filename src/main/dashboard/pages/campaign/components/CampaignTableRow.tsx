@@ -41,7 +41,6 @@ function formatAmount(x: number) {
 }
 
 function statusStyles(status: string): string {
-    // console.log(status);
     switch (status) {
         case "ready":
         case "active":
@@ -60,11 +59,9 @@ function statusStyles(status: string): string {
 }
 function formatDate(date: string) {
     // yyyy-mm-dd -> dd/mm/yyyy
-    console.log(date);
     const dateString = date.split("T")[0];
     const [y, m, d] = dateString.split("-");
 
-    console.log("formatted date: " + `${m}/${d}/${y}`);
     return `${m}/${d}/${y}`;
 }
 
@@ -79,7 +76,6 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
 
     const stopBtnClickHandler = async () => {
         try {
-            console.log(campaign);
             const response = await CampaignsAPI.updateCampaign(
                 {
                     ...campaign,
@@ -97,7 +93,6 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
     };
     const resumeBtnClickHandler = async () => {
         try {
-            console.log(campaign);
             const response = await CampaignsAPI.updateCampaign(
                 {
                     ...campaign,
@@ -171,7 +166,7 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                     {t(campaign.status)}
                 </span>
             </td>
-            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+            <td className="relative  whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 ">
                 {/* <Link
                     to={`/dashboard/campaigns/${campaign._id}`}
                     className="text-indigo-600 hover:text-indigo-900"

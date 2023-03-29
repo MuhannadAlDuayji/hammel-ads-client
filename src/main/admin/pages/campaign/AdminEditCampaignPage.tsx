@@ -148,7 +148,6 @@ function AdminEditCampaignPage({}: Props) {
             }
             return false;
         }
-        console.log(campaignInfo.adminMessage);
         return true;
     };
 
@@ -162,14 +161,8 @@ function AdminEditCampaignPage({}: Props) {
                 endDate: formatDate(campaignInfo.endDate),
                 status: selectedStatus,
             };
-            console.log(data);
-            const response = await CampaignsAPI.updateCampaign(
-                data,
-                campaign._id,
-                token
-            );
+            await CampaignsAPI.updateCampaign(data, campaign._id, token);
             setShowSuccessUpdate(true);
-            console.log(response, "response");
         } catch (err: any) {
             setErrorMessage(err.response.data.message);
             console.log(err);
@@ -252,13 +245,12 @@ function AdminEditCampaignPage({}: Props) {
                                             min="2024-30-01"
                                             max="2050-01-01"
                                             value={campaignInfo.startDate}
-                                            onChange={(e) => {
-                                                console.log(e.target.value);
+                                            onChange={(e) =>
                                                 setCampaignInfo({
                                                     ...campaignInfo,
                                                     startDate: e.target.value,
-                                                });
-                                            }}
+                                                })
+                                            }
                                             className=" max-w-lg  border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-600"
                                         ></input>
                                     </div>

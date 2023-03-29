@@ -43,7 +43,6 @@ const AddBalancePage = () => {
             const response = await WalletAPI.getAllPaymentMethods(token);
             const paymentMethodsArray = response.data.data;
             setPaymentMethods(paymentMethodsArray);
-            console.log(response.data.data);
 
             if (paymentMethodsArray.length > 0) {
                 setSelectedPaymentMethod(
@@ -75,7 +74,6 @@ const AddBalancePage = () => {
             navigate("/dashboard/wallet");
         }, 2000);
     };
-    console.log("methods", paymentMethods);
     const executeNewCreditCardPayment = async () => {
         try {
             setLoading(true);
@@ -86,7 +84,6 @@ const AddBalancePage = () => {
             );
             setLoading(false);
             showSuccess(response.data.message);
-            console.log("resssssssss", response);
             redirect();
         } catch (err: any) {
             setLoading(false);
@@ -103,14 +100,12 @@ const AddBalancePage = () => {
                 (paymentMethod: any) =>
                     paymentMethod?.cardInfo?.number === selectedPaymentMethod
             );
-            console.log("payment token", paymentToken);
             const response = await WalletAPI.executePaymentUsingToken(
                 token,
                 paymentToken?.token,
                 amountInfo.amount
             );
             setLoading(false);
-            console.log("resssssssss", response);
             showSuccess(response.data.message);
             redirect();
         } catch (err: any) {
@@ -128,7 +123,6 @@ const AddBalancePage = () => {
             executePaymentUsingToken();
         }
     };
-    console.log("selected", selectedPaymentMethod);
     return (
         <div className="bg-gray-50">
             {loading ? (

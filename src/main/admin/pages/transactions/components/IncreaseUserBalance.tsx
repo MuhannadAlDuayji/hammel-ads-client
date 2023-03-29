@@ -6,14 +6,12 @@ type Props = {};
 
 const IncreaseUserBalance = (props: Props) => {
     const token = useSelector((state: any) => state.auth.token);
-    console.log(token);
     const [userEmail, setUserEmail] = useState("");
     const [amount, setAmount] = useState("");
 
     const addBalanceHandler = async (e: any) => {
         e.preventDefault();
         if (!amount || isNaN(Number(amount)) || !userEmail) {
-            console.log("invalid input");
             return;
         }
 
@@ -23,7 +21,6 @@ const IncreaseUserBalance = (props: Props) => {
                 amount,
                 token
             );
-            console.log(response.data);
 
             setAmount("");
             setUserEmail("");

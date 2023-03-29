@@ -52,13 +52,10 @@ const Header: React.FC<Props> = ({
         try {
             const response = await CampaignsAPI.getAllCampaigns(token);
             const campaigns = response.data.data;
-            console.log(campaigns);
-            let countries = response.data.data.map(
-                (campaign: any) => campaign.country
-            );
+            let countries = campaigns.map((campaign: any) => campaign.country);
             countries = [...new Set(countries)];
             setCountryList(countries);
-            setCampaigns(response.data.data);
+            setCampaigns(campaigns);
         } catch (err: any) {
             console.log(err);
         }
@@ -85,7 +82,6 @@ const Header: React.FC<Props> = ({
         } else {
             getCampaigns();
         }
-        console.log(campaign);
     }, [nameFilter]);
 
     return (

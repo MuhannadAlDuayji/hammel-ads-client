@@ -83,21 +83,17 @@ export default function Settings() {
         setLoading(true);
         try {
             const response = await SettingsAPI.updateProfile(updateInfo, token);
-
-            console.log(response);
             dispatch(saveUser({ ...user, ...updateInfo }));
             setSuccessContent("updated");
             setShowSuccessUpdate(true);
             setLoading(false);
         } catch (err: any) {
-            console.log(err.response.data.message);
             setLoading(false);
             if (
                 err.response.data.message.includes("invalid") ||
                 err.response.data.message.includes("email") ||
                 err.response.data.message.includes("phone")
             ) {
-                console.log("heey");
                 setErrorMessage(err.response.data.message);
             }
         }

@@ -1,11 +1,11 @@
 import React from "react";
 
 interface CardInfoType {
-    brand: String; // "MASTERCARD";
-    expiryMonth: String; // "12";
-    expiryYear: String; // "25";
-    issuer: String; // "JPMORGAN CHASE BANK, N.A.";
-    number: String; // "545301xxxxxx5539";
+    brand: String;
+    expiryMonth: String;
+    expiryYear: String;
+    issuer: String;
+    number: String;
 }
 
 type Props = {
@@ -19,12 +19,6 @@ const CreditCardView = ({
     setSelectedPaymentMethod,
     selectedPaymentMethod,
 }: Props) => {
-    console.log(
-        "hello",
-        selectedPaymentMethod,
-        cardInfo.number === selectedPaymentMethod,
-        cardInfo
-    );
     return (
         <div
             className="w-64 h-40 bg-gradient-to-r from-indigo-600 via-indigo-800 to-gray-800 rounded-lg shadow-lg cursor-pointer"
@@ -57,21 +51,6 @@ const CreditCardView = ({
                     <line x1="7" y1="15" x2="7.01" y2="15" />
                     <line x1="11" y1="15" x2="13" y2="15" />
                 </svg>
-                {/* <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="34"
-                    height="34"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="#ffffff"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <circle cx="9.5" cy="9.5" r="5.5" fill="#fff" />
-                    <circle cx="14.5" cy="14.5" r="5.5" />
-                </svg> */}
             </div>
             <div className="flex justify-center mt-4">
                 <h1 className="text-gray-300 font-thin font-os">

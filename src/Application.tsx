@@ -48,7 +48,6 @@ function AdminRoutes() {
     const user = useSelector((state: any) => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    console.log(user);
 
     if (!token) navigate("/login");
     useEffect(() => {
@@ -105,7 +104,6 @@ function MainRoutes() {
     const user = useSelector((state: any) => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    console.log(user);
 
     if (!token) navigate("/login");
     useEffect(() => {

@@ -18,7 +18,6 @@ export default async function getUserInfo(
         if (response.status === 200) {
             setLoading(false);
         }
-        console.log(response);
     } catch (err: any) {
         console.log(err);
         if (err.response.status === 400) return navigate("/login");

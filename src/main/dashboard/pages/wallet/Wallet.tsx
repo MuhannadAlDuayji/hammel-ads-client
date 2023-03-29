@@ -23,7 +23,6 @@ export default function Wallet({}: WalletProps) {
 
     const getMethods = async () => {
         try {
-            console.log("token", token);
             const response = await WalletAPI.getAllPaymentMethods(token);
             const paymentMethodsArray = response.data.data;
             setPaymentMethods(paymentMethodsArray);
@@ -38,25 +37,9 @@ export default function Wallet({}: WalletProps) {
                 token,
                 paymentToken
             );
-            console.log("response", response);
         } catch (err) {
             console.log("this is an error", err);
         }
-    };
-
-    const transaction: Transaction = {
-        type: TransactionType.withdrawal,
-        transactionAmount: 17,
-        paymentMethod: {
-            token: "TOKEN3242",
-            cardInfo: {
-                number: "401200xxxxxx1112",
-                expiryMonth: "12",
-                expiryYear: "24",
-                brand: "VISA",
-                issuer: "",
-            },
-        },
     };
 
     useEffect(() => {
@@ -176,14 +159,11 @@ export default function Wallet({}: WalletProps) {
                                                             strokeWidth={1.5}
                                                             stroke="currentColor"
                                                             className="w-4 h-4 absolute top-1 right-1 text-red-500 cursor-pointer"
-                                                            onClick={() => {
-                                                                console.log(
-                                                                    paymentMethod.cardInfo
-                                                                );
+                                                            onClick={() =>
                                                                 removePaymentMethod(
                                                                     paymentMethod.token
-                                                                );
-                                                            }}
+                                                                )
+                                                            }
                                                         >
                                                             <path
                                                                 strokeLinecap="round"
