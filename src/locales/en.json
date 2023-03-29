@@ -59,6 +59,8 @@
     "waiting for funds": "WAITING FOR FUNDS",
     "waiting for edit": "WAITING FOR EDIT",
     "create_campaign": "Create an Ad",
+    "edit_campaign": "Edit your Ad here",
+    "edit_campaign_description": "If you change the link or ad photo and click publish, the ad will be sent to review automatically for the team to review the changes and accept or ask you to edit it.",
     "campaign_image": "Ad Image",
     "campaign_link": "Ad Link",
     "upload_image": "Upload an Image",
@@ -106,5 +108,6 @@
     "transactions": "Transactions",
     "withdrawal": "withdrawal",
     "deposit": "deposit",
-    "no_transactions_yet": "No transactions yet"
+    "no_transactions_yet": "No transactions yet",
+    "publish": "Publish"
 }

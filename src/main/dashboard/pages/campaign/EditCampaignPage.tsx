@@ -6,9 +6,10 @@ import LoadingSpinner from "../../../../utils/LoadingSpinner";
 import NavBar from "../../shared/NavBar";
 import UpdateSuccess from "../../shared/UpdateSuccess";
 import CampaignsAPI from "./api";
-import PreviewComponent from "./PreviewComponent";
+import PreviewComponent from "./components/PreviewComponent";
 import countryList from "./staticData/countryList";
 import AdminMessageAlert from "./components/AdminMessageAlert";
+import { useTranslation } from "react-i18next";
 type Props = {};
 
 function isValidHttpUrl(string: string) {
@@ -36,7 +37,7 @@ function EditCampaignPage({}: Props) {
     const campaignId = useParams().id;
 
     const navigate = useNavigate();
-
+    const { t, i18n } = useTranslation();
     const [errorMessage, setErrorMessage] = useState("");
 
     const token = useSelector((state: any) => state.auth.token);
@@ -192,6 +193,7 @@ function EditCampaignPage({}: Props) {
                 <form
                     className="space-y-8 divide-y divide-gray-200 m-20"
                     onChange={() => setErrorMessage("")}
+                    dir={i18n.language === "ar" ? "rtl" : "ltr"}
                 >
                     {campaign.adminMessage ? (
                         <AdminMessageAlert message={campaign.adminMessage} />
@@ -202,14 +204,10 @@ function EditCampaignPage({}: Props) {
                         <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
                             <div>
                                 <h3 className="text-lg font-medium leading-6 text-gray-900">
-                                    Edit your campaign here
+                                    {t("edit_campaign")}
                                 </h3>
                                 <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                                    If you change the link or campaign photo and
-                                    click publish, the campaign it will be sent
-                                    to review automatically for the team to
-                                    review the changes and accept or ask you to
-                                    edit it.
+                                    {t("edit_campaign_description")}
                                 </p>
                             </div>
                             <div className="space-y-6 sm:space-y-5">
@@ -218,7 +216,7 @@ function EditCampaignPage({}: Props) {
                                         htmlFor="title"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        title:
+                                        {t("campaign_title")}
                                     </label>
                                     <br />
                                     <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -244,7 +242,7 @@ function EditCampaignPage({}: Props) {
                                         htmlFor="startDate"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        start date:
+                                        {t("start_date")}
                                     </label>
                                     <br />
                                     <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -270,7 +268,7 @@ function EditCampaignPage({}: Props) {
                                         htmlFor="endDate"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        end date:
+                                        {t("end_date")}
                                     </label>
                                     <br />
                                     <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -297,7 +295,7 @@ function EditCampaignPage({}: Props) {
                                         htmlFor="budget"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Budget:
+                                        {t("budget")}
                                     </label>
                                     <br />
                                     <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -321,7 +319,7 @@ function EditCampaignPage({}: Props) {
                                         htmlFor="country"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Country:
+                                        {t("country")}
                                     </label>
                                     <br />
                                     <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -355,7 +353,7 @@ function EditCampaignPage({}: Props) {
                                         htmlFor="cover-photo"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Campaign Image:
+                                        {t("campaign_image")}
                                     </label>
                                     <div className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center">
                                         <div className="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 h-52 mt-10 ">
@@ -383,7 +381,7 @@ function EditCampaignPage({}: Props) {
                                                         className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                                                     >
                                                         <span>
-                                                            Upload a file
+                                                            {t("upload_image")}
                                                         </span>
                                                         <input
                                                             id="file-upload"
@@ -417,7 +415,7 @@ function EditCampaignPage({}: Props) {
                                         htmlFor="link"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        link:
+                                        {t("campaign_link")}
                                     </label>
                                     <br />
                                     <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -450,7 +448,7 @@ function EditCampaignPage({}: Props) {
                                     saveHandler();
                                 }}
                             >
-                                Publish
+                                {t("publish")}
                             </button>
                         </div>
                     </div>

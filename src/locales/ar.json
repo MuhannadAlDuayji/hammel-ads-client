@@ -59,6 +59,8 @@
     "waiting for funds": "بانتظار التمويل",
     "waiting for edit": "بانتظار التعديل",
     "create_campaign": "إنشاء حملة",
+    "edit_campaign": "تعديل الإعلان هنا",
+    "edit_campaign_description": "إذا قمت بتغيير الرابط أو الصورة الإعلانية ونقرت على النشر، سيتم إرسال الإعلان تلقائيًا للفريق لمراجعة التغييرات والموافقة عليها أو طلب منك تعديلها.",
     "campaign_image": "صورة الحملة",
     "campaign_link": "رابط الحملة",
     "upload_image": "رفع صورة",
@@ -106,5 +108,6 @@
     "transactions": "المعاملات",
     "withdrawal": "سحب",
     "deposit": "شحن",
-    "no_transactions_yet": "لا توجد معاملات حتى الآن"
+    "no_transactions_yet": "لا توجد معاملات حتى الآن",
+    "publish": "نشر"
 }
