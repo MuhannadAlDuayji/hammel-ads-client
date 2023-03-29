@@ -7,11 +7,15 @@ import WalletAPI from "./api";
 import BalanceInfoTable from "./components/BalanceInfoTable";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
+import TransactionsTable from "./components/TransactionsTable";
+import Transaction from "../../../../types/transaction";
+import { TransactionType } from "../../../../types/transaction/TransactionType";
 type WalletProps = {};
 
 export default function Wallet({}: WalletProps) {
     const [loading, setLoading] = useState(false);
     const [paymentMethods, setPaymentMethods] = useState([]);
+
     const token = useSelector((state: any) => state.auth.token);
     const { t, i18n } = useTranslation();
     const language = i18n.language;
@@ -38,6 +42,21 @@ export default function Wallet({}: WalletProps) {
         } catch (err) {
             console.log("this is an error", err);
         }
+    };
+
+    const transaction: Transaction = {
+        type: TransactionType.withdrawal,
+        transactionAmount: 17,
+        paymentMethod: {
+            token: "TOKEN3242",
+            cardInfo: {
+                number: "401200xxxxxx1112",
+                expiryMonth: "12",
+                expiryYear: "24",
+                brand: "VISA",
+                issuer: "",
+            },
+        },
     };
 
     useEffect(() => {
@@ -69,13 +88,15 @@ export default function Wallet({}: WalletProps) {
                                 <br></br>
                                 <div className="ml-4">
                                     <div className="mt-10 border-t border-gray-200 pt-10">
-                                        <h1>{t("your_payment_methods")}</h1>
+                                        <h1 className="text-xl">
+                                            {t("your_payment_methods")}
+                                        </h1>
                                         <br></br>
 
-                                        <h5 className="text-gray-400">
+                                        <p className="text-xs text-gray-500">
                                             {paymentMethods.length === 0 &&
                                                 t("no_payment_methods")}
-                                        </h5>
+                                        </p>
                                         <ul className="flex gap-1">
                                             {paymentMethods.map(
                                                 (paymentMethod: any) => (
@@ -193,6 +214,7 @@ export default function Wallet({}: WalletProps) {
                                         {t("add_balance")}
                                     </button>
                                 </div>
+                                <TransactionsTable />
                             </div>
                         )}
                     </div>
