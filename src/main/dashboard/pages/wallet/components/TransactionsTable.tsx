@@ -4,8 +4,26 @@ import { useSelector } from "react-redux";
 import Transaction from "../../../../../types/transaction";
 import WalletAPI from "../api";
 
-interface Props {
-    transactions: Transaction[];
+function dateFormater(date: Date, separator: string) {
+    const day = date.getDate();
+    // add +1 to month because getMonth() returns month from 0 to 11
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    // show date and month in two digits
+    // if month is less than 10, add a 0 before it
+    let dayString = String(day);
+    let monthString = String(month);
+    if (day < 10) {
+        dayString = "0" + day;
+    }
+    if (month < 10) {
+        monthString = "0" + month;
+    }
+
+    // now we have day, month and year
+    // use the separator to join them
+    return dayString + separator + monthString + separator + String(year);
 }
 
 export default function TransactionsTable() {
@@ -16,12 +34,11 @@ export default function TransactionsTable() {
 
     const getTransactions = async () => {
         try {
-            console.log("token", token);
             const response = await WalletAPI.getTransactions(token);
             const transactionsArray = response.data.data;
             setTransactions(transactionsArray);
         } catch (err) {
-            console.log("this is an error", err);
+            console.log(err);
         }
     };
 
@@ -62,29 +79,49 @@ export default function TransactionsTable() {
                                         >
                                             {t("transaction_type")}
                                         </th>
+                                        <th
+                                            scope="col"
+                                            className={`px-3 py-3.5 text-${textDir} text-sm font-semibold text-gray-900`}
+                                        >
+                                            {t("transaction_date")}
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                    {transactions.map((transaction, i) => (
-                                        <tr key={i}>
-                                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
-                                                {
-                                                    transaction.paymentMethod
-                                                        ?.cardInfo.number
-                                                }
-                                            </td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                ${transaction.transactionAmount}
-                                            </td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                                                    {t(
-                                                        transaction.type.toLowerCase()
+                                    {transactions
+                                        .reverse()
+                                        .map((transaction, i) => (
+                                            <tr key={i}>
+                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
+                                                    {
+                                                        transaction
+                                                            .paymentMethod
+                                                            ?.cardInfo.number
+                                                    }
+                                                </td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    $
+                                                    {
+                                                        transaction.transactionAmount
+                                                    }
+                                                </td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                                                        {t(
+                                                            transaction.type.toLowerCase()
+                                                        )}
+                                                    </span>
+                                                </td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    {dateFormater(
+                                                        new Date(
+                                                            transaction.createdAt
+                                                        ),
+                                                        "-"
                                                     )}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                                </td>
+                                            </tr>
+                                        ))}
                                 </tbody>
                             </table>
                         ) : (

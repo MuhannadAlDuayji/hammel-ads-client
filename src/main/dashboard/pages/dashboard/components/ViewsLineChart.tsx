@@ -76,8 +76,6 @@ function ViewsLineChart() {
             const startDate = formatDate(lastTwoWeeks); // Convert date to ISO format and extract the date string
             const endDate = formatDate(today); // Do the same for today's date
 
-            console.log("startdate", startDate);
-            console.log("enddate", endDate);
             const views = await AnalyticsAPI.getTotalAnalytics(
                 token,
                 "view",

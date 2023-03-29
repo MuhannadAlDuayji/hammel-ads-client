@@ -30,7 +30,6 @@ function dateFormater(date: Date, separator: string) {
 }
 
 function statusStyles(status: string): string {
-    // console.log(status);
     switch (status) {
         case "ready":
         case "active":

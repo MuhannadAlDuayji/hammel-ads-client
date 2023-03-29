@@ -31,15 +31,6 @@ export default function LoginPage() {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(`
-        user: ${user}
-        isLoading: ${isLoading}
-        isSuccess: ${isSuccess}
-        isError: ${isError}
-        message: ${message}
-
-        `);
-
         if (isLoading) return;
 
         if (isError) {

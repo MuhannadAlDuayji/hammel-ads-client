@@ -34,7 +34,6 @@ function formatDateToLabel(dateString: string): string {
 function Dashboard() {
     const [loading, setLoading] = useState(true);
     const { t, i18n } = useTranslation();
-    console.log("env", process.env.REACT_APP_API_URL);
 
     const language = i18n.language;
 
@@ -68,7 +67,6 @@ function Dashboard() {
                 startDate,
                 endDate
             );
-            console.log(startDate);
 
             setStats(stats.data.data);
             setLoading(false);
@@ -76,7 +74,6 @@ function Dashboard() {
             console.log(err);
         }
     };
-    console.log(stats);
     useEffect(() => {
         getUserStats();
     }, []);
