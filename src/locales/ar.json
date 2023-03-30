@@ -117,5 +117,18 @@
     "password_changed_description": "تم تغيير كلمة المرور بنجاح",
     "campaign_updated_message": "تم تحديث الإعلان بنجاح",
     "payment_successful": "تم الدفع بنجاح",
-    "payment_failure": "عملية الدفع فشلت"
+    "payment_failure": "عملية الدفع فشلت",
+    "settings_updated_message": "تم تحديث الإعدادات بنجاح",
+    "invalid_settings_message": "إعدادات غير صالحة",
+    "phone_unavailable_message": "رقم الهاتف غير متاح",
+    "email_unavailable_message": "عنوان البريد الإلكتروني غير متاح",
+    "invalid_image_type": "نوع الصورة غير صالح.",
+    "invalid_campaign_title_message": "يجب أن يكون العنوان بين 3 و 30 حرفًا",
+    "no_campaign_start_date_message": "يجب تحديد تاريخ البدء",
+    "no_campaign_end_date_message": "يجب تحديد تاريخ الانتهاء",
+    "invalid_campaign_budget_message": " يجب تحديد ميزانية أكبر من 10$",
+    "no_campaign_country_message": "يجب تحديد الدولة المستهدفة",
+    "no_campaign_photo_message": "يجب توفير صورة",
+    "no_campaign_link_message": "يجب توفير رابط",
+    "invalid_campaign_link_message": "الرابط غير صالح: "
 }

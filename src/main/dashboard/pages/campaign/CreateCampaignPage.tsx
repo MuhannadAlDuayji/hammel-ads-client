@@ -71,38 +71,46 @@ function CreateCampaignPage({}: Props) {
     };
 
     const formIsValid = () => {
-        if (campaignInfo.title.length < 3 || campaignInfo.title.length > 40) {
-            setErrorMessage("Title must be between 3 and 40 characters");
+        if (campaignInfo.title.length < 3 || campaignInfo.title.length > 30) {
+            const message = t("invalid_campaign_title_message");
+            setErrorMessage(message);
             return false;
         }
         if (campaignInfo.startDate === "") {
-            setErrorMessage("you must provide a start date");
+            const message = t("no_campaign_start_date_message");
+            setErrorMessage(message);
             return false;
         }
         if (campaignInfo.endDate === "") {
-            setErrorMessage("you must provide an end date");
+            const message = t("no_campaign_end_date_message");
+            setErrorMessage(message);
             return false;
         }
         if (
             isNaN(Number(campaignInfo.budget)) ||
             Number(campaignInfo.budget) < 10
         ) {
-            setErrorMessage("budget must be greater than 10");
+            const message = t("invalid_campaign_budget_message");
+            setErrorMessage(message);
             return false;
         }
         if (!countryList.includes(campaignInfo.country)) {
-            setErrorMessage("you must provide a country");
+            const message = t("no_campaign_country_message");
+            setErrorMessage(message);
             return false;
         }
         if (campaignInfo.photoPath === "") {
-            setErrorMessage("you must provide a campaign photo");
+            const message = t("no_campaign_photo_message");
+            setErrorMessage(message);
             return false;
         }
         if (!isValidHttpUrl(campaignInfo.link)) {
             if (!campaignInfo.link) {
-                setErrorMessage("you must provide a campaign link");
+                const message = t("no_campaign_link_message");
+                setErrorMessage(message);
             } else {
-                setErrorMessage("invalid campaign link: " + campaignInfo.link);
+                const message = t("invalid_campaign_link_message");
+                setErrorMessage(message + campaignInfo.link);
             }
             return false;
         }

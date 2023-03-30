@@ -9,7 +9,6 @@ function dateFormater(date: Date, separator: string) {
     // add +1 to month because getMonth() returns month from 0 to 11
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-
     // show date and month in two digits
     // if month is less than 10, add a 0 before it
     let dayString = String(day);
@@ -20,7 +19,6 @@ function dateFormater(date: Date, separator: string) {
     if (month < 10) {
         monthString = "0" + month;
     }
-
     // now we have day, month and year
     // use the separator to join them
     return dayString + separator + monthString + separator + String(year);
