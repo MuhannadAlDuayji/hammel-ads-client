@@ -23,11 +23,6 @@ const AnalyticsAPI = {
         country: string | null = null,
         campaignName: string | null = null
     ) {
-        console.log(
-            country,
-            campaignName,
-            "htis -<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-        );
         return axios.post(
             `${process.env.REACT_APP_API_URL}/analytics/user-analytics`,
             {

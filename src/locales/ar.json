@@ -105,6 +105,7 @@
     "resume": "استئناف",
     "options": "الإعدادات",
     "transaction_type": "نوع المعاملة",
+    "transaction_date": "التاريخ",
     "transactions": "المعاملات",
     "withdrawal": "سحب",
     "deposit": "شحن",
@@ -114,5 +115,7 @@
     "email_confirmed_description": "تم تأكيد بريدك الإلكتروني بنجاح",
     "password_changed": "كلمة المرور",
     "password_changed_description": "تم تغيير كلمة المرور بنجاح",
-    "campaign_updated_message": "تم تحديث الإعلان بنجاح"
+    "campaign_updated_message": "تم تحديث الإعلان بنجاح",
+    "payment_successful": "تم الدفع بنجاح",
+    "payment_failure": "عملية الدفع فشلت"
 }

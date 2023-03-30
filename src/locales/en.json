@@ -105,6 +105,7 @@
     "resume": "Resume",
     "options": "Options",
     "transaction_type": "type",
+    "transaction_date": "Date",
     "transactions": "Transactions",
     "withdrawal": "withdrawal",
     "deposit": "deposit",
@@ -114,5 +115,7 @@
     "email_confirmed_description": "your email have been confirmed successfully",
     "password_changed": "Password Changed",
     "password_changed_description": "Your password has been changed successfully",
-    "campaign_updated_message": "Ad Updated Successfully"
+    "campaign_updated_message": "Ad Updated Successfully",
+    "payment_successful": "Payment Successful",
+    "payment_failure": "Payment Failed"
 }

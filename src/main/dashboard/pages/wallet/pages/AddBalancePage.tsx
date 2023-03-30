@@ -83,12 +83,12 @@ const AddBalancePage = () => {
                 amountInfo.amount
             );
             setLoading(false);
-            showSuccess(response.data.message);
+            showSuccess(t("payment_successful"));
             redirect();
         } catch (err: any) {
             setLoading(false);
             if (err.response.status === 400) {
-                showError(err.response.data.message);
+                showError(t("payment_failure"));
                 console.log(err);
             }
         }
@@ -106,13 +106,15 @@ const AddBalancePage = () => {
                 amountInfo.amount
             );
             setLoading(false);
-            showSuccess(response.data.message);
+            showSuccess(t("payment_successful"));
             redirect();
         } catch (err: any) {
             setLoading(false);
+
             if (err.response.status === 400) {
-                showError(err.response.data.message);
+                showError(t("payment_failure"));
             }
+            showError(t("payment_failure"));
         }
     };
 

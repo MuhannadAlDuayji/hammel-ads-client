@@ -10,11 +10,14 @@ import { useNavigate } from "react-router-dom";
 import TransactionsTable from "./components/TransactionsTable";
 import Transaction from "../../../../types/transaction";
 import { TransactionType } from "../../../../types/transaction/TransactionType";
+import UserPaymentMethodType from "../../../../types/payment method";
 type WalletProps = {};
 
 export default function Wallet({}: WalletProps) {
     const [loading, setLoading] = useState(false);
-    const [paymentMethods, setPaymentMethods] = useState([]);
+    const [paymentMethods, setPaymentMethods] = useState<
+        UserPaymentMethodType[]
+    >([]);
 
     const token = useSelector((state: any) => state.auth.token);
     const { t, i18n } = useTranslation();
@@ -82,8 +85,14 @@ export default function Wallet({}: WalletProps) {
                                         </p>
                                         <ul className="flex gap-1">
                                             {paymentMethods.map(
-                                                (paymentMethod: any) => (
-                                                    <div className="w-64 h-40 relative bg-gradient-to-r from-indigo-600 via-indigo-800 to-gray-800 rounded-lg shadow-lg ">
+                                                (
+                                                    paymentMethod: UserPaymentMethodType,
+                                                    i: number
+                                                ) => (
+                                                    <div
+                                                        className="w-64 h-40 relative bg-gradient-to-r from-indigo-600 via-indigo-800 to-gray-800 rounded-lg shadow-lg "
+                                                        key={i}
+                                                    >
                                                         <div className="flex justify-between m-2 ">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
