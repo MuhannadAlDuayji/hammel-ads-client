@@ -5,9 +5,10 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import CampaignsAPI from "../api";
 import { useSelector } from "react-redux";
+import Campaign from "../../../../../types/campaign";
 
 interface CampaignsTableRowProps {
-    campaign: any;
+    campaign: Campaign;
 }
 
 function classNames(...classes: string[]) {
@@ -57,9 +58,9 @@ function statusStyles(status: string): string {
             return "text-gray-800 bg-gray-100";
     }
 }
-function formatDate(date: string) {
+function formatDate(date: Date) {
     // yyyy-mm-dd -> dd/mm/yyyy
-    const dateString = date.split("T")[0];
+    const dateString = String(date).split("T")[0];
     const [y, m, d] = dateString.split("-");
 
     return `${m}/${d}/${y}`;
@@ -69,7 +70,6 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
     const token = useSelector((state: any) => state.auth.token);
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
-
     const editBtnClickHandler = () => {
         navigate(`/dashboard/campaigns/${campaign._id}`);
     };
@@ -110,7 +110,7 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
     };
 
     return (
-        <tr key={campaign.email}>
+        <tr key={campaign._id}>
             {/* // title */}
             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                 <div className="flex items-center">

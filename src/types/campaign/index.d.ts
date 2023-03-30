@@ -3,6 +3,7 @@ import { CampaignStatus } from "./CampaignStatus";
 import Event from "../event";
 import Load from "../load";
 export default interface Campaign {
+    _id: string;
     title: string;
     startDate: Date;
     endDate: Date;

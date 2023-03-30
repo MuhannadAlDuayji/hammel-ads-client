@@ -113,5 +113,6 @@
     "email_confirmed": "Email Confirmed",
     "email_confirmed_description": "your email have been confirmed successfully",
     "password_changed": "Password Changed",
-    "password_changed_description": "Your password has been changed successfully"
+    "password_changed_description": "Your password has been changed successfully",
+    "campaign_updated_message": "Ad Updated Successfully"
 }

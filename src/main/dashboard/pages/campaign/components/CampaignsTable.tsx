@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
+import Campaign from "../../../../../types/campaign";
 import CampaignTableRow from "./CampaignTableRow";
 
 interface CampaignTableProps {
-    campaigns: any;
+    campaigns: Campaign[];
 }
 
 export default function CampaignsTable({ campaigns }: CampaignTableProps) {
@@ -82,12 +83,14 @@ export default function CampaignsTable({ campaigns }: CampaignTableProps) {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 bg-white">
-                                {campaigns.map((campaign: any, i: number) => (
-                                    <CampaignTableRow
-                                        key={i}
-                                        campaign={campaign}
-                                    />
-                                ))}
+                                {campaigns.map(
+                                    (campaign: Campaign, i: number) => (
+                                        <CampaignTableRow
+                                            key={i}
+                                            campaign={campaign}
+                                        />
+                                    )
+                                )}
                             </tbody>
                         </table>
                     </div>

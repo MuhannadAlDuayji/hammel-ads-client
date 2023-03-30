@@ -12,12 +12,18 @@ import { useTranslation } from "react-i18next";
 
 type SettingsProps = {};
 
+interface Language {
+    id: number;
+    name: string;
+    value: string;
+}
+
 const languages = [
     { id: 1, name: "العربية", value: "ar" },
     { id: 2, name: "English", value: "en" },
 ];
 
-function classNames(...classes: any) {
+function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
 }
 
@@ -77,8 +83,9 @@ export default function Settings({}: SettingsProps) {
             phoneNumber: user.phoneNumber,
         });
         setSelectedLanguage(
-            languages.find((l: any) => l.value === user.preferredLanguage) ||
-                languages[0]
+            languages.find(
+                (l: Language) => l.value === user.preferredLanguage
+            ) || languages[0]
         );
     }, [user]);
     const saveHandler = async (e: any) => {

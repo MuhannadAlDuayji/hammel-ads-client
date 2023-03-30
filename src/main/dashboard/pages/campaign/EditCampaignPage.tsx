@@ -10,6 +10,7 @@ import PreviewComponent from "./components/PreviewComponent";
 import countryList from "./staticData/countryList";
 import AdminMessageAlert from "./components/AdminMessageAlert";
 import { useTranslation } from "react-i18next";
+import Campaign from "../../../../types/campaign";
 type Props = {};
 
 function isValidHttpUrl(string: string) {
@@ -46,9 +47,9 @@ function EditCampaignPage({}: Props) {
     const [campaign, setCampaign] = useState({
         _id: "",
         title: "",
-        startDate: "",
-        endDate: "",
-        budget: "",
+        startDate: new Date(),
+        endDate: new Date(),
+        budget: 0,
         country: "",
         photoPath: "",
         link: "",
@@ -457,7 +458,7 @@ function EditCampaignPage({}: Props) {
             )}
 
             <UpdateSuccess
-                content="Campaign updated successfully"
+                content={t("campaign_updated_message")}
                 setShowSuccessUpdate={setShowSuccessUpdate}
                 showSuccessUpdate={showSuccessUpdate}
             />
