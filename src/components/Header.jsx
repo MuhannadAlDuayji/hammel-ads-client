@@ -3,11 +3,7 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
 
-import { Button } from "./Button";
 import { Container } from "./Container";
-import { Logo } from "./Logo";
-import { NavLink } from "./NavLink";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 

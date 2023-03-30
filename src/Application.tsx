@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 import Login from "./main/auth/Login";
 import Register from "./main/auth/Register";
-import Home from "./main/Home";
 import Dashboard from "./main/dashboard/pages/dashboard/Dashboard";
 import Settings from "./main/dashboard/pages/settings/Settings";
 import Analytics from "./main/dashboard/pages/analytics/Analytics";
