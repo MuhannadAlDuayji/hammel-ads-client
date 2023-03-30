@@ -72,15 +72,6 @@ export default function LoginPage() {
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                         {t("login_account_description")}
                     </h2>
-                    <p className="mt-2 text-center text-sm text-gray-600">
-                        {t("or")}{" "}
-                        <Link
-                            to="/register"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                        >
-                            {t("create_account")}
-                        </Link>
-                    </p>
                 </div>
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -203,6 +194,15 @@ export default function LoginPage() {
                                         {t("sign_in")}
                                     </button>
                                 </div>
+                                <p className="mt-1 text-center text-sm text-gray-600">
+                                    {t("or")}{" "}
+                                    <Link
+                                        to="/register"
+                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                    >
+                                        {t("create_account")}
+                                    </Link>
+                                </p>
                             </form>
                         )}
                         <br></br>

@@ -104,14 +104,14 @@ export function Header() {
                         <LanguageSwitcher />
                     </div>
 
-                    <div className="flex items-center gap-x-5 md:gap-x-8">
+                    {/* <div className="flex items-center gap-x-5 md:gap-x-8">
                         <div className="hidden md:block">
                             <Link to="/login">{t("sign_in")}</Link>
                         </div>
                         <Button href="/register" color="blue">
                             <span>{t("get_started_today")}</span>
                         </Button>
-                    </div>
+                    </div> */}
                 </nav>
             </Container>
         </header>
