@@ -68,7 +68,8 @@ export default function Settings({}: SettingsProps) {
                 setLoading(false);
             } catch (err: any) {
                 console.log(err);
-                setErrorMessage("invalid file type");
+                const message = t("invalid_image_type");
+                setErrorMessage(message);
                 setLoading(false);
             }
         }
@@ -91,10 +92,12 @@ export default function Settings({}: SettingsProps) {
     const saveHandler = async (e: any) => {
         e.preventDefault();
         if (updateInfo.firstName.length < 3) {
-            return setErrorMessage("invalid first name");
+            const message = t("invalid_first_name_message");
+            return setErrorMessage(message);
         }
         if (updateInfo.lastName.length < 3) {
-            return setErrorMessage("invalid last name");
+            const message = t("invalid_last_name_message");
+            return setErrorMessage(message);
         }
 
         // if (
@@ -102,11 +105,13 @@ export default function Settings({}: SettingsProps) {
         //         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         //     )
         // ) {
-        //     return setErrorMessage("invalid email address");
+        // const message = t("invalid_email_message")
+        //     return setErrorMessage(message);
         // }
 
         if (updateInfo.phoneNumber.length < 8) {
-            return setErrorMessage("invalid phone number");
+            const message = t("invalid_phone_number");
+            return setErrorMessage(message);
         }
 
         setLoading(true);
@@ -124,18 +129,19 @@ export default function Settings({}: SettingsProps) {
                 })
             );
             i18n.changeLanguage(selectedLanguage.value);
-            setSuccessContent("updated");
+            const message = t("settings_updated_message");
+            setSuccessContent(message);
             setShowSuccessUpdate(true);
             setLoading(false);
         } catch (err: any) {
             setLoading(false);
-            if (
-                err.response.data.message.includes("invalid") ||
-                err.response.data.message.includes("email") ||
-                err.response.data.message.includes("phone")
-            ) {
-                setErrorMessage(err.response.data.message);
+            let message = t("invalid_settings_message");
+            if (err.response.data.message.includes("phone")) {
+                message = t("phone_unavailable_message");
+            } else if (err.response.data.message.includes("email")) {
+                message = t("email_unavailable_message");
             }
+            setErrorMessage(message);
         }
     };
 
@@ -163,7 +169,7 @@ export default function Settings({}: SettingsProps) {
                             ) : (
                                 <form
                                     dir={language === "ar" ? "rtl" : "ltr"}
-                                    className="divide-y divide-gray-200 lg:col-span-9 rtl"
+                                    className="divide-y divide-gray-200 lg:col-span-9"
                                     action="#"
                                     method="POST"
                                     onChange={() => {

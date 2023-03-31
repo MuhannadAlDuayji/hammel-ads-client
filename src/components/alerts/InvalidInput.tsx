@@ -1,14 +1,17 @@
 import { XCircleIcon } from "@heroicons/react/20/solid";
+import { useTranslation } from "react-i18next";
 
 interface InvalidInputProps {
     content?: string;
 }
 
 export default function InvalidInput({ content }: InvalidInputProps) {
+    const { t, i18n } = useTranslation();
     return (
         <div
             className="rounded-md bg-red-50 p-4"
             style={{ display: content === "" ? "none" : "block" }}
+            dir={i18n.language === "ar" ? "rtl" : "ltr"}
         >
             <div className="flex">
                 <div className="flex-shrink-0">
