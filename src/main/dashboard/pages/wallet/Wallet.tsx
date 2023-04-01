@@ -8,8 +8,6 @@ import BalanceInfoTable from "./components/BalanceInfoTable";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
 import TransactionsTable from "./components/TransactionsTable";
-import Transaction from "../../../../types/transaction";
-import { TransactionType } from "../../../../types/transaction/TransactionType";
 import UserPaymentMethodType from "../../../../types/payment method";
 type WalletProps = {};
 
@@ -90,7 +88,7 @@ export default function Wallet({}: WalletProps) {
                                                     i: number
                                                 ) => (
                                                     <div
-                                                        className="w-64 h-40 relative bg-gradient-to-r from-indigo-600 via-indigo-800 to-gray-800 rounded-lg shadow-lg "
+                                                        className="w-64 h-40 relative bg-gradient-to-r from-indigo-600 via-indigo-800 to-gray-800 rounded-lg shadow-xl "
                                                         key={i}
                                                     >
                                                         <div className="flex justify-between m-2 ">
@@ -167,7 +165,12 @@ export default function Wallet({}: WalletProps) {
                                                             viewBox="0 0 24 24"
                                                             strokeWidth={1.5}
                                                             stroke="currentColor"
-                                                            className="w-4 h-4 absolute top-1 right-1 text-red-500 cursor-pointer"
+                                                            className={`w-4 h-4 absolute top-1 ${
+                                                                i18n.language ===
+                                                                "ar"
+                                                                    ? "left-1 text-red-500"
+                                                                    : "right-1 text-red-500"
+                                                            }  cursor-pointer shadow-lg`}
                                                             onClick={() =>
                                                                 removePaymentMethod(
                                                                     paymentMethod.token

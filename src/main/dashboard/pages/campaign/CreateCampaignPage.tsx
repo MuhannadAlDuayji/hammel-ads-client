@@ -8,9 +8,13 @@ import NavBar from "../../shared/NavBar";
 import UpdateSuccess from "../../shared/UpdateSuccess";
 import CampaignsAPI from "./api";
 import PreviewComponent from "./components/PreviewComponent";
-import countryList from "./staticData/countryList";
 
 type Props = {};
+
+interface Country {
+    name: string;
+    value: string;
+}
 
 function isValidHttpUrl(string: string) {
     let url;
@@ -33,7 +37,7 @@ function CreateCampaignPage({}: Props) {
     const [errorMessage, setErrorMessage] = useState("");
 
     const token = useSelector((state: any) => state.auth.token);
-
+    const [countryList, setCountryList] = useState<Country[]>([]);
     const [loading, setLoading] = useState(true);
     const [campaignInfo, setCampaignInfo] = useState({
         title: "",
@@ -46,6 +50,19 @@ function CreateCampaignPage({}: Props) {
     });
 
     const [showSuccessUpdate, setShowSuccessUpdate] = useState(false);
+
+    const getCountryList = async () => {
+        try {
+            const { data } = await CampaignsAPI.getCountryList(token);
+            const countries = data.data.countryList.map((country: string) => {
+                return { name: t(country.toLowerCase()), value: country };
+            });
+            setCountryList(countries);
+            console.log(countries);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const changePhotoHandler = async (e: any) => {
         e.preventDefault();
@@ -64,7 +81,8 @@ function CreateCampaignPage({}: Props) {
                 });
             } catch (err: any) {
                 console.log(err);
-                setErrorMessage("invalid file type");
+                const message = t("invalid_image_type");
+                setErrorMessage(message);
                 setLoading(false);
             }
         }
@@ -94,7 +112,11 @@ function CreateCampaignPage({}: Props) {
             setErrorMessage(message);
             return false;
         }
-        if (!countryList.includes(campaignInfo.country)) {
+        if (
+            !countryList
+                .map((country) => country.name)
+                .includes(campaignInfo.country)
+        ) {
             const message = t("no_campaign_country_message");
             setErrorMessage(message);
             return false;
@@ -126,6 +148,9 @@ function CreateCampaignPage({}: Props) {
                 ...campaignInfo,
                 startDate: formatDate(campaignInfo.startDate),
                 endDate: formatDate(campaignInfo.endDate),
+                country: countryList.find(
+                    (country) => country.name === campaignInfo.country
+                )?.value,
                 status,
             };
             const response = await CampaignsAPI.createCampaign(data, token);
@@ -143,6 +168,7 @@ function CreateCampaignPage({}: Props) {
 
     useEffect(() => {
         if (!token) return;
+        getCountryList();
         setLoading(false);
     }, [token]);
 
@@ -308,7 +334,7 @@ function CreateCampaignPage({}: Props) {
                                             </option>
                                             {countryList.map((country, i) => (
                                                 <option key={i}>
-                                                    {country}
+                                                    {country.name}
                                                 </option>
                                             ))}
                                         </select>
@@ -440,14 +466,3 @@ function CreateCampaignPage({}: Props) {
 }
 
 export default CreateCampaignPage;
-
-/*
-
-
-loads{
-    id
-    date
-    status: [served, pending, unvalid]
-}
-
-*/

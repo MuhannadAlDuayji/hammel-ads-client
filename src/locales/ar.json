@@ -130,5 +130,21 @@
     "no_campaign_country_message": "يجب تحديد الدولة المستهدفة",
     "no_campaign_photo_message": "يجب توفير صورة",
     "no_campaign_link_message": "يجب توفير رابط",
-    "invalid_campaign_link_message": "الرابط غير صالح: "
+    "invalid_campaign_link_message": "الرابط غير صالح: ",
+    "algeria": "الجزائر",
+    "bahrain": "البحرين",
+    "egypt": "مصر",
+    "iraq": "العراق",
+    "jordan": "الأردن",
+    "kuwait": "الكويت",
+    "libya": "ليبيا",
+    "morocco": "المغرب",
+    "oman": "عُمان",
+    "qatar": "قطر",
+    "saudi arabia": "المملكة العربية السعودية",
+    "sudan": "السودان",
+    "syrian arab republic": "الجمهورية العربية السورية",
+    "tunisia": "تونس",
+    "united arab emirates": "الإمارات العربية المتحدة",
+    "yemen": "اليمن"
 }
