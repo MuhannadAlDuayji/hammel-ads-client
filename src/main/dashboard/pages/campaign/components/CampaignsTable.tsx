@@ -59,6 +59,12 @@ export default function CampaignsTable({ campaigns }: CampaignTableProps) {
                                         scope="col"
                                         className={`px-3 py-3.5 text-${textDir} text-sm font-semibold text-gray-900`}
                                     >
+                                        {t("views")}
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className={`px-3 py-3.5 text-${textDir} text-sm font-semibold text-gray-900`}
+                                    >
                                         {t("clicks")}
                                     </th>
                                     <th
