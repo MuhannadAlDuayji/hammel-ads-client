@@ -144,5 +144,7 @@
     "syrian arab republic": "Syrian Arab Republic",
     "tunisia": "Tunisia",
     "united arab emirates": "United Arab Emirates",
-    "yemen": "Yemen"
+    "yemen": "Yemen",
+    "please_select_a_country": "Please select a country",
+    "campaign_created_message": "Ad created successfully"
 }

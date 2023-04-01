@@ -372,7 +372,7 @@ function EditCampaignPage({}: Props) {
                                             className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
                                         >
                                             <option>
-                                                Please select a country
+                                                {t("please_select_a_country")}
                                             </option>
                                             {countryList.map((country, i) => (
                                                 <option key={i}>
