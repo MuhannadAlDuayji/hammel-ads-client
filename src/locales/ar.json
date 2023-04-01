@@ -146,5 +146,7 @@
     "syrian arab republic": "الجمهورية العربية السورية",
     "tunisia": "تونس",
     "united arab emirates": "الإمارات العربية المتحدة",
-    "yemen": "اليمن"
+    "yemen": "اليمن",
+    "please_select_a_country": "الرجاء تحديد البلد المستهدف",
+    "campaign_created_message": "تم إنشاء الإعلان بنجاح"
 }
