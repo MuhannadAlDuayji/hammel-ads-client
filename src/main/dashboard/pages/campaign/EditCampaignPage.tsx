@@ -7,12 +7,14 @@ import NavBar from "../../shared/NavBar";
 import UpdateSuccess from "../../shared/UpdateSuccess";
 import CampaignsAPI from "./api";
 import PreviewComponent from "./components/PreviewComponent";
-import countryList from "./staticData/countryList";
 import AdminMessageAlert from "./components/AdminMessageAlert";
 import { useTranslation } from "react-i18next";
 import Campaign from "../../../../types/campaign";
 type Props = {};
-
+interface Country {
+    name: string;
+    value: string;
+}
 function isValidHttpUrl(string: string) {
     let url;
     try {
@@ -42,6 +44,7 @@ function EditCampaignPage({}: Props) {
     const [errorMessage, setErrorMessage] = useState("");
 
     const token = useSelector((state: any) => state.auth.token);
+    const [countryList, setCountryList] = useState<Country[]>([]);
 
     const [loading, setLoading] = useState(true);
     const [campaign, setCampaign] = useState({
@@ -67,7 +70,18 @@ function EditCampaignPage({}: Props) {
     });
 
     const [showSuccessUpdate, setShowSuccessUpdate] = useState(false);
-
+    const getCountryList = async () => {
+        try {
+            const { data } = await CampaignsAPI.getCountryList(token);
+            const countries = data.data.countryList.map((country: string) => {
+                return { name: t(country.toLowerCase()), value: country };
+            });
+            setCountryList(countries);
+            return countries;
+        } catch (err) {
+            console.log(err);
+        }
+    };
     const changePhotoHandler = async (e: any) => {
         e.preventDefault();
         const campaignPhoto = e.target.files[0];
@@ -92,6 +106,7 @@ function EditCampaignPage({}: Props) {
 
     const getCampaign = async () => {
         try {
+            const countries: Country[] = await getCountryList();
             const response = await CampaignsAPI.getCampaignById(
                 token,
                 campaignId || "nothing"
@@ -102,6 +117,9 @@ function EditCampaignPage({}: Props) {
                 ...fetchedCampaign,
                 startDate: formatFetchedDate(fetchedCampaign.startDate),
                 endDate: formatFetchedDate(fetchedCampaign.endDate),
+                country: countries.find(
+                    (country) => country.value === fetchedCampaign.country
+                )?.name,
             });
         } catch (err: any) {
             console.log(err);
@@ -133,7 +151,11 @@ function EditCampaignPage({}: Props) {
             setErrorMessage(message);
             return false;
         }
-        if (!countryList.includes(campaignInfo.country)) {
+        if (
+            !countryList
+                .map((country) => country.name)
+                .includes(campaignInfo.country)
+        ) {
             const message = t("no_campaign_country_message");
             setErrorMessage(message);
             return false;
@@ -164,6 +186,9 @@ function EditCampaignPage({}: Props) {
                 ...campaignInfo,
                 startDate: formatDate(campaignInfo.startDate),
                 endDate: formatDate(campaignInfo.endDate),
+                country: countryList.find(
+                    (country) => country.name === campaignInfo.country
+                )?.value,
             };
             const response = await CampaignsAPI.updateCampaign(
                 data,
@@ -180,6 +205,7 @@ function EditCampaignPage({}: Props) {
     useEffect(() => {
         if (!token) return;
         getCampaign();
+
         setLoading(false);
     }, [token]);
 
@@ -350,7 +376,7 @@ function EditCampaignPage({}: Props) {
                                             </option>
                                             {countryList.map((country, i) => (
                                                 <option key={i}>
-                                                    {country}
+                                                    {country.name}
                                                 </option>
                                             ))}
                                         </select>

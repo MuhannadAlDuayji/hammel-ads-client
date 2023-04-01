@@ -128,5 +128,21 @@
     "no_campaign_country_message": "You need to provide a target country",
     "no_campaign_photo_message": "You need to provide a photo",
     "no_campaign_link_message": "You need to provide a link",
-    "invalid_campaign_link_message": "Invalid link: "
+    "invalid_campaign_link_message": "Invalid link: ",
+    "algeria": "Algeria",
+    "bahrain": "Bahrain",
+    "egypt": "Egypt",
+    "iraq": "Iraq",
+    "jordan": "Jordan",
+    "kuwait": "Kuwait",
+    "libya": "Libya",
+    "morocco": "Morocco",
+    "oman": "Oman",
+    "qatar": "Qatar",
+    "saudi arabia": "Saudi Arabia",
+    "sudan": "Sudan",
+    "syrian arab republic": "Syrian Arab Republic",
+    "tunisia": "Tunisia",
+    "united arab emirates": "United Arab Emirates",
+    "yemen": "Yemen"
 }

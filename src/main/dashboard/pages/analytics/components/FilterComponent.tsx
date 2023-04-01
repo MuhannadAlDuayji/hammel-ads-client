@@ -129,7 +129,11 @@ const Header: React.FC<Props> = ({
                             <div className="relative mt-2">
                                 <Listbox.Button className="relative w-52 cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     <span className="block truncate">
-                                        {nameFilter}
+                                        {nameFilter
+                                            .toLowerCase()
+                                            .includes("all campaigns")
+                                            ? t("all_campaigns")
+                                            : nameFilter}
                                     </span>
                                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                         <ChevronUpDownIcon
@@ -169,7 +173,7 @@ const Header: React.FC<Props> = ({
                                                             "block truncate"
                                                         )}
                                                     >
-                                                        {"All Campaigns"}
+                                                        {t("all_campaigns")}
                                                     </span>
 
                                                     {selected ? (
@@ -253,7 +257,11 @@ const Header: React.FC<Props> = ({
                             <div className="relative mt-2">
                                 <Listbox.Button className="relative w-52 cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     <span className="block truncate">
-                                        {countryFilter}
+                                        {countryFilter
+                                            .toLowerCase()
+                                            .includes("all countries")
+                                            ? t("all_countries")
+                                            : t(countryFilter.toLowerCase())}
                                     </span>
                                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                         <ChevronUpDownIcon
@@ -293,7 +301,7 @@ const Header: React.FC<Props> = ({
                                                             "block truncate"
                                                         )}
                                                     >
-                                                        {"All Countries"}
+                                                        {t("all_countries")}
                                                     </span>
 
                                                     {selected ? (
@@ -315,7 +323,7 @@ const Header: React.FC<Props> = ({
                                             )}
                                         </Listbox.Option>
 
-                                        {countryList.map((name, i) => (
+                                        {countryList.map((name: String, i) => (
                                             <Listbox.Option
                                                 key={i + 1}
                                                 className={({ active }) =>
@@ -338,7 +346,9 @@ const Header: React.FC<Props> = ({
                                                                 "block truncate"
                                                             )}
                                                         >
-                                                            {name}
+                                                            {t(
+                                                                name.toLowerCase()
+                                                            )}
                                                         </span>
 
                                                         {selected ? (
