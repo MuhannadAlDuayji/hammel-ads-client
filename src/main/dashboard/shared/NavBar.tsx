@@ -27,6 +27,7 @@ export default function NavBar({ index }: NavBarProps) {
         { name: t("analytics"), href: "/dashboard/analytics", current: false },
         { name: t("campaigns"), href: "/dashboard/campaigns", current: false },
         { name: t("wallet"), href: "/dashboard/wallet", current: false },
+        { name: t("support"), href: "/dashboard/support", current: false },
     ];
     const userNavigation = [{ name: t("settings") }, { name: t("logout") }];
 
