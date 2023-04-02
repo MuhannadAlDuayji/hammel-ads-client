@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
     BrowserRouter,
     Navigate,
-    redirect,
     Route,
     Routes,
     useNavigate,
@@ -39,6 +38,7 @@ import { initReactI18next } from "react-i18next";
 import translationEN from "./locales/en.json";
 import translationAR from "./locales/ar.json";
 import i18n from "i18next";
+import Support from "./main/dashboard/pages/support/Support";
 
 export interface IApplicationProps {}
 
@@ -111,7 +111,6 @@ function AdminRoutes() {
 
 function MainRoutes() {
     const token = useSelector((state: any) => state.auth.token);
-    const user = useSelector((state: any) => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -174,6 +173,7 @@ function MainRoutes() {
                 }
             />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/support" element={<Support />} />
 
             <Route path="/verifyemail" element={<VerifyEmailPage />} />
             <Route path="*" element={<NotFoundPage />} />

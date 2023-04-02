@@ -28,9 +28,9 @@
     "add_balance": "Add Balance",
     "date": "Date",
     "the_total": "Total",
-    "filter_by_date": "Filter by Date",
-    "filter_by_country": "Filter by Country",
-    "filter_by_name": "Filter by name",
+    "filter_by_date": "Filter By Date",
+    "filter_by_country": "Filter By Country",
+    "filter_by_name": "Filter By Name",
     "country": "Country",
     "to": "to",
     "amount": "Amount",
@@ -147,5 +147,8 @@
     "united arab emirates": "United Arab Emirates",
     "yemen": "Yemen",
     "please_select_a_country": "Please select a country",
-    "campaign_created_message": "Ad created successfully"
+    "campaign_created_message": "Ad created successfully",
+    "support": "Support",
+    "support_page_title": "Get In Touch",
+    "support_page_description": "Thank you for using the File Manager Ad System (Hammel). \n If you encounter any problems or have any suggestions, please don't hesitate contact us."
 }
