@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import InvalidInput from "../../../../components/alerts/InvalidInput";
@@ -9,6 +9,8 @@ import CampaignsAPI from "./api";
 import PreviewComponent from "./PreviewComponent";
 import countryList from "./staticData/countryList";
 import StatusListSelect from "./components/StatusListSelect";
+import { useDropzone } from "react-dropzone";
+
 type Props = {};
 
 function isValidHttpUrl(string: string) {
@@ -67,27 +69,33 @@ function AdminEditCampaignPage({}: Props) {
         adminMessage: "",
     });
 
+    const onDrop = useCallback((acceptedFiles: any) => {
+        handlePhotoUpload(acceptedFiles[0]);
+    }, []);
+    const { getRootProps, isDragActive } = useDropzone({
+        onDrop,
+        maxFiles: 1,
+    });
+
     const [showSuccessUpdate, setShowSuccessUpdate] = useState(false);
 
-    const changePhotoHandler = async (e: any) => {
-        e.preventDefault();
-        const campaignPhoto = e.target.files[0];
-        if (campaignPhoto !== null) {
-            const formData = new FormData();
-            formData.append("campaignPhoto", campaignPhoto);
-            try {
-                const response = await CampaignsAPI.uploadCampaignPhoto(
-                    formData,
-                    token
-                );
-                setCampaignInfo({
-                    ...campaignInfo,
+    const handlePhotoUpload = async (campaignPhoto: File) => {
+        const formData = new FormData();
+        formData.append("campaignPhoto", campaignPhoto);
+        try {
+            const response = await CampaignsAPI.uploadCampaignPhoto(
+                formData,
+                token
+            );
+            setCampaignInfo((prev) => {
+                return {
+                    ...prev,
                     photoPath: response.data.data.photoPath,
-                });
-            } catch (err: any) {
-                console.log(err);
-                setErrorMessage("invalid file type");
-            }
+                };
+            });
+        } catch (err: any) {
+            console.log(err);
+            setErrorMessage("invalid file type");
         }
     };
 
@@ -193,7 +201,10 @@ function AdminEditCampaignPage({}: Props) {
             ) : (
                 <form
                     className="space-y-8 divide-y divide-gray-200 m-20"
-                    onChange={() => setErrorMessage("")}
+                    onChange={(e) => {
+                        e.preventDefault();
+                        setErrorMessage("");
+                    }}
                 >
                     <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                         <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
@@ -340,7 +351,7 @@ function AdminEditCampaignPage({}: Props) {
                                     </div>
                                 </div>
 
-                                <div className="">
+                                <div className="" {...getRootProps()}>
                                     <label
                                         htmlFor="cover-photo"
                                         className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
@@ -348,7 +359,13 @@ function AdminEditCampaignPage({}: Props) {
                                         Campaign Image
                                     </label>
                                     <div className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center">
-                                        <div className="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 h-52 mt-10 ">
+                                        <div
+                                            className={`flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 h-46 mt-10 ${
+                                                isDragActive
+                                                    ? "bg-green-50"
+                                                    : ""
+                                            }`}
+                                        >
                                             <div
                                                 className="space-y-1 text-center"
                                                 style={{ minWidth: "200px" }}
@@ -375,16 +392,6 @@ function AdminEditCampaignPage({}: Props) {
                                                         <span>
                                                             Upload a file
                                                         </span>
-                                                        <input
-                                                            id="file-upload"
-                                                            name="file-upload"
-                                                            type="file"
-                                                            className="sr-only"
-                                                            accept=".png, .jpg, .jpeg"
-                                                            onChange={
-                                                                changePhotoHandler
-                                                            }
-                                                        />
                                                     </label>
                                                     <p className="pl-1">
                                                         or drag and drop

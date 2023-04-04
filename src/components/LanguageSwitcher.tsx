@@ -31,8 +31,8 @@ export default function LanguageSwitcher() {
     const [query, setQuery] = useState("");
     const { t, i18n } = useTranslation();
     const languages: Language[] = [
-        { id: 1, value: "ar", name: "Arabic 🇸🇦" },
-        { id: 2, value: "en", name: "English 🇬🇧" },
+        { id: 1, value: "ar", name: "Arabic" },
+        { id: 2, value: "en", name: "English" },
     ];
 
     let language = languages.find(
