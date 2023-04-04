@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import NavBar from "../../shared/NavBar";
 import UpdateSuccess from "../../shared/UpdateSuccess";
 import CampaignsAPI from "./api";
 import PreviewComponent from "./components/PreviewComponent";
+import { useDropzone } from "react-dropzone";
 
 type Props = {};
 
@@ -48,6 +49,16 @@ function CreateCampaignPage({}: Props) {
         photoPath: "",
         link: "",
     });
+    console.log("info", campaignInfo);
+
+    const onDrop = useCallback((acceptedFiles: any) => {
+        console.log(acceptedFiles);
+        handlePhotoUpload(acceptedFiles[0]);
+    }, []);
+    const { getRootProps, isDragActive } = useDropzone({
+        onDrop,
+        maxFiles: 1,
+    });
 
     const [showSuccessUpdate, setShowSuccessUpdate] = useState(false);
 
@@ -58,34 +69,37 @@ function CreateCampaignPage({}: Props) {
                 return { name: t(country.toLowerCase()), value: country };
             });
             setCountryList(countries);
-            console.log(countries);
         } catch (err) {
             console.log(err);
         }
     };
 
-    const changePhotoHandler = async (e: any) => {
+    const handlePhotoUpload = async (campaignPhoto: File) => {
+        const formData = new FormData();
+        formData.append("campaignPhoto", campaignPhoto);
+        try {
+            const response = await CampaignsAPI.uploadCampaignPhoto(
+                formData,
+                token
+            );
+            setCampaignInfo((prev) => {
+                return {
+                    ...prev,
+                    photoPath: response.data.data.photoPath,
+                };
+            });
+        } catch (err: any) {
+            console.log(err);
+            const message = t("invalid_image_type");
+            setErrorMessage(message);
+            setLoading(false);
+        }
+    };
+
+    const changePhotoHandler = (e: any) => {
         e.preventDefault();
         const campaignPhoto = e.target.files[0];
-        if (campaignPhoto !== null) {
-            const formData = new FormData();
-            formData.append("campaignPhoto", campaignPhoto);
-            try {
-                const response = await CampaignsAPI.uploadCampaignPhoto(
-                    formData,
-                    token
-                );
-                setCampaignInfo({
-                    ...campaignInfo,
-                    photoPath: response.data.data.photoPath,
-                });
-            } catch (err: any) {
-                console.log(err);
-                const message = t("invalid_image_type");
-                setErrorMessage(message);
-                setLoading(false);
-            }
-        }
+        handlePhotoUpload(campaignPhoto);
     };
 
     const formIsValid = () => {
@@ -190,8 +204,11 @@ function CreateCampaignPage({}: Props) {
             ) : (
                 <form
                     className="space-y-8 divide-y divide-gray-200 m-20"
-                    onChange={() => setErrorMessage("")}
                     dir={i18n.language === "ar" ? "rtl" : "ltr"}
+                    onChange={(e) => {
+                        e.preventDefault();
+                        setErrorMessage("");
+                    }}
                 >
                     <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                         <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
@@ -341,7 +358,7 @@ function CreateCampaignPage({}: Props) {
                                     </div>
                                 </div>
 
-                                <div className="">
+                                <div className="" {...getRootProps()}>
                                     <label
                                         htmlFor="cover-photo"
                                         className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
@@ -349,9 +366,15 @@ function CreateCampaignPage({}: Props) {
                                         {t("campaign_image")}
                                     </label>
                                     <div className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center">
-                                        <div className="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 h-52 mt-10 ">
+                                        <div
+                                            className={`flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 h-46 mt-10 ${
+                                                isDragActive
+                                                    ? "bg-green-50"
+                                                    : ""
+                                            }`}
+                                        >
                                             <div
-                                                className="space-y-1 text-center"
+                                                className="space-y-1 text-center "
                                                 style={{ minWidth: "200px" }}
                                             >
                                                 <svg
@@ -376,16 +399,6 @@ function CreateCampaignPage({}: Props) {
                                                         <span className="px-1">
                                                             {t("upload_image")}
                                                         </span>
-                                                        <input
-                                                            id="file-upload"
-                                                            name="file-upload"
-                                                            type="file"
-                                                            className="sr-only"
-                                                            accept=".png, .jpg, .jpeg"
-                                                            onChange={
-                                                                changePhotoHandler
-                                                            }
-                                                        />
                                                     </label>
                                                 </div>
                                                 <p className="text-xs text-gray-500">
