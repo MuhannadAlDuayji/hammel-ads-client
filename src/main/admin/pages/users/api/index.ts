@@ -1,9 +1,16 @@
 import axios from "axios";
 
-const TransactionsAPI = {
+const UsersAPI = {
+    getAllUsers: function (token: string) {
+        return axios.get(`${process.env.REACT_APP_API_URL}/users/getAllUsers`, {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        });
+    },
     increaseBalance: function (
         userEmail: string,
-        amount: string,
+        amount: number,
         token: string
     ) {
         return axios.post(
@@ -18,4 +25,4 @@ const TransactionsAPI = {
     },
 };
 
-export default TransactionsAPI;
+export default UsersAPI;

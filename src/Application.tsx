@@ -30,7 +30,7 @@ import { saveUser } from "./redux/user/userSlice";
 import ProtectedAdminRoute from "./utils/ProtectedAdminRoute";
 import AdminEditCampaignPage from "./main/admin/pages/campaign/AdminEditCampaignPage";
 import AdminCampaigns from "./main/admin/pages/campaign/AdminCampaigns";
-import TransactionsManagement from "./main/admin/pages/transactions/TransactionsManagement";
+import UsersManagement from "./main/admin/pages/users/UsersManagement";
 import AdminSettings from "./main/admin/pages/settings/Settings";
 import AddBalancePage from "./main/dashboard/pages/wallet/pages/AddBalancePage";
 import { I18nextProvider, useTranslation } from "react-i18next";
@@ -100,7 +100,7 @@ function AdminRoutes() {
                     </Routes>
                 }
             />
-            <Route path="/transactions" element={<TransactionsManagement />} />
+            <Route path="/users" element={<UsersManagement />} />
             <Route path="/settings" element={<AdminSettings />} />
 
             <Route path="/verifyemail" element={<VerifyEmailPage />} />
