@@ -9,8 +9,8 @@ import { useTranslation } from "react-i18next";
 const adminNavigation = [
     { name: "Admin Dashboard", href: "/admin/dashboard", current: false },
     {
-        name: "Transactions Management",
-        href: "/admin/transactions",
+        name: "Users Management",
+        href: "/admin/users",
         current: false,
     },
 ];
