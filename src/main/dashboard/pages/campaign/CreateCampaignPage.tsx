@@ -314,12 +314,19 @@ function CreateCampaignPage({}: Props) {
                                             name="budget"
                                             id="budget"
                                             value={campaignInfo.budget}
-                                            onChange={(e) =>
+                                            onChange={(e) => {
+                                                if (
+                                                    isNaN(
+                                                        Number(e.target.value)
+                                                    )
+                                                ) {
+                                                    return;
+                                                }
                                                 setCampaignInfo({
                                                     ...campaignInfo,
                                                     budget: e.target.value,
-                                                })
-                                            }
+                                                });
+                                            }}
                                             className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
                                         />
                                     </div>
