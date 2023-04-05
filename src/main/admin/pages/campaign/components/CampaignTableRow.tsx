@@ -162,7 +162,7 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                 <Link
                     to={`/admin/dashboard/campaigns/${campaign._id}`}
-                    className="text-indigo-600 hover:text-indigo-900"
+                    className="text-[#60b0bd] hover:text-indigo-900"
                 >
                     Edit<span className="sr-only">, {campaign.name}</span>
                 </Link>

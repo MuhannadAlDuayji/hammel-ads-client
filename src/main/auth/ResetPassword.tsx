@@ -119,7 +119,7 @@ const ResetPassword = (props: Props) => {
                                         type="password"
                                         autoComplete="password"
                                         required
-                                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#60b0bd] focus:outline-none focus:ring-[#60b0bd] sm:text-sm"
                                         value={newPassword.password}
                                         onChange={(e) => {
                                             setNewPassword({
@@ -153,7 +153,7 @@ const ResetPassword = (props: Props) => {
                                         type="password"
                                         autoComplete="current-password"
                                         required
-                                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#60b0bd] focus:outline-none focus:ring-[#60b0bd] sm:text-sm"
                                         value={newPassword.passwordConfirm}
                                         onChange={(e) =>
                                             setNewPassword({
@@ -179,7 +179,7 @@ const ResetPassword = (props: Props) => {
                                         id="remember-me"
                                         name="remember-me"
                                         type="checkbox"
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                        className="h-4 w-4 rounded border-gray-300 text-[#60b0bd] focus:ring-[#60b0bd]"
                                     />
                                     <label
                                         htmlFor="remember-me"
@@ -192,7 +192,7 @@ const ResetPassword = (props: Props) => {
                             <div>
                                 <button
                                     type="submit"
-                                    className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    className="flex w-full justify-center rounded-md border border-transparent bg-[#60b0bd] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2"
                                     onClick={newPasswordHandler}
                                 >
                                     Done

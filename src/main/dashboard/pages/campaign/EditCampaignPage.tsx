@@ -49,6 +49,8 @@ function EditCampaignPage({}: Props) {
     const [countryList, setCountryList] = useState<Country[]>([]);
 
     const [loading, setLoading] = useState(true);
+    const [photoUploadPending, setPhotoUploadPending] = useState(false);
+
     const [campaign, setCampaign] = useState({
         _id: "",
         title: "",
@@ -70,8 +72,6 @@ function EditCampaignPage({}: Props) {
         photoPath: "",
         link: "",
     });
-    console.log("my info", campaignInfo);
-
     const onDrop = useCallback((acceptedFiles: any) => {
         handlePhotoUpload(acceptedFiles[0]);
     }, []);
@@ -95,6 +95,7 @@ function EditCampaignPage({}: Props) {
     };
 
     const handlePhotoUpload = async (campaignPhoto: File) => {
+        setPhotoUploadPending(true);
         const formData = new FormData();
         formData.append("campaignPhoto", campaignPhoto);
         try {
@@ -108,6 +109,7 @@ function EditCampaignPage({}: Props) {
                     photoPath: response.data.data.photoPath,
                 };
             });
+            setPhotoUploadPending(false);
         } catch (err: any) {
             console.log(err);
             setErrorMessage("invalid file type");
@@ -222,7 +224,7 @@ function EditCampaignPage({}: Props) {
     return (
         <>
             <NavBar index={2} />
-            {loading ? (
+            {loading || !campaignInfo.title ? (
                 <div
                     style={{
                         width: "100%",
@@ -273,7 +275,7 @@ function EditCampaignPage({}: Props) {
                                             name="title"
                                             id="title"
                                             autoComplete="given-name"
-                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                             value={campaignInfo.title}
                                             onChange={(e) =>
                                                 setCampaignInfo({
@@ -307,7 +309,7 @@ function EditCampaignPage({}: Props) {
                                                     startDate: e.target.value,
                                                 })
                                             }
-                                            className=" max-w-lg  border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-gray-600"
+                                            className=" max-w-lg  border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] sm:text-sm text-gray-600"
                                         ></input>
                                     </div>
                                 </div>
@@ -333,7 +335,7 @@ function EditCampaignPage({}: Props) {
                                                     endDate: e.target.value,
                                                 })
                                             }
-                                            className=" max-w-lg  border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-gray-600"
+                                            className=" max-w-lg  border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] sm:text-sm text-gray-600"
                                         ></input>
                                     </div>
                                 </div>
@@ -365,7 +367,7 @@ function EditCampaignPage({}: Props) {
                                                     budget: e.target.value,
                                                 });
                                             }}
-                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                         />
                                     </div>
                                 </div>
@@ -389,7 +391,7 @@ function EditCampaignPage({}: Props) {
                                                     country: e.target.value,
                                                 })
                                             }
-                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] "
                                         >
                                             <option>
                                                 {t("please_select_a_country")}
@@ -418,42 +420,47 @@ function EditCampaignPage({}: Props) {
                                                     : ""
                                             }`}
                                         >
-                                            <div
-                                                className="space-y-1 text-center"
-                                                style={{ minWidth: "200px" }}
-                                            >
-                                                <svg
-                                                    className="mx-auto h-12 w-12 text-gray-400"
-                                                    stroke="currentColor"
-                                                    fill="none"
-                                                    viewBox="0 0 48 48"
-                                                    aria-hidden="true"
+                                            {photoUploadPending ? (
+                                                <LoadingSpinner />
+                                            ) : (
+                                                <div
+                                                    className="space-y-1 text-center "
+                                                    style={{
+                                                        minWidth: "200px",
+                                                    }}
                                                 >
-                                                    <path
-                                                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                        strokeWidth={2}
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                    />
-                                                </svg>
-                                                <div className="flex text-sm text-gray-600">
-                                                    <label
-                                                        htmlFor="file-upload"
-                                                        className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                                                    <svg
+                                                        className="mx-auto h-12 w-12 text-gray-400"
+                                                        stroke="currentColor"
+                                                        fill="none"
+                                                        viewBox="0 0 48 48"
+                                                        aria-hidden="true"
                                                     >
-                                                        <span>
-                                                            {t("upload_image")}
-                                                        </span>
-                                                    </label>
-                                                    <p className="pl-1">
-                                                        or drag and drop
+                                                        <path
+                                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                            strokeWidth={2}
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />
+                                                    </svg>
+                                                    <div className="flex text-sm text-gray-600">
+                                                        <label
+                                                            htmlFor="file-upload"
+                                                            className="relative cursor-pointer rounded-md bg-white font-medium text-[#60b0bd] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#60b0bd] focus-within:ring-offset-2 hover:text-[#60b0bd]"
+                                                        >
+                                                            <span className="px-1">
+                                                                {t(
+                                                                    "upload_image"
+                                                                )}
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                    <p className="text-xs text-gray-500">
+                                                        2090*1284 PNG, JPG, JPEG
+                                                        up to 4MB
                                                     </p>
                                                 </div>
-                                                <p className="text-xs text-gray-500">
-                                                    2090*1284 PNG, JPG, JPEG up
-                                                    to 4MB
-                                                </p>
-                                            </div>
+                                            )}
                                         </div>
                                         <PreviewComponent
                                             photoPath={campaignInfo.photoPath}
@@ -481,7 +488,7 @@ function EditCampaignPage({}: Props) {
                                                     link: e.target.value,
                                                 })
                                             }
-                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] "
                                         />
                                     </div>
                                 </div>
@@ -493,7 +500,7 @@ function EditCampaignPage({}: Props) {
                         <div className="flex justify-end">
                             <button
                                 type="button"
-                                className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-[#60b0bd] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     saveHandler();
