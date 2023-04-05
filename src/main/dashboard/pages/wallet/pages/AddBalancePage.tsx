@@ -162,7 +162,7 @@ const AddBalancePage = () => {
                                     });
                                 }}
                                 value={amountInfo.amount}
-                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] sm:text-sm"
                             />
                         </div>
                     </div>
@@ -247,7 +247,7 @@ const AddBalancePage = () => {
                                                             name="payment-type"
                                                             type="radio"
                                                             defaultChecked
-                                                            className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                            className="h-4 w-4 border-gray-300 text-[#60b0bd] focus:ring-[#60b0bd]"
                                                         />
                                                     ) : (
                                                         <input
@@ -256,7 +256,7 @@ const AddBalancePage = () => {
                                                             }
                                                             name="payment-type"
                                                             type="radio"
-                                                            className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                            className="h-4 w-4 border-gray-300 text-[#60b0bd] focus:ring-[#60b0bd]"
                                                         />
                                                     )}
 
@@ -288,7 +288,7 @@ const AddBalancePage = () => {
                                                 id="card-number"
                                                 name="card-number"
                                                 autoComplete="cc-number"
-                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] sm:text-sm"
                                                 value={cardDetails.Number}
                                                 onFocus={() =>
                                                     setSelectedPaymentMethod("")
@@ -325,7 +325,7 @@ const AddBalancePage = () => {
                                                 id="name-on-card"
                                                 name="name-on-card"
                                                 autoComplete="cc-name"
-                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] sm:text-sm"
                                                 value={cardDetails.HolderName}
                                                 onFocus={() =>
                                                     setSelectedPaymentMethod("")
@@ -354,7 +354,7 @@ const AddBalancePage = () => {
                                                 name="expiration-date"
                                                 id="expiration-date"
                                                 autoComplete="cc-exp"
-                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] sm:text-sm"
                                                 value={cardDetails.ExpiryMonth}
                                                 onFocus={() =>
                                                     setSelectedPaymentMethod("")
@@ -397,7 +397,7 @@ const AddBalancePage = () => {
                                                 name="expiration-date"
                                                 id="expiration-date"
                                                 autoComplete="cc-exp"
-                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] sm:text-sm"
                                                 value={cardDetails.ExpiryYear}
                                                 onFocus={() =>
                                                     setSelectedPaymentMethod("")
@@ -439,7 +439,7 @@ const AddBalancePage = () => {
                                                 name="cvc"
                                                 id="cvc"
                                                 autoComplete="csc"
-                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] sm:text-sm"
                                                 value={cardDetails.SecurityCode}
                                                 onFocus={() =>
                                                     setSelectedPaymentMethod("")
@@ -512,8 +512,8 @@ const AddBalancePage = () => {
                                         className={`w-full rounded-md border border-transparent  ${
                                             amountInfo.amount < 5
                                                 ? "bg-indigo-200"
-                                                : "bg-indigo-600 hover:bg-indigo-700"
-                                        } py-3 px-4 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50`}
+                                                : "bg-[#60b0bd] hover:bg-indigo-700"
+                                        } py-3 px-4 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2 focus:ring-offset-gray-50`}
                                     >
                                         {t("confirm")}
                                     </button>

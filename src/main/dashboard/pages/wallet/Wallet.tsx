@@ -88,7 +88,7 @@ export default function Wallet({}: WalletProps) {
                                                     i: number
                                                 ) => (
                                                     <div
-                                                        className="w-64 h-40 relative bg-gradient-to-r from-indigo-600 via-indigo-800 to-gray-800 rounded-lg shadow-xl "
+                                                        className="w-64 h-40 relative bg-gradient-to-r from-[#60b0bd] via-indigo-800 to-gray-800 rounded-lg shadow-xl "
                                                         key={i}
                                                     >
                                                         <div className="flex justify-between m-2 ">
@@ -197,7 +197,7 @@ export default function Wallet({}: WalletProps) {
                                                 "/dashboard/wallet/addbalance"
                                             )
                                         }
-                                        className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                        className="inline-flex items-center rounded-md border border-transparent bg-[#60b0bd] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2"
                                     >
                                         <PlusIcon
                                             className="mx-1 mr-2 h-5 w-5"

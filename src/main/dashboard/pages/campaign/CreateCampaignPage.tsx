@@ -231,7 +231,7 @@ function CreateCampaignPage({}: Props) {
                                             name="title"
                                             id="title"
                                             autoComplete="given-name"
-                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                             value={campaignInfo.title}
                                             onChange={(e) =>
                                                 setCampaignInfo({
@@ -265,7 +265,7 @@ function CreateCampaignPage({}: Props) {
                                                     startDate: e.target.value,
                                                 })
                                             }
-                                            className=" max-w-lg  border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-600"
+                                            className=" max-w-lg  border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] text-gray-600"
                                         ></input>
                                     </div>
                                 </div>
@@ -291,7 +291,7 @@ function CreateCampaignPage({}: Props) {
                                                     endDate: e.target.value,
                                                 })
                                             }
-                                            className=" max-w-lg  border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-600"
+                                            className=" max-w-lg  border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] text-gray-600"
                                         ></input>
                                     </div>
                                 </div>
@@ -323,7 +323,7 @@ function CreateCampaignPage({}: Props) {
                                                     budget: e.target.value,
                                                 });
                                             }}
-                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] "
                                         />
                                     </div>
                                 </div>
@@ -347,7 +347,7 @@ function CreateCampaignPage({}: Props) {
                                                     country: e.target.value,
                                                 })
                                             }
-                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                         >
                                             <option>
                                                 {t("please_select_a_country")}
@@ -402,7 +402,7 @@ function CreateCampaignPage({}: Props) {
                                                     <div className="flex text-sm text-gray-600">
                                                         <label
                                                             htmlFor="file-upload"
-                                                            className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                                                            className="relative cursor-pointer rounded-md bg-white font-medium text-[#60b0bd] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#60b0bd] focus-within:ring-offset-2 hover:text-[#60b0bd]"
                                                         >
                                                             <span className="px-1">
                                                                 {t(
@@ -444,7 +444,7 @@ function CreateCampaignPage({}: Props) {
                                                     link: e.target.value,
                                                 })
                                             }
-                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                         />
                                     </div>
                                 </div>
@@ -456,7 +456,7 @@ function CreateCampaignPage({}: Props) {
                         <div className="flex justify-end">
                             <button
                                 type="button"
-                                className="rounded-md bg-gray-200    border border-gray-300  py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="rounded-md bg-gray-200    border border-gray-300  py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     saveHandler("draft");
@@ -466,7 +466,7 @@ function CreateCampaignPage({}: Props) {
                             </button>
                             <button
                                 type="button"
-                                className="mx-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="mx-3 inline-flex justify-center rounded-md border border-transparent bg-[#60b0bd] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     saveHandler("in review");

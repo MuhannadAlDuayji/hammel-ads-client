@@ -26,7 +26,7 @@ export default function StatusListSelect({ selected, setSelected }: Props) {
             {({ open }) => (
                 <>
                     <div className="relative mt-1">
-                        <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                        <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-[#60b0bd] focus:outline-none focus:ring-1 focus:ring-[#60b0bd] sm:text-sm">
                             <span className="block truncate">{selected}</span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                 <ChevronUpDownIcon
@@ -50,7 +50,7 @@ export default function StatusListSelect({ selected, setSelected }: Props) {
                                         className={({ active }) =>
                                             classNames(
                                                 active
-                                                    ? "text-white bg-indigo-600"
+                                                    ? "text-white bg-[#60b0bd]"
                                                     : "text-gray-900",
                                                 "relative cursor-default select-none py-2 pl-3 pr-9"
                                             )
@@ -75,7 +75,7 @@ export default function StatusListSelect({ selected, setSelected }: Props) {
                                                         className={classNames(
                                                             active
                                                                 ? "text-white"
-                                                                : "text-indigo-600",
+                                                                : "text-[#60b0bd]",
                                                             "absolute inset-y-0 right-0 flex items-center pr-4"
                                                         )}
                                                     >

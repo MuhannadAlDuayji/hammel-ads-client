@@ -106,7 +106,7 @@ export default function LoginPage() {
                                                 });
                                                 setErrorMessage("");
                                             }}
-                                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#60b0bd] focus:outline-none focus:ring-[#60b0bd] sm:text-sm"
                                             style={{
                                                 backgroundColor:
                                                     unvalidProperties.includes(
@@ -143,7 +143,7 @@ export default function LoginPage() {
                                                     password: e.target.value,
                                                 })
                                             }
-                                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#60b0bd] focus:outline-none focus:ring-[#60b0bd] sm:text-sm"
                                             style={{
                                                 backgroundColor:
                                                     unvalidProperties.includes(
@@ -165,7 +165,7 @@ export default function LoginPage() {
                                             id="remember-me"
                                             name="remember-me"
                                             type="checkbox"
-                                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                            className="h-4 w-4 rounded border-gray-300 text-[#60b0bd] focus:ring-[#60b0bd]"
                                         />
                                         <label
                                             htmlFor="remember-me"
@@ -178,7 +178,7 @@ export default function LoginPage() {
                                     <div className="text-sm">
                                         <Link
                                             to="/forget"
-                                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                                            className="font-medium text-[#60b0bd] hover:text-[#60b0bd]"
                                         >
                                             {t("forgot_password_question")}
                                         </Link>
@@ -189,7 +189,7 @@ export default function LoginPage() {
                                     <button
                                         type="submit"
                                         onClick={signInHandler}
-                                        className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                        className="flex w-full justify-center rounded-md border border-transparent bg-[#60b0bd] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2"
                                     >
                                         {t("sign_in")}
                                     </button>
@@ -198,7 +198,7 @@ export default function LoginPage() {
                                     {t("or")}{" "}
                                     <Link
                                         to="/register"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        className="font-medium text-[#60b0bd] hover:text-[#60b0bd]"
                                     >
                                         {t("create_account")}
                                     </Link>
