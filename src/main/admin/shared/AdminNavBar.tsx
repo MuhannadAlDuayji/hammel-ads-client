@@ -188,7 +188,7 @@ export default function AdminNavBar({ index }: AdminNavBarProps) {
                                             href={item.href}
                                             className={classNames(
                                                 item.current
-                                                    ? "bg-indigo-50 border-[#60b0bd] text-indigo-700"
+                                                    ? "bg-indigo-50 border-[#60b0bd] text-[#58a1ad]"
                                                     : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800",
                                                 "block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                                             )}

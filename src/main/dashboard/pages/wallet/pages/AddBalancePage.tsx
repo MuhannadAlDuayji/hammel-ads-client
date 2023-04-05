@@ -512,7 +512,7 @@ const AddBalancePage = () => {
                                         className={`w-full rounded-md border border-transparent  ${
                                             amountInfo.amount < 5
                                                 ? "bg-indigo-200"
-                                                : "bg-[#60b0bd] hover:bg-indigo-700"
+                                                : "bg-[#60b0bd] hover:bg-[#58a1ad]"
                                         } py-3 px-4 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2 focus:ring-offset-gray-50`}
                                     >
                                         {t("confirm")}

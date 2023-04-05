@@ -189,7 +189,7 @@ export default function LoginPage() {
                                     <button
                                         type="submit"
                                         onClick={signInHandler}
-                                        className="flex w-full justify-center rounded-md border border-transparent bg-[#60b0bd] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2"
+                                        className="flex w-full justify-center rounded-md border border-transparent bg-[#60b0bd] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-[#58a1ad] focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2"
                                     >
                                         {t("sign_in")}
                                     </button>
