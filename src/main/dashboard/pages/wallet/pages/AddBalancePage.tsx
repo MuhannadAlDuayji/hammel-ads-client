@@ -187,10 +187,10 @@ const AddBalancePage = () => {
         }
     };
     return (
-        <div className="bg-gray-50">
+        <div>
             <NavBar index={3} />
             {loading ? (
-                <div className="mx-auto max-w-2xl px-4 pt-40 pb-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
+                <div className="mx-auto mt-52 max-w-2xl px-4 pt-40 pb-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
                     <LoadingSpinner />
                 </div>
             ) : (
