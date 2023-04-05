@@ -150,5 +150,10 @@
     "campaign_created_message": "Ad created successfully",
     "support": "Support",
     "support_page_title": "Get In Touch",
-    "support_page_description": "Thank you for using the File Manager Ad System (Hammel). \n If you encounter any problems or have any suggestions, please don't hesitate contact us."
+    "support_page_description": "Thank you for using the File Manager Ad System (Hammel). \n If you encounter any problems or have any suggestions, please don't hesitate contact us.",
+    "fill_all_fields": "Please fill in all fields.",
+    "invalid_card_number": "Invalid card number.",
+    "invalid_expiry_date": "Invalid expiry date.",
+    "invalid_security_code": "Invalid security code.",
+    "invalid_holder_name": "Invalid holder name."
 }

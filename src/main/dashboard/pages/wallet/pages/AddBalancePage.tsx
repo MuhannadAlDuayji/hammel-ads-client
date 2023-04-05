@@ -7,6 +7,7 @@ import UpdateSuccess from "../../../shared/UpdateSuccess";
 import { useNavigate } from "react-router-dom";
 import InvalidInput from "../../../../../components/alerts/InvalidInput";
 import { useTranslation } from "react-i18next";
+import NavBar from "../../../shared/NavBar";
 const paymentOptions = [
     { id: "credit-card", title: "Mastercard/Visa" },
     { id: "paypal", title: "PayPal" },
@@ -74,7 +75,66 @@ const AddBalancePage = () => {
             navigate("/dashboard/wallet");
         }, 2000);
     };
+    const checkForm = () => {
+        const { Number, ExpiryMonth, ExpiryYear, SecurityCode, HolderName } =
+            cardDetails;
+
+        // Check if any field is empty
+        if (
+            !Number ||
+            !ExpiryMonth ||
+            !ExpiryYear ||
+            !SecurityCode ||
+            !HolderName
+        ) {
+            const errorMessage = t("fill_all_fields");
+            setMessage(errorMessage);
+            return false;
+        }
+
+        // Check if the card number is valid
+        const cardNumberRegex = /^\d{16}$/;
+        if (!cardNumberRegex.test(Number)) {
+            const errorMessage = t("invalid_card_number");
+            setMessage(errorMessage);
+            return false;
+        }
+
+        // Check if the expiry date is valid
+        const currentYear = new Date().getFullYear();
+        const expiryDate = new Date(`${ExpiryMonth}/01/${ExpiryYear}`);
+        if (
+            expiryDate < new Date() ||
+            expiryDate.getFullYear() > currentYear + 10
+        ) {
+            const errorMessage = t("invalid_expiry_date");
+            setMessage(errorMessage);
+            return false;
+        }
+
+        // Check if the security code is valid
+        const securityCodeRegex = /^\d{3}$/;
+        if (!securityCodeRegex.test(SecurityCode)) {
+            const errorMessage = t("invalid_security_code");
+            setMessage(errorMessage);
+            return false;
+        }
+
+        // Check if the holder name is valid
+        const holderNameRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+        if (!holderNameRegex.test(HolderName)) {
+            const errorMessage = t("invalid_holder_name");
+            setMessage(errorMessage);
+            return false;
+        }
+
+        // All fields are valid
+        setMessage("");
+        return true;
+    };
+
     const executeNewCreditCardPayment = async () => {
+        if (!checkForm()) return;
         try {
             setLoading(true);
             const response = await WalletAPI.executePaymentUsingCard(
@@ -94,6 +154,7 @@ const AddBalancePage = () => {
         }
     };
     const executePaymentUsingToken = async () => {
+        console.log("token");
         try {
             setLoading(true);
             const paymentToken: any = paymentMethods.find(
@@ -126,9 +187,10 @@ const AddBalancePage = () => {
         }
     };
     return (
-        <div className="bg-gray-50">
+        <div>
+            <NavBar index={3} />
             {loading ? (
-                <div className="mx-auto max-w-2xl px-4 pt-40 pb-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
+                <div className="mx-auto mt-52 max-w-2xl px-4 pt-40 pb-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
                     <LoadingSpinner />
                 </div>
             ) : (

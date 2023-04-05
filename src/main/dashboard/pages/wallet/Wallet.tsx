@@ -88,7 +88,7 @@ export default function Wallet({}: WalletProps) {
                                                     i: number
                                                 ) => (
                                                     <div
-                                                        className="w-64 h-40 relative bg-gradient-to-r from-[#60b0bd] via-indigo-800 to-gray-800 rounded-lg shadow-xl "
+                                                        className="w-64 h-40 relative bg-gradient-to-r from-indigo-700 via-indigo-800 to-gray-800 rounded-lg shadow-xl "
                                                         key={i}
                                                     >
                                                         <div className="flex justify-between m-2 ">

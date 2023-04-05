@@ -21,7 +21,7 @@ const CreditCardView = ({
 }: Props) => {
     return (
         <div
-            className="w-64 h-40 bg-gradient-to-r from-[#60b0bd] via-indigo-800 to-gray-800 rounded-lg shadow-lg cursor-pointer"
+            className="w-64 h-40 bg-gradient-to-r from-indigo-600 via-indigo-800 to-gray-800 rounded-lg shadow-lg cursor-pointer"
             style={{
                 backgroundColor: "red",
                 marginBottom: "5px",
