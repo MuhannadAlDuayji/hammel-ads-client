@@ -61,7 +61,13 @@ export default function NavBar({ index }: NavBarProps) {
                             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                                 <div className="flex h-16 justify-between">
                                     <div className="flex">
-                                        <div className="flex items-center px-6">
+                                        <div
+                                            className={`flex items-center ${
+                                                i18n.language === "ar"
+                                                    ? "pl-8"
+                                                    : "pr-8"
+                                            }`}
+                                        >
                                             <img
                                                 src={logo}
                                                 alt="Website Logo"
@@ -91,7 +97,7 @@ export default function NavBar({ index }: NavBarProps) {
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="hidden sm:ml-6 sm:flex sm:items-center">
+                                    <div className="hidden sm:flex sm:items-center">
                                         <Menu
                                             as="div"
                                             className="relative ml-3"
@@ -199,7 +205,7 @@ export default function NavBar({ index }: NavBarProps) {
                                             href={item.href}
                                             className={classNames(
                                                 item.current
-                                                    ? "bg-indigo-50 border-[#60b0bd] text-indigo-700"
+                                                    ? "bg-indigo-50 border-[#60b0bd] text-[#58a1ad]"
                                                     : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800",
                                                 "block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                                             )}
