@@ -14,9 +14,6 @@ const ProtectedRoute: React.FC<Props> = ({ children }) => {
     if (!token) {
         return <Navigate to={{ pathname: "/login" }} replace />;
     }
-    if (user?.isAdmin) {
-        return <Navigate to={{ pathname: "/admin/dashboard" }} replace />;
-    }
 
     return children;
 };
