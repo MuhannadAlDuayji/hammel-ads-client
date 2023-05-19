@@ -70,7 +70,7 @@ export default function RegisterPage({ lg }: RegisterPageProps) {
     /// handler -------------------
 
     const validPassword = new RegExp(
-        "(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
+        "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})"
     );
 
     const signUpHandler = (e: any) => {
