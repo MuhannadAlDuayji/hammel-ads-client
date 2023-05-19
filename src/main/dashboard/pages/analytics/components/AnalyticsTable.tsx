@@ -140,7 +140,10 @@ export default function AnalyticsTable({ from, to, data }: props) {
                                     <td
                                         className={`py-4 pl-3 pr-4 text-${textDir} text-sm text-gray-500 sm:pr-0`}
                                     >
-                                        {date.clickRate.toFixed(2) + "%"}
+                                        {(
+                                            (date.clicks / date.views) *
+                                            100
+                                        ).toFixed(2) + "%"}
                                     </td>
                                 </tr>
                             ))}

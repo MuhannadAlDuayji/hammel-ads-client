@@ -156,9 +156,7 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             {/* // click rate */}
 
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {campaign.clickRate !== null
-                    ? formatAmount(campaign.clickRate)
-                    : "0.00"}
+                {formatAmount((campaign.clicks / (campaign.views || 1)) * 100)}%
             </td>
 
             {/* // status */}
