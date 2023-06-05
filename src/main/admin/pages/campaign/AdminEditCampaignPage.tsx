@@ -153,14 +153,14 @@ function AdminEditCampaignPage({}: Props) {
             setErrorMessage("you must provide a campaign photo");
             return false;
         }
-        if (!isValidHttpUrl(campaignInfo.link)) {
-            if (!campaignInfo.link) {
-                setErrorMessage("you must provide a campaign link");
-            } else {
-                setErrorMessage("invalid campaign link: " + campaignInfo.link);
-            }
-            return false;
-        }
+        // if (!isValidHttpUrl(campaignInfo.link)) {
+        //     if (!campaignInfo.link) {
+        //         setErrorMessage("you must provide a campaign link");
+        //     } else {
+        //         setErrorMessage("invalid campaign link: " + campaignInfo.link);
+        //     }
+        //     return false;
+        // }
         return true;
     };
 
