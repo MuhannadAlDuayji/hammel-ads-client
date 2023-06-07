@@ -155,5 +155,6 @@
     "invalid_card_number": "رقم البطاقة غير صالح.",
     "invalid_expiry_date": "تاريخ انتهاء الصلاحية غير صالح.",
     "invalid_security_code": "رمز الأمان غير صالح.",
-    "invalid_holder_name": "اسم الحائز غير صالح."
+    "invalid_holder_name": "اسم الحائز غير صالح.",
+    "all countries": "كل البلدان"
 }

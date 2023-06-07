@@ -155,5 +155,6 @@
     "invalid_card_number": "Invalid card number.",
     "invalid_expiry_date": "Invalid expiry date.",
     "invalid_security_code": "Invalid security code.",
-    "invalid_holder_name": "Invalid holder name."
+    "invalid_holder_name": "Invalid holder name.",
+    "all countries": "All Countries"
 }
