@@ -67,7 +67,6 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             console.log(err);
         }
     };
-
     useEffect(() => {
         getUser();
     }, []);
@@ -145,7 +144,9 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             {/* // click rate */}
 
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {((campaign.clicks / campaign.views) * 100).toFixed(2) + "%"}
+                {(((campaign.clicks / (campaign.views || 1)) * 100).toFixed(
+                    2
+                ) || "0") + "%"}
             </td>
 
             {/* // status */}
