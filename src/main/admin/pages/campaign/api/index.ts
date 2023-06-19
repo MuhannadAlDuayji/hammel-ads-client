@@ -18,6 +18,16 @@ const CampaignsAPI = {
             }
         );
     },
+    getCountryList: function (token: string) {
+        return axios.get(
+            `${process.env.REACT_APP_API_URL}/campaigns/country-list`,
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            }
+        );
+    },
     createCampaign: function (data: any, token: string) {
         return axios.post(`${process.env.REACT_APP_API_URL}/campaigns/`, data, {
             headers: {

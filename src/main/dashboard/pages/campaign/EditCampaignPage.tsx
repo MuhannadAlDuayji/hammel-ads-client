@@ -130,7 +130,9 @@ function EditCampaignPage({}: Props) {
                 startDate: formatFetchedDate(fetchedCampaign.startDate),
                 endDate: formatFetchedDate(fetchedCampaign.endDate),
                 country: countries.find(
-                    (country) => country.value === fetchedCampaign.country
+                    (country) =>
+                        country.value.toLowerCase() ===
+                        fetchedCampaign.country.toLowerCase()
                 )?.name,
             });
         } catch (err: any) {

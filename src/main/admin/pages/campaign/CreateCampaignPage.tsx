@@ -7,8 +7,8 @@ import NavBar from "../../shared/AdminNavBar";
 import UpdateSuccess from "../../shared/UpdateSuccess";
 import CampaignsAPI from "./api";
 import PreviewComponent from "./PreviewComponent";
-import countryList from "./staticData/countryList";
 import { useDropzone } from "react-dropzone";
+import { t } from "i18next";
 
 type Props = {};
 
@@ -27,13 +27,17 @@ function formatDate(date: string) {
     const [y, m, d] = date.split("-");
     return `${m}/${d}/${y}`;
 }
+interface Country {
+    name: string;
+    value: string;
+}
 function CreateCampaignPage({}: Props) {
     const navigate = useNavigate();
 
     const [errorMessage, setErrorMessage] = useState("");
 
     const token = useSelector((state: any) => state.auth.token);
-
+    const [countryList, setCountryList] = useState<Country[]>([]);
     const [loading, setLoading] = useState(true);
     const [photoUploadPending, setPhotoUploadPending] = useState(false);
 
@@ -56,6 +60,18 @@ function CreateCampaignPage({}: Props) {
     });
 
     const [showSuccessUpdate, setShowSuccessUpdate] = useState(false);
+
+    const getCountryList = async () => {
+        try {
+            const { data } = await CampaignsAPI.getCountryList(token);
+            const countries = data.data.countryList.map((country: string) => {
+                return { name: country.toLowerCase(), value: country };
+            });
+            setCountryList(countries);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const handlePhotoUpload = async (campaignPhoto: File) => {
         setPhotoUploadPending(true);
@@ -100,7 +116,11 @@ function CreateCampaignPage({}: Props) {
             setErrorMessage("budget must be greater than 10");
             return false;
         }
-        if (!countryList.includes(campaignInfo.country)) {
+        if (
+            !countryList
+                .map((country) => country.name)
+                .includes(campaignInfo.country)
+        ) {
             setErrorMessage("you must provide a country");
             return false;
         }
@@ -146,6 +166,7 @@ function CreateCampaignPage({}: Props) {
     useEffect(() => {
         if (!token) return;
         setLoading(false);
+        getCountryList();
     }, [token]);
 
     return (
@@ -305,14 +326,14 @@ function CreateCampaignPage({}: Props) {
                                                     country: e.target.value,
                                                 })
                                             }
-                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] sm:max-w-xs sm:text-sm"
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                         >
                                             <option>
                                                 Please select a country
                                             </option>
                                             {countryList.map((country, i) => (
                                                 <option key={i}>
-                                                    {country}
+                                                    {country.name}
                                                 </option>
                                             ))}
                                         </select>

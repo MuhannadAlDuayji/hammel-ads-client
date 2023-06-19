@@ -7,11 +7,15 @@ import NavBar from "../../shared/AdminNavBar";
 import UpdateSuccess from "../../shared/UpdateSuccess";
 import CampaignsAPI from "./api";
 import PreviewComponent from "./PreviewComponent";
-import countryList from "./staticData/countryList";
 import StatusListSelect from "./components/StatusListSelect";
 import { useDropzone } from "react-dropzone";
+import { t } from "i18next";
 
 type Props = {};
+interface Country {
+    name: string;
+    value: string;
+}
 
 function isValidHttpUrl(string: string) {
     let url;
@@ -44,6 +48,7 @@ function AdminEditCampaignPage({}: Props) {
     const [errorMessage, setErrorMessage] = useState("");
 
     const token = useSelector((state: any) => state.auth.token);
+    const [countryList, setCountryList] = useState<Country[]>([]);
 
     const [loading, setLoading] = useState(true);
     const [photoUploadPending, setPhotoUploadPending] = useState(false);
@@ -80,6 +85,18 @@ function AdminEditCampaignPage({}: Props) {
     });
 
     const [showSuccessUpdate, setShowSuccessUpdate] = useState(false);
+    const getCountryList = async () => {
+        try {
+            const { data } = await CampaignsAPI.getCountryList(token);
+            const countries = data.data.countryList.map((country: string) => {
+                return { name: country.toLowerCase(), value: country };
+            });
+            setCountryList(countries);
+            return countries;
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const handlePhotoUpload = async (campaignPhoto: File) => {
         setPhotoUploadPending(true);
@@ -106,6 +123,7 @@ function AdminEditCampaignPage({}: Props) {
 
     const getCampaign = async () => {
         try {
+            const countries: Country[] = await getCountryList();
             const response = await CampaignsAPI.getCampaignById(
                 token,
                 campaignId || "nothing"
@@ -117,6 +135,11 @@ function AdminEditCampaignPage({}: Props) {
                 adminMessage: fetchedCampaign.adminMessage,
                 startDate: formatFetchedDate(fetchedCampaign.startDate),
                 endDate: formatFetchedDate(fetchedCampaign.endDate),
+                country: countries.find(
+                    (country) =>
+                        country.value.toLowerCase() ===
+                        fetchedCampaign.country.toLowerCase()
+                )?.name,
             });
             setSelectedStatus(fetchedCampaign.status);
         } catch (err: any) {
@@ -145,7 +168,11 @@ function AdminEditCampaignPage({}: Props) {
             setErrorMessage("budget must be greater than 10");
             return false;
         }
-        if (!countryList.includes(campaignInfo.country)) {
+        if (
+            !countryList
+                .map((country) => country.name)
+                .includes(campaignInfo.country)
+        ) {
             setErrorMessage("you must provide a country");
             return false;
         }
@@ -186,6 +213,7 @@ function AdminEditCampaignPage({}: Props) {
         if (!token) return;
         getCampaign();
         setLoading(false);
+        getCountryList();
     }, [token]);
 
     return (
@@ -356,7 +384,7 @@ function AdminEditCampaignPage({}: Props) {
                                             </option>
                                             {countryList.map((country, i) => (
                                                 <option key={i}>
-                                                    {country}
+                                                    {country.name}
                                                 </option>
                                             ))}
                                         </select>
