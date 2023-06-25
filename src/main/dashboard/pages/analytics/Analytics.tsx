@@ -29,9 +29,9 @@ function formatDateForRequest(date: Date): string {
     const day = date.getDate();
     const year = date.getFullYear();
 
-    const formattedDate = `${month.toString().padStart(2, "0")}-${day
+    const formattedDate = `${year.toString()}-${month
         .toString()
-        .padStart(2, "0")}-${year.toString()}`;
+        .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
     return formattedDate;
 }
 function formatDateToLabel(dateString: string): string {
@@ -67,7 +67,7 @@ function formatForTable(data: Data) {
         object.views = data.views.datasets[i];
         object.clicks = data.clicks.datasets[i];
         if (object.views !== 0) {
-            object.clickRate = (object.clicks / object.views) * 100;
+            object.clickRate = (object.clicks / (object.views || 1)) * 100;
         }
         dataArray.push(object);
     });
@@ -109,6 +109,7 @@ export default function Analytics({}: AnalyticsProps) {
                     : countryFilter,
                 nameFilter.toLowerCase().includes("all") ? null : nameFilter
             );
+            console.log(clicks);
 
             const views = await AnalyticsAPI.getTotalAnalytics(
                 token,
