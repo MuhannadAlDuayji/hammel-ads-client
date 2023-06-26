@@ -7,6 +7,10 @@ interface CampaignsTableRowProps {
     campaign: any;
 }
 
+function formatNumber(number: number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function dateFormater(date: Date, separator: string) {
     const day = date.getDate();
     // add +1 to month because getMonth() returns month from 0 to 11
@@ -127,18 +131,18 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             </td>
             {/* // Budget */}
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {campaign.budget}
+                {formatNumber(campaign.budget)}
             </td>
 
             {/* // money spent */}
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {campaign.moneySpent}
+                {formatNumber(campaign.moneySpent)}
             </td>
 
             {/* // clicks */}
 
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {campaign.clicks}
+                {formatNumber(campaign.clicks)}
             </td>
 
             {/* // click rate */}

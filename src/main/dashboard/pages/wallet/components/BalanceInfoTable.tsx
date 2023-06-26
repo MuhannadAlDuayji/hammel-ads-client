@@ -66,7 +66,10 @@ const BalanceInfoTable = (props: Props) => {
                         {t("account_balance")}
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                        ${user?.balance?.toFixed(2)}
+                        $
+                        {user?.balance
+                            ?.toFixed(2)
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </dd>
                 </div>
             </dl>

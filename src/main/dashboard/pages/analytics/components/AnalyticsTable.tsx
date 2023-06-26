@@ -13,6 +13,10 @@ interface props {
     data: Array<Data>;
 }
 
+function formatNumber(number: number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function formatDate(date: Date) {
     const monthNames = [
         "January",
@@ -130,12 +134,12 @@ export default function AnalyticsTable({ from, to, data }: props) {
                                     <td
                                         className={`hidden py-4 px-3 text-${textDir} text-sm text-gray-500 sm:table-cell`}
                                     >
-                                        {date.views}
+                                        {formatNumber(date.views)}
                                     </td>
                                     <td
                                         className={`hidden py-4 px-3 text-${textDir} text-sm text-gray-500 sm:table-cell`}
                                     >
-                                        {date.clicks}
+                                        {formatNumber(date.clicks)}
                                     </td>
                                     <td
                                         className={`py-4 pl-3 pr-4 text-${textDir} text-sm text-gray-500 sm:pr-0`}
@@ -157,12 +161,12 @@ export default function AnalyticsTable({ from, to, data }: props) {
                             <td
                                 className={`hidden py-4 px-3 text-${textDir} text-sm text-gray-500 sm:table-cell`}
                             >
-                                {totalData.views}
+                                {formatNumber(totalData.views)}
                             </td>
                             <td
                                 className={`hidden py-4 px-3 text-${textDir} text-sm text-gray-500 sm:table-cell`}
                             >
-                                {totalData.clicks}
+                                {formatNumber(totalData.clicks)}
                             </td>
                             <td
                                 className={`py-4 pl-3 pr-4 text-${textDir} text-sm text-gray-500 sm:pr-0`}

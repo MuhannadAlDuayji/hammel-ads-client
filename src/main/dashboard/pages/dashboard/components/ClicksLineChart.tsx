@@ -30,9 +30,11 @@ function formatDate(date: Date): string {
     const day = date.getDate();
     const year = date.getFullYear();
 
+    console.log(date);
     const formattedDate = `${year.toString()}-${month
         .toString()
         .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+    console.log(formattedDate);
     return formattedDate;
 }
 
