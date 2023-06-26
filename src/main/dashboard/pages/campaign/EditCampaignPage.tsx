@@ -179,14 +179,10 @@ function EditCampaignPage({}: Props) {
             setErrorMessage(message);
             return false;
         }
-        if (!isValidHttpUrl(campaignInfo.link)) {
-            if (!campaignInfo.link) {
-                const message = t("no_campaign_link_message");
-                setErrorMessage(message);
-            } else {
-                const message = t("invalid_campaign_link_message");
-                setErrorMessage(message + campaignInfo.link);
-            }
+        if (!campaignInfo.link) {
+            const message = t("no_campaign_link_message");
+            setErrorMessage(message);
+
             return false;
         }
         return true;
