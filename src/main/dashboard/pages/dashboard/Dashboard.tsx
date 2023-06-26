@@ -9,6 +9,12 @@ import ClicksLineChart from "./components/ClicksLineChart";
 import ChartCard from "../../shared/ChartCard";
 import { useTranslation } from "react-i18next";
 
+function formatNumber(number: number) {
+    return number
+        .toFixed(0)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function formatDateToLabel(dateString: string): string {
     const months = [
         "Jan",
@@ -47,13 +53,18 @@ function Dashboard() {
     const token = useSelector((state: any) => state.auth.token);
 
     const lastTwoWeeksStats = [
-        { name: t("total_views"), stat: `${stats.views}` },
-        { name: t("total_clicks"), stat: `${stats.clicks}` },
+        { name: t("total_views"), stat: `${formatNumber(stats.views)}` },
+        { name: t("total_clicks"), stat: `${formatNumber(stats.clicks)}` },
         {
             name: t("click_rate"),
             stat: stats.clickRate ? `${stats.clickRate}%` : `0%`,
         },
-        { name: t("wallet"), stat: `$${user?.balance?.toFixed(2) || ""}` },
+        {
+            name: t("wallet"),
+            stat: `$${user?.balance
+                ?.toFixed(2)
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
+        },
     ];
 
     const today: Date = new Date(); // Get today's date

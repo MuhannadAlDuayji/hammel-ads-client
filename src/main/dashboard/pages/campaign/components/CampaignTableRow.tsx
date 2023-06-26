@@ -14,7 +14,9 @@ interface CampaignsTableRowProps {
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
 }
-
+function formatNumber(number: number | string) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function dateFormater(date: Date, separator: string) {
     const day = date.getDate();
     // add +1 to month because getMonth() returns month from 0 to 11
@@ -35,10 +37,6 @@ function dateFormater(date: Date, separator: string) {
     // now we have day, month and year
     // use the separator to join them
     return dayString + separator + monthString + separator + String(year);
-}
-
-function formatAmount(x: number) {
-    return x.toFixed(2);
 }
 
 function statusStyles(status: string): string {
@@ -133,30 +131,30 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             </td>
             {/* // Budget */}
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                ${formatAmount(campaign.budget)}
+                ${formatNumber(campaign.budget.toFixed(2))}
             </td>
 
             {/* // money spent */}
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                ${formatAmount(campaign.moneySpent)}
+                ${formatNumber(campaign.moneySpent.toFixed(2))}
             </td>
 
             {/* // views */}
 
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {campaign.views}
+                {formatNumber(campaign.views)}
             </td>
 
             {/* // clicks */}
 
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {campaign.clicks}
+                {formatNumber(campaign.clicks)}
             </td>
 
             {/* // click rate */}
 
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {formatAmount((campaign.clicks / (campaign.views || 1)) * 100)}%
+                {((campaign.clicks / (campaign.views || 1)) * 100).toFixed(2)}%
             </td>
 
             {/* // status */}
