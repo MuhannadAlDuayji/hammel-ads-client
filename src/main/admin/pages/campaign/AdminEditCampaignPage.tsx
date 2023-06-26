@@ -180,11 +180,12 @@ function AdminEditCampaignPage({}: Props) {
             setErrorMessage("you must provide a campaign photo");
             return false;
         }
-        if (campaignInfo.link) {
+        if (!campaignInfo.link) {
             setErrorMessage("you must provide a campaign link");
 
             return false;
         }
+
         return true;
     };
 
