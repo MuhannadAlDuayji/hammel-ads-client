@@ -72,6 +72,8 @@ const Header: React.FC<Props> = ({
             const countries = data.data.countryList.map((country: string) => {
                 return { name: t(country.toLowerCase()), value: country };
             });
+            console.log("countries data", data);
+            console.log("countries", countries);
             if (countries) {
                 setCountryList(countries);
                 return countries;
