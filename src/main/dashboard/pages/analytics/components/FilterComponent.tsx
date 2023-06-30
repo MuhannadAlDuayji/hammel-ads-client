@@ -48,18 +48,12 @@ const Header: React.FC<Props> = ({
 }) => {
     const token = useSelector((state: any) => state.auth.token);
     const { t, i18n } = useTranslation();
-    const language = i18n.language;
-
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
     const [countryList, setCountryList] = useState<Country[]>([]);
-    console.log(countryFilter);
     const getCampaigns = async () => {
         try {
             const response = await CampaignsAPI.getAllCampaigns(token);
             const campaigns = response.data.data;
-            let countries = campaigns.map((campaign: any) => campaign.country);
-            countries = [...new Set(countries)];
-            setCountryList(countries);
             setCampaigns(campaigns);
         } catch (err: any) {
             console.log(err);
@@ -72,14 +66,9 @@ const Header: React.FC<Props> = ({
             const countries = data.data.countryList.map((country: string) => {
                 return { name: t(country.toLowerCase()), value: country };
             });
-            console.log("countries data", data);
-            console.log("countries", countries);
-            if (countries) {
-                setCountryList(countries);
-                return countries;
-            } else {
-                console.log(countries);
-            }
+
+            setCountryList(countries);
+            return countries;
         } catch (err: any) {
             console.log(err);
         }
@@ -98,10 +87,6 @@ const Header: React.FC<Props> = ({
         getCampaigns();
         getCountries();
     }, []);
-
-    useEffect(() => {
-        console.log("country list is -> ", countryList);
-    }, [countryList]);
 
     return (
         <div className=" shadow  bg-gray-50 mg-20 mb-10">
