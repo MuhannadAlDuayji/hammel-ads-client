@@ -10,11 +10,11 @@ import { useTranslation } from "react-i18next";
 interface Props {
     fromDate: Date;
     toDate: Date;
-    nameFilter: string;
+    campaignIdFilter: string;
     countryFilter: string;
     setFromDate: (date: Date) => void;
     setToDate: (date: Date) => void;
-    setNameFilter: (name: string) => void;
+    setCampaignIdFilter: (name: string) => void;
     setCountryFilter: (name: string) => void;
 }
 
@@ -27,6 +27,11 @@ interface Campaign {
     country: string;
 }
 
+interface Country {
+    name: string;
+    value: string;
+}
+
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
 }
@@ -34,11 +39,11 @@ function classNames(...classes: any) {
 const Header: React.FC<Props> = ({
     fromDate,
     toDate,
-    nameFilter,
+    campaignIdFilter,
     countryFilter,
     setFromDate,
     setToDate,
-    setNameFilter,
+    setCampaignIdFilter,
     setCountryFilter,
 }) => {
     const token = useSelector((state: any) => state.auth.token);
@@ -46,8 +51,8 @@ const Header: React.FC<Props> = ({
     const language = i18n.language;
 
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
-    const [countryList, setCountryList] = useState<String[]>([]);
-
+    const [countryList, setCountryList] = useState<Country[]>([]);
+    console.log(countryFilter);
     const getCampaigns = async () => {
         try {
             const response = await CampaignsAPI.getAllCampaigns(token);
@@ -61,6 +66,22 @@ const Header: React.FC<Props> = ({
         }
     };
 
+    const getCountries = async () => {
+        try {
+            const { data } = await CampaignsAPI.getCountryList(token);
+            const countries = data.data.countryList.map((country: string) => {
+                return { name: t(country.toLowerCase()), value: country };
+            });
+            setCountryList(countries);
+            console.log(countries);
+            return countries;
+        } catch (err: any) {
+            console.log(err);
+        }
+    };
+    const getCampaingName = (campaignId: string) => {
+        return campaigns.find((el) => el._id === campaignId)?.title;
+    };
     const formatDate = (date: Date) => {
         const year = date.getFullYear();
         const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -70,19 +91,12 @@ const Header: React.FC<Props> = ({
 
     useEffect(() => {
         getCampaigns();
+        getCountries();
     }, []);
 
     useEffect(() => {
-        const campaign = campaigns.find(
-            (campaign) => campaign.title === nameFilter
-        );
-        if (campaign) {
-            setCountryFilter(campaign.country);
-            setCountryList([campaign.country]);
-        } else {
-            getCampaigns();
-        }
-    }, [nameFilter]);
+        console.log(countryFilter);
+    }, [countryFilter]);
 
     return (
         <div className=" shadow  bg-gray-50 mg-20 mb-10">
@@ -119,7 +133,10 @@ const Header: React.FC<Props> = ({
 
                 {/* select component for campaign name */}
 
-                <Listbox value={nameFilter} onChange={setNameFilter}>
+                <Listbox
+                    value={campaignIdFilter}
+                    onChange={setCampaignIdFilter}
+                >
                     {({ open }) => (
                         <div className="ml-5">
                             <Listbox.Label className="text-sm font-medium leading-6 text-gray-500">
@@ -129,11 +146,9 @@ const Header: React.FC<Props> = ({
                             <div className="relative mt-2">
                                 <Listbox.Button className="relative w-52 cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] sm:text-sm sm:leading-6">
                                     <span className="block truncate">
-                                        {nameFilter
-                                            .toLowerCase()
-                                            .includes("all campaigns")
+                                        {campaignIdFilter === ""
                                             ? t("all_campaigns")
-                                            : nameFilter}
+                                            : getCampaingName(campaignIdFilter)}
                                     </span>
                                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                         <ChevronUpDownIcon
@@ -161,7 +176,7 @@ const Header: React.FC<Props> = ({
                                                     "relative cursor-default select-none py-2 pl-3 pr-9"
                                                 )
                                             }
-                                            value={"All Campaigns"}
+                                            value={""}
                                         >
                                             {({ selected, active }) => (
                                                 <>
@@ -205,7 +220,7 @@ const Header: React.FC<Props> = ({
                                                         "relative cursor-default select-none py-2 pl-3 pr-9"
                                                     )
                                                 }
-                                                value={campaign.title}
+                                                value={campaign._id}
                                             >
                                                 {({ selected, active }) => (
                                                     <>
@@ -279,51 +294,7 @@ const Header: React.FC<Props> = ({
                                     leaveTo="opacity-0"
                                 >
                                     <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                        <Listbox.Option
-                                            key={0}
-                                            className={({ active }) =>
-                                                classNames(
-                                                    active
-                                                        ? "bg-[#60b0bd] text-white"
-                                                        : "text-gray-900",
-                                                    "relative cursor-default select-none py-2 pl-3 pr-9"
-                                                )
-                                            }
-                                            value={"All Countries"}
-                                        >
-                                            {({ selected, active }) => (
-                                                <>
-                                                    <span
-                                                        className={classNames(
-                                                            selected
-                                                                ? "font-semibold"
-                                                                : "font-normal",
-                                                            "block truncate"
-                                                        )}
-                                                    >
-                                                        {t("all_countries")}
-                                                    </span>
-
-                                                    {selected ? (
-                                                        <span
-                                                            className={classNames(
-                                                                active
-                                                                    ? "text-white"
-                                                                    : "text-[#60b0bd]",
-                                                                "absolute inset-y-0 right-0 flex items-center pr-4"
-                                                            )}
-                                                        >
-                                                            <CheckIcon
-                                                                className="h-5 w-5"
-                                                                aria-hidden="true"
-                                                            />
-                                                        </span>
-                                                    ) : null}
-                                                </>
-                                            )}
-                                        </Listbox.Option>
-
-                                        {countryList.map((name: String, i) => (
+                                        {countryList.map((country, i) => (
                                             <Listbox.Option
                                                 key={i + 1}
                                                 className={({ active }) =>
@@ -334,7 +305,7 @@ const Header: React.FC<Props> = ({
                                                         "relative cursor-default select-none py-2 pl-3 pr-9"
                                                     )
                                                 }
-                                                value={name}
+                                                value={country?.value}
                                             >
                                                 {({ selected, active }) => (
                                                     <>
@@ -346,9 +317,7 @@ const Header: React.FC<Props> = ({
                                                                 "block truncate"
                                                             )}
                                                         >
-                                                            {t(
-                                                                name.toLowerCase()
-                                                            )}
+                                                            {t(country?.name)}
                                                         </span>
 
                                                         {selected ? (

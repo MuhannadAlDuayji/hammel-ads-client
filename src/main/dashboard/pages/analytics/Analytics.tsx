@@ -83,7 +83,7 @@ export default function Analytics({}: AnalyticsProps) {
     const oneMonthAgo = new Date().getTime() - 1000 * 60 * 60 * 24 * 30;
     const [fromDate, setFromDate] = useState<Date>(new Date(oneMonthAgo));
     const [toDate, setToDate] = useState<Date>(new Date());
-    const [nameFilter, setNameFilter] = useState("All Campaigns");
+    const [campaignIdFilter, setCampaignIdFilter] = useState("");
     const [countryFilter, setCountryFilter] = useState("All Countries");
 
     const [data, setData] = useState<Data>({
@@ -107,7 +107,7 @@ export default function Analytics({}: AnalyticsProps) {
                 countryFilter.toLowerCase().includes("all")
                     ? null
                     : countryFilter,
-                nameFilter.toLowerCase().includes("all") ? null : nameFilter
+                campaignIdFilter === "" ? null : campaignIdFilter
             );
             console.log(clicks);
 
@@ -119,7 +119,7 @@ export default function Analytics({}: AnalyticsProps) {
                 countryFilter.toLowerCase().includes("all")
                     ? null
                     : countryFilter,
-                nameFilter.toLowerCase().includes("all") ? null : nameFilter
+                campaignIdFilter === "" ? null : campaignIdFilter
             );
 
             setData({ clicks: clicks.data.data, views: views.data.data });
@@ -131,7 +131,7 @@ export default function Analytics({}: AnalyticsProps) {
 
     useEffect(() => {
         getData();
-    }, [fromDate, toDate, countryFilter, nameFilter]);
+    }, [fromDate, toDate, countryFilter, campaignIdFilter]);
 
     return (
         <>
@@ -155,8 +155,8 @@ export default function Analytics({}: AnalyticsProps) {
                         setFromDate={setFromDate}
                         toDate={toDate}
                         setToDate={setToDate}
-                        nameFilter={nameFilter}
-                        setNameFilter={setNameFilter}
+                        campaignIdFilter={campaignIdFilter}
+                        setCampaignIdFilter={setCampaignIdFilter}
                         countryFilter={countryFilter}
                         setCountryFilter={setCountryFilter}
                     />
