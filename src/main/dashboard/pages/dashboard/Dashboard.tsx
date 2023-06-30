@@ -87,6 +87,13 @@ function Dashboard() {
     };
     useEffect(() => {
         getUserStats();
+
+        // Refresh stats every 5 seconds
+        const interval = setInterval(getUserStats, 5000);
+
+        return () => {
+            clearInterval(interval);
+        };
     }, []);
 
     return (

@@ -73,7 +73,6 @@ const Header: React.FC<Props> = ({
                 return { name: t(country.toLowerCase()), value: country };
             });
             setCountryList(countries);
-            console.log(countries);
             return countries;
         } catch (err: any) {
             console.log(err);
