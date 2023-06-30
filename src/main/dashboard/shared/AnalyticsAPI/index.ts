@@ -21,7 +21,7 @@ const AnalyticsAPI = {
         from: string,
         to: string,
         country: string | null = null,
-        campaignName: string | null = null
+        campaignId: string | null = null
     ) {
         return axios.post(
             `${process.env.REACT_APP_API_URL}/analytics/user-analytics`,
@@ -30,7 +30,7 @@ const AnalyticsAPI = {
                 from,
                 to,
                 country,
-                campaignName,
+                campaignId,
             },
             {
                 headers: {
