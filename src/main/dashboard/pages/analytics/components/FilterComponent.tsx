@@ -100,8 +100,8 @@ const Header: React.FC<Props> = ({
     }, []);
 
     useEffect(() => {
-        console.log(countryFilter);
-    }, [countryFilter]);
+        console.log("country list is -> ", countryList);
+    }, [countryList]);
 
     return (
         <div className=" shadow  bg-gray-50 mg-20 mb-10">
