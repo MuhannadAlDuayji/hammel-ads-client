@@ -8,6 +8,7 @@ import { login, reset } from "../../redux/auth/authSlice";
 import InvalidPasswordModal from "../../utils/InvalidPasswordModal";
 import LoadingSpinner from "../../utils/LoadingSpinner";
 import SuccessModel from "../../utils/SuccessModel";
+import AlertPopup from "../../components/alerts/AlertPopup";
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -64,6 +65,16 @@ export default function LoginPage() {
     return (
         <>
             <Header />
+            {/* temporary */}
+            <div
+                className="flex mx-6"
+                dir={i18n.language === "ar" ? "rtl" : "ltr"}
+            >
+                <AlertPopup
+                    title={t("attention_needed")}
+                    message={t("demo_app_warning")}
+                />
+            </div>
             <div
                 className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8"
                 dir={i18n.language === "ar" ? "rtl" : "ltr"}

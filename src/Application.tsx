@@ -39,6 +39,7 @@ import translationEN from "./locales/en.json";
 import translationAR from "./locales/ar.json";
 import i18n from "i18next";
 import Support from "./main/dashboard/pages/support/Support";
+import AlertPopup from "./components/alerts/AlertPopup";
 
 export interface IApplicationProps {}
 
@@ -113,7 +114,7 @@ function MainRoutes() {
     const token = useSelector((state: any) => state.auth.token);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const { t } = useTranslation();
     if (!token) navigate("/login");
     useEffect(() => {
         axios
@@ -123,14 +124,23 @@ function MainRoutes() {
                 },
             })
             .then((res) => {
-                dispatch(saveUser(res.data.data.user));
+                const user = res.data.data.user;
+                dispatch(saveUser(user));
                 localStorage.setItem(
                     "preferredLanguage",
-                    res.data.data.user.preferredLanguage
+                    user.preferredLanguage
                 );
-                i18n.changeLanguage(res.data.data.user.preferredLanguage);
-                if (res.data.data.user?.isAdmin)
-                    return navigate("/admin/dashboard");
+                i18n.changeLanguage(user.preferredLanguage);
+                if (user?.isAdmin) return navigate("/admin/dashboard");
+
+                // temporary
+                if (
+                    !["hammel@hammel.in", "gyoom@gyoom.sa"].includes(
+                        user.email.toLowerCase()
+                    )
+                ) {
+                    navigate("/dashboard/service-not-available");
+                }
             })
             .catch((err) => {
                 if (err?.response?.status === 400) return navigate("/login");
@@ -144,6 +154,21 @@ function MainRoutes() {
         <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/analytics" element={<Analytics />} />
+            {/* temporary route */}
+            <Route
+                path="/service-not-available"
+                element={
+                    <div
+                        className="flex items-center justify-center h-screen "
+                        dir={i18n.language === "ar" ? "rtl" : "ltr"}
+                    >
+                        <AlertPopup
+                            title={t("attention_needed")}
+                            message={t("demo_app_warning")}
+                        />
+                    </div>
+                }
+            />
             <Route
                 path="/campaigns/*"
                 element={
