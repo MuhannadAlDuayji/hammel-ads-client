@@ -156,5 +156,7 @@
     "invalid_expiry_date": "Invalid expiry date.",
     "invalid_security_code": "Invalid security code.",
     "invalid_holder_name": "Invalid holder name.",
-    "all countries": "All Countries"
+    "all countries": "All Countries",
+    "attention_needed": "Attention needed",
+    "demo_app_warning": "We apologize to all those who have registered for the advertising service in the File Management application. The service is not currently launched, and this page appeared due to a technical error. Insha'Allah, we will inform you and announce the launch on our accounts once the website is complete. 👍"
 }
