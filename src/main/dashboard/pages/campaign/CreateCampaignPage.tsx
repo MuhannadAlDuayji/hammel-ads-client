@@ -136,12 +136,12 @@ function CreateCampaignPage({}: Props) {
             setErrorMessage(message);
             return false;
         }
-        if (!campaignInfo.link) {
-            const message = t("no_campaign_link_message");
-            setErrorMessage(message);
+        // if (!campaignInfo.link) {
+        //     const message = t("no_campaign_link_message");
+        //     setErrorMessage(message);
 
-            return false;
-        }
+        //     return false;
+        // }
         return true;
     };
 
