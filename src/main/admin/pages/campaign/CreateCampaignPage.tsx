@@ -129,11 +129,11 @@ function CreateCampaignPage({}: Props) {
             return false;
         }
 
-        if (!campaignInfo.link) {
-            setErrorMessage("you must provide a campaign link");
+        // if (!campaignInfo.link) {
+        //     setErrorMessage("you must provide a campaign link");
 
-            return false;
-        }
+        //     return false;
+        // }
 
         return true;
     };
