@@ -40,6 +40,7 @@ import translationAR from "./locales/ar.json";
 import i18n from "i18next";
 import Support from "./main/dashboard/pages/support/Support";
 import AlertPopup from "./components/alerts/AlertPopup";
+import PaymentCheck from "./main/dashboard/pages/wallet/pages/PaymentCheck";
 
 export interface IApplicationProps {}
 
@@ -189,6 +190,7 @@ function MainRoutes() {
                 element={
                     <Routes>
                         <Route path="/" element={<Wallet />} />
+                        <Route path="/payment" element={<PaymentCheck />} />
                         <Route
                             path="/addbalance"
                             element={<AddBalancePage />}
