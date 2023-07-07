@@ -91,7 +91,7 @@ export default function TransactionsTable() {
                                         .map((transaction, i) => (
                                             <tr key={i}>
                                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
-                                                    {transaction.paymentMethod.toUpperCase()}
+                                                    {transaction?.paymentMethod?.toUpperCase()}
                                                 </td>
                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                     $
