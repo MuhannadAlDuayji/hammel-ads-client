@@ -47,6 +47,7 @@ function Dashboard() {
         clicks: 0,
         views: 0,
         clickRate: null,
+        balance: 0,
     });
 
     const user = useSelector((state: any) => state.user.user);
@@ -61,7 +62,7 @@ function Dashboard() {
         },
         {
             name: t("wallet"),
-            stat: `$${user?.balance
+            stat: `$${stats?.balance
                 ?.toFixed(2)
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
         },
@@ -88,7 +89,7 @@ function Dashboard() {
     useEffect(() => {
         getUserStats();
 
-        // Refresh stats every 5 seconds
+        // Refresh stats every 11 seconds
         const interval = setInterval(getUserStats, 11000);
 
         return () => {
