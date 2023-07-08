@@ -89,7 +89,7 @@ function Dashboard() {
         getUserStats();
 
         // Refresh stats every 5 seconds
-        const interval = setInterval(getUserStats, 5000);
+        const interval = setInterval(getUserStats, 11000);
 
         return () => {
             clearInterval(interval);
