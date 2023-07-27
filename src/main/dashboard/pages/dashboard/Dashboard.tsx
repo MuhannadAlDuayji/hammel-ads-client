@@ -54,8 +54,8 @@ function Dashboard() {
     const token = useSelector((state: any) => state.auth.token);
 
     const lastTwoWeeksStats = [
-        { name: t("total_views"), stat: `${formatNumber(stats.views)}` },
-        { name: t("total_clicks"), stat: `${formatNumber(stats.clicks)}` },
+        { name: t("total_views"), stat: `${formatNumber(stats?.views)}` },
+        { name: t("total_clicks"), stat: `${formatNumber(stats?.clicks)}` },
         {
             name: t("click_rate"),
             stat: stats.clickRate ? `${stats.clickRate}%` : `0%`,
