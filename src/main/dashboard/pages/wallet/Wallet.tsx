@@ -8,14 +8,10 @@ import BalanceInfoTable from "./components/BalanceInfoTable";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
 import TransactionsTable from "./components/TransactionsTable";
-import UserPaymentMethodType from "../../../../types/payment method";
 type WalletProps = {};
 
 export default function Wallet({}: WalletProps) {
     const [loading, setLoading] = useState(false);
-    const [paymentMethods, setPaymentMethods] = useState<
-        UserPaymentMethodType[]
-    >([]);
 
     const token = useSelector((state: any) => state.auth.token);
     const { t, i18n } = useTranslation();

@@ -80,8 +80,10 @@ function Dashboard() {
                 endDate
             );
 
-            setStats(stats.data.data);
-            setLoading(false);
+            if (stats?.data?.data) {
+                setStats(stats.data.data);
+                setLoading(false);
+            }
         } catch (err) {
             console.log(err);
         }
