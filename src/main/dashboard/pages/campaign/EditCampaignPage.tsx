@@ -501,7 +501,7 @@ function EditCampaignPage({}: Props) {
                                                                 ) ? (
                                                                     <li
                                                                         key={i}
-                                                                        className="px-1 bg-gray-100 flex rounded-lg flex-row gap-1 items-center"
+                                                                        className=" bg-gray-100 flex rounded-lg flex-row gap-2 items-center pr-2"
                                                                     >
                                                                         <p className="m-0 p-0">
                                                                             {t(
@@ -515,7 +515,7 @@ function EditCampaignPage({}: Props) {
                                                                                     city
                                                                                 )
                                                                             }
-                                                                            className="text-lg"
+                                                                            className="text-lg rounded-lg hover:bg-gray-300 w-4"
                                                                         >
                                                                             +
                                                                         </button>
@@ -523,7 +523,7 @@ function EditCampaignPage({}: Props) {
                                                                 ) : (
                                                                     <li
                                                                         key={i}
-                                                                        className="px-1 bg-green-100 flex rounded-lg flex-row gap-2 items-center"
+                                                                        className="bg-green-100 flex rounded-lg flex-row gap-2 items-center pr-2 border-2 border-green-600"
                                                                     >
                                                                         <p className="m-0 p-0">
                                                                             {t(
@@ -537,7 +537,7 @@ function EditCampaignPage({}: Props) {
                                                                                     city
                                                                                 )
                                                                             }
-                                                                            className="text-lg"
+                                                                            className="text-lg rounded-lg hover:bg-green-200 w-4"
                                                                         >
                                                                             -
                                                                         </button>
