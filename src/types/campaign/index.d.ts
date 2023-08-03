@@ -5,20 +5,20 @@ import Load from "../load";
 export default interface Campaign {
     _id: string;
     title: string;
+    userId: string;
     startDate: Date;
     endDate: Date;
     budget: number;
     country: string;
+    targetedCities: string[];
     photoPath: string;
     link: string;
-    status: CampaignStatus;
-    userId: string;
+    status: string;
     createdAt: Date;
     clicks: number;
-    clickRate: number;
     views: number;
     moneySpent: number;
     adminMessage: string;
-    events: Array<Event>;
-    loads: Array<Load>;
+    servedCount: number;
+    pendingCount: number;
 }
