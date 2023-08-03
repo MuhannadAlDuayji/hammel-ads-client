@@ -17,6 +17,17 @@ interface Country {
     value: string;
 }
 
+interface CampaignInfo {
+    title: string;
+    startDate: string;
+    endDate: string;
+    budget: string;
+    country: string;
+    targetedCities: string[];
+    photoPath: string;
+    link: string;
+}
+
 function isValidHttpUrl(string: string) {
     let url;
     try {
@@ -39,15 +50,17 @@ function CreateCampaignPage({}: Props) {
 
     const token = useSelector((state: any) => state.auth.token);
     const [countryList, setCountryList] = useState<Country[]>([]);
+    const [citiesList, setCitiesList] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
     const [photoUploadPending, setPhotoUploadPending] = useState(false);
 
-    const [campaignInfo, setCampaignInfo] = useState({
+    const [campaignInfo, setCampaignInfo] = useState<CampaignInfo>({
         title: "",
         startDate: "",
         endDate: "",
         budget: "",
         country: "",
+        targetedCities: [],
         photoPath: "",
         link: "",
     });
@@ -98,7 +111,27 @@ function CreateCampaignPage({}: Props) {
         }
     };
 
+    const handleAddCity = (city: string) => {
+        if (!campaignInfo.targetedCities.includes(city)) {
+            setCampaignInfo({
+                ...campaignInfo,
+                targetedCities: [...campaignInfo.targetedCities, city],
+            });
+        }
+    };
+    const handleRemoveCity = (city: string) => {
+        setCampaignInfo({
+            ...campaignInfo,
+            targetedCities: campaignInfo.targetedCities.filter(
+                (c) => c !== city
+            ),
+        });
+    };
+
     const formIsValid = () => {
+        const country = countryList.find(
+            (country) => country.name === campaignInfo.country
+        )?.value;
         if (campaignInfo.title.length < 3 || campaignInfo.title.length > 30) {
             const message = t("invalid_campaign_title_message");
             setErrorMessage(message);
@@ -136,6 +169,15 @@ function CreateCampaignPage({}: Props) {
             setErrorMessage(message);
             return false;
         }
+        if (
+            campaignInfo.targetedCities.length === 0 &&
+            country !== "All Countries"
+        ) {
+            console.log(campaignInfo.country);
+            const message = t("no_cities_message");
+            setErrorMessage(message);
+            return false;
+        }
         // if (!campaignInfo.link) {
         //     const message = t("no_campaign_link_message");
         //     setErrorMessage(message);
@@ -159,6 +201,7 @@ function CreateCampaignPage({}: Props) {
                 )?.value,
                 status,
             };
+            console.log(data);
             const response = await CampaignsAPI.createCampaign(data, token);
             setLoading(false);
             setShowSuccessUpdate(true);
@@ -172,11 +215,42 @@ function CreateCampaignPage({}: Props) {
         }
     };
 
+    const getCities = async (country: string) => {
+        try {
+            const { data } = await CampaignsAPI.getCountryCities(
+                token,
+                country
+            );
+
+            setCitiesList(data.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         if (!token) return;
         getCountryList();
         setLoading(false);
     }, [token]);
+
+    // if country !== all countries || select country get cities list
+
+    useEffect(() => {
+        const country = countryList.find(
+            (country) => country.name === campaignInfo.country
+        )?.value;
+        setCampaignInfo({
+            ...campaignInfo,
+            targetedCities: [],
+        });
+
+        if (!country || country === "All Countries") {
+            setCitiesList([]);
+            return;
+        }
+        getCities(country);
+    }, [campaignInfo.country]);
 
     return (
         <>
@@ -200,6 +274,9 @@ function CreateCampaignPage({}: Props) {
                     onChange={(e) => {
                         e.preventDefault();
                         setErrorMessage("");
+                    }}
+                    onSubmit={(e) => {
+                        e.preventDefault();
                     }}
                 >
                     <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -356,6 +433,78 @@ function CreateCampaignPage({}: Props) {
                                         </select>
                                     </div>
                                 </div>
+                                {citiesList.length > 0 ? (
+                                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                                        <label
+                                            htmlFor="city"
+                                            className="block text-sm font-medium text-gray-700"
+                                        >
+                                            {t("targeted_cities")}
+                                        </label>
+                                        <br />
+                                        <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                            <div className="block w-full max-w-lg">
+                                                <ul className="flex gap-1  w-full max-w-lg flex-wrap">
+                                                    {citiesList.map(
+                                                        (city, i) => (
+                                                            <>
+                                                                {!campaignInfo.targetedCities.includes(
+                                                                    city
+                                                                ) ? (
+                                                                    <li
+                                                                        key={i}
+                                                                        className="px-1 bg-gray-100 flex rounded-lg flex-row gap-1 items-center"
+                                                                    >
+                                                                        <p className="m-0 p-0">
+                                                                            {t(
+                                                                                city
+                                                                            )}
+                                                                        </p>
+
+                                                                        <button
+                                                                            onClick={() =>
+                                                                                handleAddCity(
+                                                                                    city
+                                                                                )
+                                                                            }
+                                                                            className="text-lg"
+                                                                        >
+                                                                            +
+                                                                        </button>
+                                                                    </li>
+                                                                ) : (
+                                                                    <li
+                                                                        key={i}
+                                                                        className="px-1 bg-green-100 flex rounded-lg flex-row gap-2 items-center"
+                                                                    >
+                                                                        <p className="m-0 p-0">
+                                                                            {t(
+                                                                                city
+                                                                            )}
+                                                                        </p>
+
+                                                                        <button
+                                                                            onClick={() =>
+                                                                                handleRemoveCity(
+                                                                                    city
+                                                                                )
+                                                                            }
+                                                                            className="text-lg"
+                                                                        >
+                                                                            -
+                                                                        </button>
+                                                                    </li>
+                                                                )}
+                                                            </>
+                                                        )
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <></>
+                                )}
 
                                 <div className="" {...getRootProps()}>
                                     <label

@@ -8,9 +8,9 @@ const CampaignsAPI = {
             },
         });
     },
-    getCampaignById: function (token: string, campaignId: string) {
+    getCountryList: function (token: string) {
         return axios.get(
-            `${process.env.REACT_APP_API_URL}/campaigns/${campaignId}`,
+            `${process.env.REACT_APP_API_URL}/campaigns/country-list`,
             {
                 headers: {
                     authorization: `Bearer ${token}`,
@@ -18,9 +18,22 @@ const CampaignsAPI = {
             }
         );
     },
-    getCountryList: function (token: string) {
+    getCountryCities: function (token: string, country: string) {
+        return axios.post(
+            `${process.env.REACT_APP_API_URL}/campaigns/get-country-city-list`,
+            {
+                country,
+            },
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            }
+        );
+    },
+    getCampaignById: function (token: string, campaignId: string) {
         return axios.get(
-            `${process.env.REACT_APP_API_URL}/campaigns/country-list`,
+            `${process.env.REACT_APP_API_URL}/campaigns/${campaignId}`,
             {
                 headers: {
                     authorization: `Bearer ${token}`,

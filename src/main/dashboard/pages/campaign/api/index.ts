@@ -18,6 +18,19 @@ const CampaignsAPI = {
             }
         );
     },
+    getCountryCities: function (token: string, country: string) {
+        return axios.post(
+            `${process.env.REACT_APP_API_URL}/campaigns/get-country-city-list`,
+            {
+                country,
+            },
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            }
+        );
+    },
     getCampaignById: function (token: string, campaignId: string) {
         return axios.get(
             `${process.env.REACT_APP_API_URL}/campaigns/${campaignId}`,
