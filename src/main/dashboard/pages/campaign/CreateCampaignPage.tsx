@@ -119,6 +119,12 @@ function CreateCampaignPage({}: Props) {
             });
         }
     };
+    const handleAddAllCities = () => {
+        setCampaignInfo({
+            ...campaignInfo,
+            targetedCities: [...citiesList],
+        });
+    };
     const handleRemoveCity = (city: string) => {
         setCampaignInfo({
             ...campaignInfo,
@@ -173,7 +179,6 @@ function CreateCampaignPage({}: Props) {
             campaignInfo.targetedCities.length === 0 &&
             country !== "All Countries"
         ) {
-            console.log(campaignInfo.country);
             const message = t("no_cities_message");
             setErrorMessage(message);
             return false;
@@ -201,7 +206,6 @@ function CreateCampaignPage({}: Props) {
                 )?.value,
                 status,
             };
-            console.log(data);
             const response = await CampaignsAPI.createCampaign(data, token);
             setLoading(false);
             setShowSuccessUpdate(true);
@@ -444,16 +448,29 @@ function CreateCampaignPage({}: Props) {
                                         <br />
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
                                             <div className="block w-full max-w-lg">
+                                                <button
+                                                    onClick={handleAddAllCities}
+                                                    className={`rounded-md border-2 px-2 py-1 mb-5 text-md ${
+                                                        campaignInfo
+                                                            .targetedCities
+                                                            .length ===
+                                                        citiesList.length
+                                                            ? "bg-green-100 border-2 border-green-600"
+                                                            : "border-2 border-gray-200"
+                                                    }`}
+                                                >
+                                                    {t("select_all_locations")}
+                                                </button>
                                                 <ul className="flex gap-1  w-full max-w-lg flex-wrap">
                                                     {citiesList.map(
                                                         (city, i) => (
-                                                            <>
+                                                            <div key={i}>
                                                                 {!campaignInfo.targetedCities.includes(
                                                                     city
                                                                 ) ? (
                                                                     <li
                                                                         key={i}
-                                                                        className=" bg-gray-100 flex rounded-lg flex-row gap-2 items-center pr-2"
+                                                                        className=" bg-gray-100 flex rounded-lg flex-row gap-2 items-center pr-2 border-2 border-gray-200"
                                                                     >
                                                                         <p className="m-0 p-0">
                                                                             {t(
@@ -475,7 +492,7 @@ function CreateCampaignPage({}: Props) {
                                                                 ) : (
                                                                     <li
                                                                         key={i}
-                                                                        className="bg-green-100 flex rounded-lg flex-row gap-2 items-center pr-2 border-2 border-green-600"
+                                                                        className="flex rounded-lg flex-row gap-2 items-center pr-2 bg-green-100 border-2 border-green-600"
                                                                     >
                                                                         <p className="m-0 p-0">
                                                                             {t(
@@ -495,7 +512,7 @@ function CreateCampaignPage({}: Props) {
                                                                         </button>
                                                                     </li>
                                                                 )}
-                                                            </>
+                                                            </div>
                                                         )
                                                     )}
                                                 </ul>
