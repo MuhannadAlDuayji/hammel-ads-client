@@ -110,7 +110,7 @@ function AdminEditCampaignPage({}: Props) {
         try {
             const { data } = await CampaignsAPI.getCountryList(token);
             const countries = data.data.countryList.map((country: string) => {
-                return { name: country.toLowerCase(), value: country };
+                return { name: t(country.toLowerCase()), value: country };
             });
             setCountryList(countries);
             return countries;

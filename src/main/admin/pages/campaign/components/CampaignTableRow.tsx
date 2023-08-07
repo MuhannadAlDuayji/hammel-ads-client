@@ -138,6 +138,11 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 {formatNumber(campaign.moneySpent.toFixed(2))}
             </td>
+            {/* // views */}
+
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                {formatNumber(campaign.views)}
+            </td>
 
             {/* // clicks */}
 
