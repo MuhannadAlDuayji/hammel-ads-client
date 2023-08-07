@@ -984,5 +984,6 @@
     "Bekalta": "بقالطة",
     "Beni Khiar": "بني خيار",
     "Bechri": "بشري",
-    "select_all_locations": "جميع الجهات"
+    "select_all_locations": "جميع الجهات",
+    "no_options_message": "لا يوجد خيارات"
 }

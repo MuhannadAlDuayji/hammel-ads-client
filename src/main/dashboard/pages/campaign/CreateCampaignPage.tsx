@@ -9,6 +9,7 @@ import UpdateSuccess from "../../shared/UpdateSuccess";
 import CampaignsAPI from "./api";
 import PreviewComponent from "./components/PreviewComponent";
 import { useDropzone } from "react-dropzone";
+import Select from "react-select";
 
 type Props = {};
 
@@ -26,6 +27,11 @@ interface CampaignInfo {
     targetedCities: string[];
     photoPath: string;
     link: string;
+}
+
+interface City {
+    label: string;
+    value: string;
 }
 
 function isValidHttpUrl(string: string) {
@@ -50,7 +56,7 @@ function CreateCampaignPage({}: Props) {
 
     const token = useSelector((state: any) => state.auth.token);
     const [countryList, setCountryList] = useState<Country[]>([]);
-    const [citiesList, setCitiesList] = useState<string[]>([]);
+    const [citiesList, setCitiesList] = useState<City[]>([]);
     const [loading, setLoading] = useState(true);
     const [photoUploadPending, setPhotoUploadPending] = useState(false);
 
@@ -111,28 +117,35 @@ function CreateCampaignPage({}: Props) {
         }
     };
 
-    const handleAddCity = (city: string) => {
-        if (!campaignInfo.targetedCities.includes(city)) {
+    const handleAddAllCities = () => {
+        if (campaignInfo.targetedCities.includes("*")) {
+            const filteredTargetedCities: string[] =
+                campaignInfo.targetedCities.filter(
+                    (city: string) => city !== "*"
+                );
             setCampaignInfo({
                 ...campaignInfo,
-                targetedCities: [...campaignInfo.targetedCities, city],
+                targetedCities: [...filteredTargetedCities],
             });
+            return;
         }
-    };
-    const handleAddAllCities = () => {
         setCampaignInfo({
             ...campaignInfo,
-            targetedCities: [...citiesList],
+            targetedCities: [...campaignInfo.targetedCities, "*"],
         });
     };
-    const handleRemoveCity = (city: string) => {
+    const handleCitiesChange = (value: any) => {
         setCampaignInfo({
             ...campaignInfo,
-            targetedCities: campaignInfo.targetedCities.filter(
-                (c) => c !== city
-            ),
+            targetedCities: value.map((city: any) => city.value),
         });
     };
+
+    function formatCities(citiesStringArray: string[]) {
+        return citiesStringArray.map((city: string) => {
+            return { label: t(city), value: city };
+        });
+    }
 
     const formIsValid = () => {
         const country = countryList.find(
@@ -226,7 +239,12 @@ function CreateCampaignPage({}: Props) {
                 country
             );
 
-            setCitiesList(data.data);
+            const cities: string[] = data.data;
+            const formattedCities: City[] = cities.map((city: string) => {
+                return { label: t(city), value: city };
+            });
+
+            setCitiesList(formattedCities);
         } catch (err) {
             console.log(err);
         }
@@ -451,10 +469,9 @@ function CreateCampaignPage({}: Props) {
                                                 <button
                                                     onClick={handleAddAllCities}
                                                     className={`rounded-md border-2 px-2 py-1 mb-5 text-md ${
-                                                        campaignInfo
-                                                            .targetedCities
-                                                            .length ===
-                                                        citiesList.length
+                                                        campaignInfo.targetedCities.includes(
+                                                            "*"
+                                                        )
                                                             ? "bg-green-100 border-2 border-green-600"
                                                             : "border-2 border-gray-200"
                                                     }`}
@@ -462,58 +479,29 @@ function CreateCampaignPage({}: Props) {
                                                     {t("select_all_locations")}
                                                 </button>
                                                 <ul className="flex gap-1  w-full max-w-lg flex-wrap">
-                                                    {citiesList.map(
-                                                        (city, i) => (
-                                                            <div key={i}>
-                                                                {!campaignInfo.targetedCities.includes(
-                                                                    city
-                                                                ) ? (
-                                                                    <li
-                                                                        key={i}
-                                                                        className=" bg-gray-100 flex rounded-lg flex-row gap-2 items-center pr-2 border-2 border-gray-200"
-                                                                    >
-                                                                        <p className="m-0 p-0">
-                                                                            {t(
-                                                                                city
-                                                                            )}
-                                                                        </p>
-
-                                                                        <button
-                                                                            onClick={() =>
-                                                                                handleAddCity(
-                                                                                    city
-                                                                                )
-                                                                            }
-                                                                            className="text-lg rounded-lg hover:bg-gray-300 w-4"
-                                                                        >
-                                                                            +
-                                                                        </button>
-                                                                    </li>
-                                                                ) : (
-                                                                    <li
-                                                                        key={i}
-                                                                        className="flex rounded-lg flex-row gap-2 items-center pr-2 bg-green-100 border-2 border-green-600"
-                                                                    >
-                                                                        <p className="m-0 p-0">
-                                                                            {t(
-                                                                                city
-                                                                            )}
-                                                                        </p>
-
-                                                                        <button
-                                                                            onClick={() =>
-                                                                                handleRemoveCity(
-                                                                                    city
-                                                                                )
-                                                                            }
-                                                                            className="text-lg rounded-lg hover:bg-green-200 w-4"
-                                                                        >
-                                                                            -
-                                                                        </button>
-                                                                    </li>
-                                                                )}
-                                                            </div>
-                                                        )
+                                                    {!campaignInfo.targetedCities.includes(
+                                                        "*"
+                                                    ) ? (
+                                                        <Select
+                                                            value={formatCities(
+                                                                campaignInfo.targetedCities
+                                                            )}
+                                                            isMulti
+                                                            name="cities"
+                                                            noOptionsMessage={() =>
+                                                                t(
+                                                                    "no_options_message"
+                                                                )
+                                                            }
+                                                            options={citiesList}
+                                                            onChange={
+                                                                handleCitiesChange
+                                                            }
+                                                            className="basic-multi-select"
+                                                            classNamePrefix="select"
+                                                        />
+                                                    ) : (
+                                                        <></>
                                                     )}
                                                 </ul>
                                             </div>

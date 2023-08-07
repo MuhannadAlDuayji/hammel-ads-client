@@ -131,12 +131,12 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             </td>
             {/* // Budget */}
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {formatNumber(campaign.budget)}
+                {formatNumber(campaign.budget.toFixed(2))}
             </td>
 
             {/* // money spent */}
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {formatNumber(campaign.moneySpent)}
+                {formatNumber(campaign.moneySpent.toFixed(2))}
             </td>
 
             {/* // clicks */}
