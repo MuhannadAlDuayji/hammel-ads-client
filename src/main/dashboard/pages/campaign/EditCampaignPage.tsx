@@ -542,7 +542,7 @@ function EditCampaignPage({}: Props) {
                                                             onChange={
                                                                 handleCitiesChange
                                                             }
-                                                            className="basic-multi-select"
+                                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                                             classNamePrefix="select"
                                                         />
                                                     ) : (
