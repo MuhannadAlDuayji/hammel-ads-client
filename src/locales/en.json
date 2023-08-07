@@ -983,5 +983,6 @@
     "Bekalta": "Bekalta",
     "Beni Khiar": "Beni Khiar",
     "Bechri": "Bechri",
-    "select_all_locations": "All Locations"
+    "select_all_locations": "All Locations",
+    "no_options_message": "No options"
 }
