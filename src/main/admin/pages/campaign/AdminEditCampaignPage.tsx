@@ -28,6 +28,7 @@ interface CampaignInfo {
     adminMessage: string;
     photoPath: string;
     link: string;
+    testDeviceId: string;
 }
 
 interface City {
@@ -95,6 +96,7 @@ function AdminEditCampaignPage({}: Props) {
         photoPath: "",
         link: "",
         adminMessage: "",
+        testDeviceId: "",
     });
 
     const onDrop = useCallback((acceptedFiles: any) => {
@@ -652,6 +654,35 @@ function AdminEditCampaignPage({}: Props) {
                                         />
                                     </div>
                                 </div>
+
+                                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label
+                                        htmlFor="testDeviceId"
+                                        className="block text-sm font-medium text-gray-700"
+                                    >
+                                        Test Device Id chosen by the user
+                                        (optional)
+                                    </label>
+                                    <br />
+                                    <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                        <input
+                                            type="text"
+                                            name="testDeviceId"
+                                            id="testDeviceId"
+                                            value={campaignInfo.testDeviceId}
+                                            placeholder="EX: AB4FB743-57X3-4208-X11X-679D88100F36"
+                                            onChange={(e) =>
+                                                setCampaignInfo({
+                                                    ...campaignInfo,
+                                                    testDeviceId:
+                                                        e.target.value,
+                                                })
+                                            }
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] "
+                                        />
+                                    </div>
+                                </div>
+
                                 <div className="">
                                     <label
                                         htmlFor="link"
