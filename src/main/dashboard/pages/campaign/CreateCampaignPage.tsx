@@ -420,6 +420,35 @@ function CreateCampaignPage({}: Props) {
                                             }}
                                             className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] "
                                         />
+                                        {Number(campaignInfo.budget) > 0 && (
+                                            <p className="mx-2 text-sm my-1 text-gray-600">
+                                                {`${t(
+                                                    "budget_message_part_1"
+                                                )} ${
+                                                    i18n.language !== "ar"
+                                                        ? "$"
+                                                        : ""
+                                                }${Number(
+                                                    process.env
+                                                        .REACT_APP_THOUSAND_VIEWS_COST
+                                                )}${
+                                                    i18n.language === "ar"
+                                                        ? "$"
+                                                        : ""
+                                                } ${t(
+                                                    "budget_message_part_2"
+                                                )}: (${
+                                                    (Number(
+                                                        campaignInfo.budget
+                                                    ) /
+                                                        Number(
+                                                            process.env
+                                                                .REACT_APP_THOUSAND_VIEWS_COST
+                                                        )) *
+                                                    1000
+                                                })`}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="block text-sm font-medium text-gray-700">

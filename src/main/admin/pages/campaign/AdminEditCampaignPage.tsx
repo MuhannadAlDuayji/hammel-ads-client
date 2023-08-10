@@ -458,6 +458,23 @@ function AdminEditCampaignPage({}: Props) {
                                             }}
                                             className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                         />
+                                        {Number(campaignInfo.budget) > 0 && (
+                                            <p className="mx-2 text-sm my-1 text-gray-600">
+                                                {`price for 1000 views: $${Number(
+                                                    process.env
+                                                        .REACT_APP_THOUSAND_VIEWS_COST
+                                                )}. expected views for this user: (${
+                                                    (Number(
+                                                        campaignInfo.budget
+                                                    ) /
+                                                        Number(
+                                                            process.env
+                                                                .REACT_APP_THOUSAND_VIEWS_COST
+                                                        )) *
+                                                    1000
+                                                })`}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="">
