@@ -27,6 +27,7 @@ interface CampaignInfo {
     targetedCities: string[];
     photoPath: string;
     link: string;
+    testDeviceId: string;
 }
 
 interface City {
@@ -69,6 +70,7 @@ function CreateCampaignPage({}: Props) {
         targetedCities: [],
         photoPath: "",
         link: "",
+        testDeviceId: "",
     });
 
     const onDrop = useCallback((acceptedFiles: any) => {
@@ -420,6 +422,35 @@ function CreateCampaignPage({}: Props) {
                                             }}
                                             className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] "
                                         />
+                                        {Number(campaignInfo.budget) > 0 && (
+                                            <p className="mx-2 text-sm my-1 text-gray-600">
+                                                {`${t(
+                                                    "budget_message_part_1"
+                                                )} ${
+                                                    i18n.language !== "ar"
+                                                        ? "$"
+                                                        : ""
+                                                }${Number(
+                                                    process.env
+                                                        .REACT_APP_THOUSAND_VIEWS_COST
+                                                )}${
+                                                    i18n.language === "ar"
+                                                        ? "$"
+                                                        : ""
+                                                } ${t(
+                                                    "budget_message_part_2"
+                                                )}: (${
+                                                    (Number(
+                                                        campaignInfo.budget
+                                                    ) /
+                                                        Number(
+                                                            process.env
+                                                                .REACT_APP_THOUSAND_VIEWS_COST
+                                                        )) *
+                                                    1000
+                                                })`}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="block text-sm font-medium text-gray-700">
@@ -497,7 +528,7 @@ function CreateCampaignPage({}: Props) {
                                                             onChange={
                                                                 handleCitiesChange
                                                             }
-                                                            className="basic-multi-select"
+                                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                                             classNamePrefix="select"
                                                         />
                                                     ) : (
@@ -595,6 +626,32 @@ function CreateCampaignPage({}: Props) {
                                                 })
                                             }
                                             className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label
+                                        htmlFor="testDeviceId"
+                                        className="block text-sm font-medium text-gray-700"
+                                    >
+                                        {t("testDeviceId_input_title")}
+                                    </label>
+                                    <br />
+                                    <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                        <input
+                                            type="text"
+                                            name="testDeviceId"
+                                            id="testDeviceId"
+                                            value={campaignInfo.testDeviceId}
+                                            placeholder="EX: AB4FB743-57X3-4208-X11X-679D88100F36"
+                                            onChange={(e) =>
+                                                setCampaignInfo({
+                                                    ...campaignInfo,
+                                                    testDeviceId:
+                                                        e.target.value,
+                                                })
+                                            }
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] "
                                         />
                                     </div>
                                 </div>

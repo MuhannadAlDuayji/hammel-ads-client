@@ -30,8 +30,10 @@ const PaymentCheck = () => {
     const checkPayment = async () => {
         if (!paymentId) return;
         try {
+            console.log("d5al");
             const { data } = await WalletAPI.checkPayment(token, paymentId);
             setInfo(data.data);
+            console.log("null error", data.data);
             setLoading(false);
 
             if (data.data.isSuccessfullPayment) {

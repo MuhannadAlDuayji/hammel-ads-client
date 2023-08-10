@@ -985,5 +985,8 @@
     "Beni Khiar": "بني خيار",
     "Bechri": "بشري",
     "select_all_locations": "جميع الجهات",
-    "no_options_message": "لا يوجد خيارات"
+    "no_options_message": "لا يوجد خيارات",
+    "budget_message_part_1": "سعر الالف مشاهدة",
+    "budget_message_part_2": "وبناءً على الميزانية الحالية سيكون عدد المشاهدات المتوقع",
+    "testDeviceId_input_title": "معرف الجهاز للاختبار (اختياري)"
 }

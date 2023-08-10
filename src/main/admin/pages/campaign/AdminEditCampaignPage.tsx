@@ -28,6 +28,7 @@ interface CampaignInfo {
     adminMessage: string;
     photoPath: string;
     link: string;
+    testDeviceId: string;
 }
 
 interface City {
@@ -95,6 +96,7 @@ function AdminEditCampaignPage({}: Props) {
         photoPath: "",
         link: "",
         adminMessage: "",
+        testDeviceId: "",
     });
 
     const onDrop = useCallback((acceptedFiles: any) => {
@@ -110,7 +112,7 @@ function AdminEditCampaignPage({}: Props) {
         try {
             const { data } = await CampaignsAPI.getCountryList(token);
             const countries = data.data.countryList.map((country: string) => {
-                return { name: country.toLowerCase(), value: country };
+                return { name: t(country.toLowerCase()), value: country };
             });
             setCountryList(countries);
             return countries;
@@ -458,6 +460,23 @@ function AdminEditCampaignPage({}: Props) {
                                             }}
                                             className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                         />
+                                        {Number(campaignInfo.budget) > 0 && (
+                                            <p className="mx-2 text-sm my-1 text-gray-600">
+                                                {`price for 1000 views: $${Number(
+                                                    process.env
+                                                        .REACT_APP_THOUSAND_VIEWS_COST
+                                                )}. expected views for this user: (${
+                                                    (Number(
+                                                        campaignInfo.budget
+                                                    ) /
+                                                        Number(
+                                                            process.env
+                                                                .REACT_APP_THOUSAND_VIEWS_COST
+                                                        )) *
+                                                    1000
+                                                })`}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="">
@@ -536,7 +555,7 @@ function AdminEditCampaignPage({}: Props) {
                                                             onChange={
                                                                 handleCitiesChange
                                                             }
-                                                            className="basic-multi-select"
+                                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
                                                             classNamePrefix="select"
                                                         />
                                                     ) : (
@@ -635,6 +654,35 @@ function AdminEditCampaignPage({}: Props) {
                                         />
                                     </div>
                                 </div>
+
+                                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label
+                                        htmlFor="testDeviceId"
+                                        className="block text-sm font-medium text-gray-700"
+                                    >
+                                        Test Device Id chosen by the user
+                                        (optional)
+                                    </label>
+                                    <br />
+                                    <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                        <input
+                                            type="text"
+                                            name="testDeviceId"
+                                            id="testDeviceId"
+                                            value={campaignInfo.testDeviceId}
+                                            placeholder="EX: AB4FB743-57X3-4208-X11X-679D88100F36"
+                                            onChange={(e) =>
+                                                setCampaignInfo({
+                                                    ...campaignInfo,
+                                                    testDeviceId:
+                                                        e.target.value,
+                                                })
+                                            }
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd] "
+                                        />
+                                    </div>
+                                </div>
+
                                 <div className="">
                                     <label
                                         htmlFor="link"

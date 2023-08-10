@@ -6,9 +6,10 @@ import IUser from "../../../../../types/user";
 type Props = {
     user: IUser | null;
     setUser: any;
+    selectedType: string;
 };
 
-const AddBalanceModal = ({ user, setUser }: Props) => {
+const AddBalanceModal = ({ user, setUser, selectedType }: Props) => {
     const token = useSelector((state: any) => state.auth.token);
     const [amount, setAmount] = useState<number | undefined>();
     const [errorMessage, setErrorMessage] = useState("");
@@ -23,7 +24,7 @@ const AddBalanceModal = ({ user, setUser }: Props) => {
         try {
             const response = await UsersAPI.increaseBalance(
                 user.email,
-                amount,
+                selectedType === "increase" ? amount : -amount,
                 token
             );
 

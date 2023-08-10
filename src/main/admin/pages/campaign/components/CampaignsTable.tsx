@@ -60,6 +60,12 @@ export default function CampaignsTable({ campaigns }: CampaignTableProps) {
                                         scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                                     >
+                                        Views
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                    >
                                         Clicks
                                     </th>
                                     <th

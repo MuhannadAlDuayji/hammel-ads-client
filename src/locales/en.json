@@ -984,5 +984,8 @@
     "Beni Khiar": "Beni Khiar",
     "Bechri": "Bechri",
     "select_all_locations": "All Locations",
-    "no_options_message": "No options"
+    "no_options_message": "No options",
+    "budget_message_part_1": "The price of a thousand views is",
+    "budget_message_part_2": "Based on the current budget, the expected number of views will be",
+    "testDeviceId_input_title": "Device Id for testing (optional)"
 }

@@ -5,8 +5,18 @@ import AddBalanceModal from "./AddBalanceModal";
 interface Props {
     users: IUser[];
 }
+function formatNumber(number: number) {
+    return Number(
+        number
+            .toFixed(0)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    );
+}
 export default function UsersTable({ users }: Props) {
     const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
+    const [selectedType, setSelectedType] = useState<string>("increase");
+
     return (
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="mt-8 flow-root">
@@ -32,15 +42,6 @@ export default function UsersTable({ users }: Props) {
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                                     >
                                         Balance
-                                    </th>
-
-                                    <th
-                                        scope="col"
-                                        className="relative py-3.5 pl-3 pr-4 sm:pr-0"
-                                    >
-                                        <span className="sr-only">
-                                            Add balance
-                                        </span>
                                     </th>
                                 </tr>
                             </thead>
@@ -76,16 +77,31 @@ export default function UsersTable({ users }: Props) {
                                             {user.email}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {user.balance}
+                                            $
+                                            {formatNumber(user.balance).toFixed(
+                                                2
+                                            )}
                                         </td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                             <button
-                                                className="text-white bg-blue-700 hover:bg-blue-600 py-2 px-4 rounded-lg"
+                                                className="text-white bg-green-700 hover:bg-green-800 py-2 px-4 rounded-lg"
                                                 onClick={() => {
+                                                    setSelectedType("increase");
                                                     setSelectedUser(user);
                                                 }}
                                             >
-                                                Add balance
+                                                increase balance
+                                            </button>
+                                        </td>
+                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                            <button
+                                                className="text-white bg-red-700 hover:bg-red-800 py-2 px-4 rounded-lg"
+                                                onClick={() => {
+                                                    setSelectedType("decrease");
+                                                    setSelectedUser(user);
+                                                }}
+                                            >
+                                                decrease balance
                                             </button>
                                         </td>
                                     </tr>
@@ -94,6 +110,7 @@ export default function UsersTable({ users }: Props) {
                         </table>
                         <AddBalanceModal
                             setUser={setSelectedUser}
+                            selectedType={selectedType}
                             user={selectedUser}
                         />
                     </div>
