@@ -99,6 +99,7 @@ export default function Analytics({}: AnalyticsProps) {
 
     const getData = async () => {
         try {
+            console.log("getting clicks");
             const clicks = await AnalyticsAPI.getTotalAnalytics(
                 token,
                 "click",
@@ -109,7 +110,8 @@ export default function Analytics({}: AnalyticsProps) {
                     : countryFilter,
                 campaignIdFilter === "" ? null : campaignIdFilter
             );
-            console.log(clicks);
+            console.log("clicks: ", clicks.data.data);
+            console.log("getting views...");
 
             const views = await AnalyticsAPI.getTotalAnalytics(
                 token,
@@ -121,6 +123,7 @@ export default function Analytics({}: AnalyticsProps) {
                     : countryFilter,
                 campaignIdFilter === "" ? null : campaignIdFilter
             );
+            console.log("views: ", views.data.data);
 
             setData({ clicks: clicks.data.data, views: views.data.data });
             setLoading(false);
