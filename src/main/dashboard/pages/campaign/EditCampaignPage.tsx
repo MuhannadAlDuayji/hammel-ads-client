@@ -484,7 +484,7 @@ function EditCampaignPage({}: Props) {
                                                         : ""
                                                 } ${t(
                                                     "budget_message_part_2"
-                                                )}: (${
+                                                )}: (${(
                                                     (Number(
                                                         campaignInfo.budget
                                                     ) /
@@ -493,7 +493,13 @@ function EditCampaignPage({}: Props) {
                                                                 .REACT_APP_THOUSAND_VIEWS_COST
                                                         )) *
                                                     1000
-                                                })`}
+                                                )
+                                                    .toFixed(0)
+                                                    .toString()
+                                                    .replace(
+                                                        /\B(?=(\d{3})+(?!\d))/g,
+                                                        ","
+                                                    )})`}
                                             </p>
                                         )}
                                     </div>
