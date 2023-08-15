@@ -23,6 +23,17 @@ const UsersAPI = {
             }
         );
     },
+    updateDiscount: function (userId: string, discount: number, token: string) {
+        return axios.post(
+            `${process.env.REACT_APP_API_URL}/users/update-discount`,
+            { userId: userId, discount },
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            }
+        );
+    },
 };
 
 export default UsersAPI;
