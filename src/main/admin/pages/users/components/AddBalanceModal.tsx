@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import UsersAPI from "../api";
 import IUser from "../../../../../types/user";
-
+import { Disclosure } from "@headlessui/react";
+import { Navigate } from "react-router-dom";
 type Props = {
     user: IUser | null;
     setUser: any;
@@ -20,16 +21,32 @@ const AddBalanceModal = ({ user, setUser, selectedType }: Props) => {
             setErrorMessage("please enter a valid amount");
             return;
         }
+        if (selectedType === "discount" && (amount > 100 || amount < 0)) {
+            setErrorMessage("please enter a discount between 0 and 100");
+            return;
+        }
 
         try {
-            const response = await UsersAPI.increaseBalance(
-                user.email,
-                selectedType === "increase" ? amount : -amount,
-                token
-            );
+            if (selectedType === "discount") {
+                console.log(user);
+                const discount = amount / 100;
+                const response = await UsersAPI.updateDiscount(
+                    user._id,
+                    discount,
+                    token
+                );
+                console.log(response);
+            } else {
+                const response = await UsersAPI.increaseBalance(
+                    user.email,
+                    selectedType === "increase" ? amount : -amount,
+                    token
+                );
+            }
 
             setAmount(undefined);
             setUser(null);
+            window.location.reload();
         } catch (err) {
             console.log(err);
         }
@@ -41,6 +58,14 @@ const AddBalanceModal = ({ user, setUser, selectedType }: Props) => {
                 <div className="flex items-center justify-center min-h-screen px-4">
                     <div className="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full sm:max-w-lg">
                         <div className="bg-white rounded-lg overflow-hidden shadow-xl">
+                            <div
+                                onClick={() => {
+                                    setUser(null);
+                                }}
+                                className="mx-2 w-2 cursor-pointer"
+                            >
+                                x
+                            </div>
                             <form
                                 className="p-6 space-y-6"
                                 action="#"
@@ -55,7 +80,9 @@ const AddBalanceModal = ({ user, setUser, selectedType }: Props) => {
                                         htmlFor="amount"
                                         className="block text-sm font-medium text-gray-700"
                                     >
-                                        Amount
+                                        {selectedType === "discount"
+                                            ? "Discount value (0 - 100)"
+                                            : "Amount"}
                                     </label>
                                     <div className="mt-1">
                                         <input

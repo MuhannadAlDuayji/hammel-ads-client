@@ -43,6 +43,12 @@ export default function UsersTable({ users }: Props) {
                                     >
                                         Balance
                                     </th>
+                                    <th
+                                        scope="col"
+                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                    >
+                                        Discount
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 bg-white">
@@ -82,26 +88,40 @@ export default function UsersTable({ users }: Props) {
                                                 2
                                             )}
                                         </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {user.discount * 100}%
+                                        </td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                             <button
-                                                className="text-white bg-green-700 hover:bg-green-800 py-2 px-4 rounded-lg"
+                                                className="text-white bg-green-600 hover:bg-green-700 py-2 px-2 rounded-lg"
                                                 onClick={() => {
                                                     setSelectedType("increase");
                                                     setSelectedUser(user);
                                                 }}
                                             >
-                                                increase balance
+                                                Charge
                                             </button>
                                         </td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                             <button
-                                                className="text-white bg-red-700 hover:bg-red-800 py-2 px-4 rounded-lg"
+                                                className="text-white bg-red-600 hover:bg-red-700 py-2 px-2  rounded-lg"
                                                 onClick={() => {
                                                     setSelectedType("decrease");
                                                     setSelectedUser(user);
                                                 }}
                                             >
-                                                decrease balance
+                                                Subtract
+                                            </button>
+                                        </td>
+                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                            <button
+                                                className="text-white bg-blue-700 hover:bg-bl-800 py-2 px-2  rounded-lg"
+                                                onClick={() => {
+                                                    setSelectedType("discount");
+                                                    setSelectedUser(user);
+                                                }}
+                                            >
+                                                Discount
                                             </button>
                                         </td>
                                     </tr>
