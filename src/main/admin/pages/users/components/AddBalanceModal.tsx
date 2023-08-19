@@ -35,7 +35,6 @@ const AddBalanceModal = ({ user, setUser, selectedType }: Props) => {
                     discount,
                     token
                 );
-                console.log(response);
             } else {
                 const response = await UsersAPI.increaseBalance(
                     user.email,
@@ -89,9 +88,7 @@ const AddBalanceModal = ({ user, setUser, selectedType }: Props) => {
                                             id="amount"
                                             name="amount"
                                             type="string"
-                                            autoComplete="amount"
-                                            required
-                                            value={amount || ""}
+                                            value={amount}
                                             onChange={(e) => {
                                                 const amount = Number(
                                                     e.target.value

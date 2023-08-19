@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CampaignsAPI from "../api";
+import DeleteCampaignConfirmModal from "./DeleteCampaignConfirmModal";
 
 interface CampaignsTableRowProps {
     campaign: any;
@@ -53,28 +54,8 @@ function statusStyles(status: string): string {
 
 export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
     const token = useSelector((state: any) => state.auth.token);
-    const [user, setUser] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        photoPath: "",
-    });
-
-    const getUser = async () => {
-        try {
-            const res = await CampaignsAPI.getUser(token, campaign.userId);
-            console.log(res);
-            const data = res?.data.data;
-            setUser(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-    useEffect(() => {
-        getUser();
-    }, []);
-
+    const user = useSelector((state: any) => state.user.user);
+    const [selectedCampaignId, setSelectedCampaignId] = useState("");
     return (
         <tr key={campaign.email}>
             {/* // title */}
@@ -169,14 +150,26 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                     {campaign.status.toUpperCase()}
                 </span>
             </td>
-            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-6">
                 <Link
                     to={`/admin/dashboard/campaigns/${campaign._id}`}
                     className="text-[#60b0bd] hover:text-indigo-900"
                 >
-                    Edit<span className="sr-only">, {campaign.name}</span>
+                    Edit
                 </Link>
+                <div
+                    onClick={() => {
+                        setSelectedCampaignId(campaign._id);
+                    }}
+                    className="text-red-600 hover:text-red-900 cursor-pointer"
+                >
+                    Delete
+                </div>
             </td>
+            <DeleteCampaignConfirmModal
+                selectedCampaignId={selectedCampaignId}
+                setSelectedCampaignId={setSelectedCampaignId}
+            />
         </tr>
     );
 }

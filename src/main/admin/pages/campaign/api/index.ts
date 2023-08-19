@@ -88,6 +88,19 @@ const CampaignsAPI = {
             }
         );
     },
+    adminDeleteCampaign: function (token: string, campaignId: string) {
+        return axios.post(
+            `${process.env.REACT_APP_API_URL}/campaigns/admin-delete-campaign`,
+            {
+                campaignId,
+            },
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            }
+        );
+    },
 };
 
 export default CampaignsAPI;
