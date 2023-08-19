@@ -58,7 +58,7 @@ export default function NavBar({ index }: NavBarProps) {
                 >
                     {({ open }) => (
                         <>
-                            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                            <div className="mx-auto max-w-7xl px-4 sm:px-16 lg:px-34">
                                 <div className="flex h-16 justify-between">
                                     <div className="flex">
                                         <div
@@ -98,10 +98,7 @@ export default function NavBar({ index }: NavBarProps) {
                                         </div>
                                     </div>
                                     <div className="hidden sm:flex sm:items-center">
-                                        <Menu
-                                            as="div"
-                                            className="relative ml-3"
-                                        >
+                                        <Menu as="div" className="relative m-3">
                                             <div>
                                                 <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#60b0bd] focus:ring-offset-2">
                                                     <span className="sr-only">
@@ -135,7 +132,7 @@ export default function NavBar({ index }: NavBarProps) {
                                                 leaveFrom="transform opacity-100 scale-100"
                                                 leaveTo="transform opacity-0 scale-95"
                                             >
-                                                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                <Menu.Items className="absolute right-0 z-10 mt-2 w-28 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                     <Menu.Item key={"settings"}>
                                                         {({ active }) => (
                                                             <Link
@@ -163,7 +160,7 @@ export default function NavBar({ index }: NavBarProps) {
                                                                     active
                                                                         ? "bg-gray-100"
                                                                         : "",
-                                                                    "block px-4 py-2 text-sm text-gray-700"
+                                                                    "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
                                                                 )}
                                                             >
                                                                 {t("logout")}
