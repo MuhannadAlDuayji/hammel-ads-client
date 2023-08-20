@@ -988,5 +988,7 @@
     "budget_message_part_1": "The price of a thousand views is",
     "budget_message_part_2": "Based on the current budget, the expected number of views will be",
     "testDeviceId_input_title": "Device Id for testing (optional)",
-    "summary": "Summary"
+    "summary": "Summary",
+    "start_date_greater_than_now_message": "Start date cannot be in the past!",
+    "start_date_greater_than_end_date_message": "End date must be greater than end date!"
 }
