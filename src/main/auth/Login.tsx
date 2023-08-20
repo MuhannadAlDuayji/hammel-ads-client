@@ -66,7 +66,7 @@ export default function LoginPage() {
         <>
             <Header />
             {/* temporary */}
-            <div
+            {/* <div
                 className="flex mx-6"
                 dir={i18n.language === "ar" ? "rtl" : "ltr"}
             >
@@ -74,7 +74,7 @@ export default function LoginPage() {
                     title={t("attention_needed")}
                     message={t("demo_app_warning")}
                 />
-            </div>
+            </div> */}
             <div
                 className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8"
                 dir={i18n.language === "ar" ? "rtl" : "ltr"}

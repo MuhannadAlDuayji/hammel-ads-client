@@ -135,13 +135,13 @@ function MainRoutes() {
                 if (user?.isAdmin) return navigate("/admin/dashboard");
 
                 // temporary
-                if (
-                    !["hammel@hammel.in", "gyoom@gyoom.sa"].includes(
-                        user.email.toLowerCase()
-                    )
-                ) {
-                    navigate("/dashboard/service-not-available");
-                }
+                // if (
+                //     !["hammel@hammel.in", "gyoom@gyoom.sa"].includes(
+                //         user.email.toLowerCase()
+                //     )
+                // ) {
+                //     navigate("/dashboard/service-not-available");
+                // }
             })
             .catch((err) => {
                 if (err?.response?.status === 400) return navigate("/login");

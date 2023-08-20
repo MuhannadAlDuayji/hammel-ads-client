@@ -49,7 +49,7 @@ function isValidHttpUrl(string: string) {
 function formatDate(date: string) {
     // yyyy-mm-dd -> dd/mm/yyyy
     const [y, m, d] = date.split("-");
-    return `${m}/${d}/${y}`;
+    return `${y}-${m}-${d}`;
 }
 
 function formatFetchedDate(date: string) {
@@ -220,6 +220,14 @@ function AdminEditCampaignPage({}: Props) {
             return false;
         }
         if (
+            new Date(campaignInfo.startDate) <
+            new Date(new Date().setHours(0, 0, 0))
+        ) {
+            const message = t("start_date_greater_than_now_message");
+            setErrorMessage(message);
+            return false;
+        }
+        if (
             isNaN(Number(campaignInfo.budget)) ||
             Number(campaignInfo.budget) < 10
         ) {
@@ -262,8 +270,8 @@ function AdminEditCampaignPage({}: Props) {
         try {
             const data = {
                 ...campaignInfo,
-                startDate: formatDate(campaignInfo.startDate),
-                endDate: formatDate(campaignInfo.endDate),
+                startDate: campaignInfo.startDate,
+                endDate: campaignInfo.endDate,
                 status: selectedStatus,
             };
             await CampaignsAPI.updateCampaign(data, campaign._id, token);

@@ -77,8 +77,6 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             const response = await CampaignsAPI.updateCampaign(
                 {
                     ...campaign,
-                    startDate: formatDate(campaign.startDate),
-                    endDate: formatDate(campaign.endDate),
                     status: "stopped",
                 },
                 campaign._id,
@@ -94,8 +92,8 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             const response = await CampaignsAPI.updateCampaign(
                 {
                     ...campaign,
-                    startDate: formatDate(campaign.startDate),
-                    endDate: formatDate(campaign.endDate),
+                    startDate: campaign.startDate,
+                    endDate: campaign.endDate,
                     status: "ready",
                 },
                 campaign._id,

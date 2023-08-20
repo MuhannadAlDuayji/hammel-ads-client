@@ -12,12 +12,12 @@ type Props = {
 
 const AddBalanceModal = ({ user, setUser, selectedType }: Props) => {
     const token = useSelector((state: any) => state.auth.token);
-    const [amount, setAmount] = useState<number | undefined>();
+    const [amount, setAmount] = useState<number>(0);
     const [errorMessage, setErrorMessage] = useState("");
 
     const addBalanceHandler = async (e: any) => {
         e.preventDefault();
-        if (!amount || isNaN(Number(amount)) || !user) {
+        if (isNaN(Number(amount)) || !user) {
             setErrorMessage("please enter a valid amount");
             return;
         }
@@ -28,7 +28,6 @@ const AddBalanceModal = ({ user, setUser, selectedType }: Props) => {
 
         try {
             if (selectedType === "discount") {
-                console.log(user);
                 const discount = amount / 100;
                 const response = await UsersAPI.updateDiscount(
                     user._id,
@@ -43,7 +42,7 @@ const AddBalanceModal = ({ user, setUser, selectedType }: Props) => {
                 );
             }
 
-            setAmount(undefined);
+            setAmount(0);
             setUser(null);
             window.location.reload();
         } catch (err) {
