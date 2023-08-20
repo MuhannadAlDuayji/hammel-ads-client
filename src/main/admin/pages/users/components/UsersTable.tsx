@@ -83,10 +83,7 @@ export default function UsersTable({ users }: Props) {
                                             {user.email}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            $
-                                            {formatNumber(user.balance).toFixed(
-                                                2
-                                            )}
+                                            ${user.balance}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {user.discount * 100}%
