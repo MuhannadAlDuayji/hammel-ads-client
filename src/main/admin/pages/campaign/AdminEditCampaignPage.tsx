@@ -220,10 +220,9 @@ function AdminEditCampaignPage({}: Props) {
             return false;
         }
         if (
-            new Date(campaignInfo.startDate) <
-            new Date(new Date().setHours(0, 0, 0))
+            new Date(campaignInfo.endDate) <= new Date(campaignInfo.startDate)
         ) {
-            const message = t("start_date_greater_than_now_message");
+            const message = t("start_date_greater_than_end_date_message");
             setErrorMessage(message);
             return false;
         }
