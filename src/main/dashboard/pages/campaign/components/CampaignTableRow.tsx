@@ -165,6 +165,11 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                 >
                     {t(campaign.status)}
                 </span>
+                <span
+                    className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-red-100 text-red-700 `}
+                >
+                    {!campaign.adminMessage ? "" : t("action_required")}
+                </span>
             </td>
             <td className="relative  whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 ">
                 {/* <Link

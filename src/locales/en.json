@@ -990,5 +990,6 @@
     "testDeviceId_input_title": "Device Id for testing (optional)",
     "summary": "Summary",
     "start_date_greater_than_now_message": "Start date cannot be in the past!",
-    "start_date_greater_than_end_date_message": "End date must be greater than end date!"
+    "start_date_greater_than_end_date_message": "End date must be greater than end date!",
+    "action_required": "action required"
 }

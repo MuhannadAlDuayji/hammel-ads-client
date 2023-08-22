@@ -8,6 +8,13 @@ const UsersAPI = {
             },
         });
     },
+    getOneUser: function (token: string, userId: string) {
+        return axios.get(`${process.env.REACT_APP_API_URL}/users/${userId}`, {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        });
+    },
     increaseBalance: function (
         userEmail: string,
         amount: number,

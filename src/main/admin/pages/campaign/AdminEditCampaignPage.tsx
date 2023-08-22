@@ -11,6 +11,7 @@ import StatusListSelect from "./components/StatusListSelect";
 import { useDropzone } from "react-dropzone";
 import { t } from "i18next";
 import Select from "react-select";
+import UsersAPI from "../users/api";
 
 type Props = {};
 interface Country {
@@ -61,6 +62,7 @@ function AdminEditCampaignPage({}: Props) {
     const campaignId = useParams().id;
 
     const [selectedStatus, setSelectedStatus] = useState(null);
+    const [user, setUser] = useState<any>(undefined);
 
     const navigate = useNavigate();
 
@@ -85,6 +87,7 @@ function AdminEditCampaignPage({}: Props) {
         link: "",
         status: "",
         adminMessage: "",
+        userId: "",
     });
     const [campaignInfo, setCampaignInfo] = useState<CampaignInfo>({
         title: "",
@@ -175,6 +178,14 @@ function AdminEditCampaignPage({}: Props) {
             return { label: t(city), value: city };
         });
     }
+    const getUser = async () => {
+        try {
+            const { data } = await UsersAPI.getOneUser(token, campaign.userId);
+            setUser(data.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const getCampaign = async () => {
         try {
@@ -304,6 +315,7 @@ function AdminEditCampaignPage({}: Props) {
         getCampaign();
         setLoading(false);
         getCountryList();
+        getUser();
     }, [token]);
 
     // if country !== all countries || select country get cities list
@@ -713,7 +725,10 @@ function AdminEditCampaignPage({}: Props) {
                             htmlFor="comment"
                             className="block text-sm font-medium text-gray-700"
                         >
-                            Add a message for the user
+                            Add a message for the user{" "}
+                            {user?.preferredLanguage === "ar"
+                                ? "(USER PREFFERED LANGUAGE IS 'ARABIC')"
+                                : "(USER PREFFERED LANGUAGE IS 'ENGLISH')"}
                         </label>
                         <br></br>
                         <div className="mt-1">

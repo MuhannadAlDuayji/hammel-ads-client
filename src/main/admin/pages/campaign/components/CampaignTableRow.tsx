@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CampaignsAPI from "../api";
 import DeleteCampaignConfirmModal from "./DeleteCampaignConfirmModal";
+import UsersAPI from "../../users/api";
 
 interface CampaignsTableRowProps {
     campaign: any;
@@ -54,8 +55,20 @@ function statusStyles(status: string): string {
 
 export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
     const token = useSelector((state: any) => state.auth.token);
-    const user = useSelector((state: any) => state.user.user);
+    const [user, setUser] = useState<any>(undefined);
     const [selectedCampaignId, setSelectedCampaignId] = useState("");
+    const getUser = async () => {
+        try {
+            const { data } = await UsersAPI.getOneUser(token, campaign.userId);
+            setUser(data.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        getUser();
+    }, []);
     return (
         <tr key={campaign.email}>
             {/* // title */}
@@ -92,9 +105,9 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                     </div>
                     <div className="ml-4">
                         <div className="font-medium text-gray-900">
-                            {user.firstName} {user.lastName}
+                            {user?.firstName} {user?.lastName}
                         </div>
-                        <div className="text-gray-500">{user.email}</div>
+                        <div className="text-gray-500">{user?.email}</div>
                     </div>
                 </div>
             </td>
