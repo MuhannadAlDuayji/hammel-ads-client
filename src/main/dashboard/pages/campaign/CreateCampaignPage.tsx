@@ -165,14 +165,6 @@ function CreateCampaignPage({}: Props) {
         }
 
         if (
-            new Date(campaignInfo.startDate) <
-            new Date(new Date().setHours(0, 0, 0))
-        ) {
-            const message = t("start_date_greater_than_now_message");
-            setErrorMessage(message);
-            return false;
-        }
-        if (
             new Date(campaignInfo.endDate) <= new Date(campaignInfo.startDate)
         ) {
             const message = t("start_date_greater_than_end_date_message");
