@@ -282,6 +282,9 @@ function AdminEditCampaignPage({}: Props) {
                 ...campaignInfo,
                 startDate: campaignInfo.startDate,
                 endDate: campaignInfo.endDate,
+                country: countryList.find(
+                    (country) => country.name === campaignInfo.country
+                )?.value,
                 status: selectedStatus,
             };
             await CampaignsAPI.updateCampaign(data, campaign._id, token);
