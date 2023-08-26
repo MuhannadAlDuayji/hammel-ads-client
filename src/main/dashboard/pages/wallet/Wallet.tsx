@@ -18,10 +18,6 @@ export default function Wallet({}: WalletProps) {
     const language = i18n.language;
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // getMethods();
-    }, []);
-
     return (
         <>
             <NavBar index={3} />
@@ -47,7 +43,7 @@ export default function Wallet({}: WalletProps) {
                                 <br></br>
                                 <TransactionsTable />
                                 <br></br>
-                                <button
+                                {/* <button
                                     type="button"
                                     onClick={() =>
                                         navigate("/dashboard/wallet/addbalance")
@@ -59,7 +55,7 @@ export default function Wallet({}: WalletProps) {
                                         aria-hidden="true"
                                     />
                                     {t("add_balance")}
-                                </button>
+                                </button> */}
                             </div>
                         )}
                     </div>
