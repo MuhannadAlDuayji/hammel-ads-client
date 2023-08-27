@@ -94,9 +94,9 @@ export default function Support({}: SupportProps) {
                                     <dd>
                                         <a
                                             className="hover:text-gray-900"
-                                            href="tel:+966533612311"
+                                            href="tel:+966551407207"
                                         >
-                                            +966533612311
+                                            966551407207 ({t("whatsapp_only")})
                                         </a>
                                     </dd>
                                 </div>
