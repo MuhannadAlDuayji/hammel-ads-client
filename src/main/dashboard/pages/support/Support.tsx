@@ -86,6 +86,25 @@ export default function Support({}: SupportProps) {
                                         <span className="sr-only">
                                             Telephone
                                         </span>
+                                        <PhoneIcon
+                                            className="h-7 w-6 text-gray-400"
+                                            aria-hidden="true"
+                                        />
+                                    </dt>
+                                    <dd>
+                                        <a
+                                            className="hover:text-gray-900"
+                                            href="tel:+966551407207"
+                                        >
+                                            966551407207 ({t("whatsapp_only")})
+                                        </a>
+                                    </dd>
+                                </div>
+                                <div className="flex gap-x-4">
+                                    <dt className="flex-none">
+                                        <span className="sr-only">
+                                            Telephone
+                                        </span>
                                         <EnvelopeIcon
                                             className="h-7 w-6 text-gray-400"
                                             aria-hidden="true"

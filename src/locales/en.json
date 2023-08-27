@@ -975,5 +975,6 @@
     "summary": "Summary",
     "start_date_greater_than_now_message": "Start date cannot be in the past!",
     "start_date_greater_than_end_date_message": "End date must be greater than end date!",
-    "action_required": "action required"
+    "action_required": "action required",
+    "whatsapp_only": "Whatsapp only"
 }
