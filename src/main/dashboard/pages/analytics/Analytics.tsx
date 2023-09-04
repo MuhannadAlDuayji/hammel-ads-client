@@ -85,6 +85,7 @@ export default function Analytics({}: AnalyticsProps) {
     const [toDate, setToDate] = useState<Date>(new Date());
     const [campaignIdFilter, setCampaignIdFilter] = useState("");
     const [countryFilter, setCountryFilter] = useState("All Countries");
+    const [cityFilter, setCityFilter] = useState("All Regions");
 
     const [data, setData] = useState<Data>({
         views: {
@@ -107,6 +108,7 @@ export default function Analytics({}: AnalyticsProps) {
                 countryFilter.toLowerCase() === "all countries"
                     ? null
                     : countryFilter,
+                cityFilter.toLowerCase() === "all regions" ? null : cityFilter,
                 campaignIdFilter === "" ? null : campaignIdFilter
             );
 
@@ -118,6 +120,7 @@ export default function Analytics({}: AnalyticsProps) {
                 countryFilter.toLowerCase() === "all countries"
                     ? null
                     : countryFilter,
+                cityFilter.toLowerCase() === "all regions" ? null : cityFilter,
                 campaignIdFilter === "" ? null : campaignIdFilter
             );
 
@@ -130,7 +133,7 @@ export default function Analytics({}: AnalyticsProps) {
 
     useEffect(() => {
         getData();
-    }, [fromDate, toDate, countryFilter, campaignIdFilter]);
+    }, [fromDate, toDate, countryFilter, campaignIdFilter, cityFilter]);
 
     return (
         <>
@@ -158,6 +161,8 @@ export default function Analytics({}: AnalyticsProps) {
                         setCampaignIdFilter={setCampaignIdFilter}
                         countryFilter={countryFilter}
                         setCountryFilter={setCountryFilter}
+                        cityFilter={cityFilter}
+                        setCityFilter={setCityFilter}
                     />
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-around flex-col sm:flex-row gap-5 bg-gray-50">
                         <div className="sm:w-1/2">
