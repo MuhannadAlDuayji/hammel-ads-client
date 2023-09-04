@@ -21,6 +21,8 @@ const AnalyticsAPI = {
         from: string,
         to: string,
         country: string | null = null,
+        city: string | null = null,
+
         campaignId: string | null = null
     ) {
         return axios.post(
@@ -30,6 +32,7 @@ const AnalyticsAPI = {
                 from,
                 to,
                 country,
+                city,
                 campaignId,
             },
             {

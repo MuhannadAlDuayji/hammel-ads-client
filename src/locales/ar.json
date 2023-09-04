@@ -277,6 +277,7 @@
     "Umm Jidr": "أم جدر",
     "Oil City": "مدينة النفط",
     "Ar Rifa' ash Shamali": "الرفاع الشمالي",
+    "Ar Rifa' ash Sharqi": "الرفاع الشرقي",
     "Safirah": "السفيرة",
     "Al Wasmiyah": "الوسمية",
     "'Askar": "العسكر",
@@ -978,5 +979,8 @@
     "start_date_greater_than_now_message": "على تاريخ البدا ان لا يكون في الماضي",
     "start_date_greater_than_end_date_message": "تاريخ البدا يجب ان يكون قبل تاريخ الانتهاء",
     "action_required": "مطلوب التعديل",
-    "whatsapp_only": "واتساب فقط"
+    "whatsapp_only": "واتساب فقط",
+    "filter_by_city": "الجهة",
+    "all_cities": "جميع الجهات",
+    "All Regions": "جميع الجهات"
 }
