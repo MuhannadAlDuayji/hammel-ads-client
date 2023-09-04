@@ -41,9 +41,7 @@ export default function Wallet({}: WalletProps) {
                             <div className="px-4 py-8 sm:px-0">
                                 <BalanceInfoTable />
                                 <br></br>
-                                <TransactionsTable />
-                                <br></br>
-                                {/* <button
+                                <button
                                     type="button"
                                     onClick={() =>
                                         navigate("/dashboard/wallet/addbalance")
@@ -55,7 +53,9 @@ export default function Wallet({}: WalletProps) {
                                         aria-hidden="true"
                                     />
                                     {t("add_balance")}
-                                </button> */}
+                                </button>
+                                <br></br>
+                                <TransactionsTable />
                             </div>
                         )}
                     </div>
