@@ -41,9 +41,12 @@ function statusStyles(status: string): string {
         case "active":
             return "text-green-800 bg-green-100";
         case "in review":
-        case "waiting for edit":
+            return "text-orange-800 bg-orange-100 w-[85px]";
         case "waiting for funds":
-            return "text-orange-800 bg-orange-100";
+            return "text-orange-800 bg-orange-100 w-[80px]";
+        case "waiting for edit":
+            return "text-orange-800 bg-orange-100 w-[90px]";
+
         case "stopped":
         case "ended":
             return "text-red-800 bg-red-100";
