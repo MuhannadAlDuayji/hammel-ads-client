@@ -9,12 +9,15 @@ import AnalyticsTable from "./components/AnalyticsTable";
 import ClicksLineChart from "./components/ClicksLineChart";
 import FilterComponent from "./components/FilterComponent";
 import ViewsLineChart from "./components/ViewsLineChart";
+import WatchTimeChart from "./components/WatchTimeChart";
 
 type AnalyticsProps = {};
 
 interface Data {
     views: any;
     clicks: any;
+    clickAverageWatchtime: any;
+    closeAverageWatchtime: any;
 }
 
 function formatDate(date: Date): string {
@@ -96,6 +99,14 @@ export default function Analytics({}: AnalyticsProps) {
             labels: [],
             datasets: [],
         },
+        clickAverageWatchtime: {
+            labels: [],
+            datasets: [],
+        },
+        closeAverageWatchtime: {
+            labels: [],
+            datasets: [],
+        },
     });
 
     const getData = async () => {
@@ -103,6 +114,17 @@ export default function Analytics({}: AnalyticsProps) {
             const clicks = await AnalyticsAPI.getTotalAnalytics(
                 token,
                 "click",
+                formatDateForRequest(fromDate),
+                formatDateForRequest(toDate),
+                countryFilter.toLowerCase() === "all countries"
+                    ? null
+                    : countryFilter,
+                cityFilter.toLowerCase() === "all regions" ? null : cityFilter,
+                campaignIdFilter === "" ? null : campaignIdFilter
+            );
+            const closes = await AnalyticsAPI.getTotalAnalytics(
+                token,
+                "close",
                 formatDateForRequest(fromDate),
                 formatDateForRequest(toDate),
                 countryFilter.toLowerCase() === "all countries"
@@ -124,7 +146,24 @@ export default function Analytics({}: AnalyticsProps) {
                 campaignIdFilter === "" ? null : campaignIdFilter
             );
 
-            setData({ clicks: clicks.data.data, views: views.data.data });
+            setData({
+                clicks: {
+                    labels: clicks.data.data.labels,
+                    datasets: clicks.data.data.datasets,
+                },
+                views: {
+                    labels: views.data.data.labels,
+                    datasets: views.data.data.datasets,
+                },
+                clickAverageWatchtime: {
+                    labels: clicks.data.data.labels,
+                    datasets: clicks.data.data.watchTimeDatasets,
+                },
+                closeAverageWatchtime: {
+                    labels: closes.data.data.labels,
+                    datasets: closes.data.data.watchTimeDatasets,
+                },
+            });
             setLoading(false);
         } catch (err) {
             console.log(err);
@@ -164,8 +203,8 @@ export default function Analytics({}: AnalyticsProps) {
                         cityFilter={cityFilter}
                         setCityFilter={setCityFilter}
                     />
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-around flex-col sm:flex-row gap-5 bg-gray-50">
-                        <div className="sm:w-1/2">
+                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-around flex-col sm:flex-row gap-5 bg-gray-50 flex-wrap">
+                        <div className="sm:w-2/5">
                             <ChartCard
                                 name={t("views")}
                                 from={formatDate(fromDate)}
@@ -174,13 +213,43 @@ export default function Analytics({}: AnalyticsProps) {
                                 <ViewsLineChart views={data.views} />
                             </ChartCard>
                         </div>
-                        <div className="sm:w-1/2">
+                        <div className="sm:w-2/5">
                             <ChartCard
                                 name={t("clicks")}
                                 from={formatDate(fromDate)}
                                 to={formatDate(toDate)}
                             >
                                 <ClicksLineChart clicks={data.clicks} />
+                            </ChartCard>
+                        </div>
+                        <div className="sm:w-2/5">
+                            <ChartCard
+                                name={t("average_click_watchtime")}
+                                from={formatDate(fromDate)}
+                                to={formatDate(toDate)}
+                            >
+                                <WatchTimeChart
+                                    labels={data.views.labels}
+                                    datasets={
+                                        data.clickAverageWatchtime.datasets
+                                    }
+                                    title={"Average Click Watchtime"}
+                                />
+                            </ChartCard>
+                        </div>
+                        <div className="sm:w-2/5">
+                            <ChartCard
+                                name={t("average_close_watchtime")}
+                                from={formatDate(fromDate)}
+                                to={formatDate(toDate)}
+                            >
+                                <WatchTimeChart
+                                    labels={data.views.labels}
+                                    datasets={
+                                        data.closeAverageWatchtime.datasets
+                                    }
+                                    title={"Average Close Watchtime"}
+                                />
                             </ChartCard>
                         </div>
                     </div>

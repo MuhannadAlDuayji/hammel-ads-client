@@ -978,5 +978,7 @@
     "action_required": "action required",
     "whatsapp_only": "Whatsapp only",
     "filter_by_city": "Filter by region",
-    "all_cities": "All Regions"
+    "all_cities": "All Regions",
+    "average_click_watchtime": "Average Click Watchtime",
+    "average_close_watchtime": "Average Close Watchtime"
 }
