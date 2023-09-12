@@ -982,5 +982,7 @@
     "whatsapp_only": "واتساب فقط",
     "filter_by_city": "الجهة",
     "all_cities": "جميع الجهات",
-    "All Regions": "جميع الجهات"
+    "All Regions": "جميع الجهات",
+    "average_click_watchtime": "معدل مدة المضاهدة قبل فتح الاعلان",
+    "average_close_watchtime": "معدل نسبة المشلهدة قبل غلق الاعلان"
 }
