@@ -125,7 +125,7 @@
     "invalid_campaign_title_message": "Title must be between 3 and 30 characters",
     "no_campaign_start_date_message": "You must provide a start date",
     "no_campaign_end_date_message": "You must provide a end date",
-    "invalid_campaign_budget_message": "You need to specify a budget greater than 10",
+    "invalid_campaign_budget_message": "You need to specify a budget greater than 5",
     "no_campaign_country_message": "You need to provide a target country",
     "no_campaign_photo_message": "You need to provide a photo",
     "no_campaign_link_message": "You need to provide a link",

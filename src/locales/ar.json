@@ -125,7 +125,7 @@
     "invalid_campaign_title_message": "يجب أن يكون العنوان من 3 إلى 30 حرفًا",
     "no_campaign_start_date_message": "يجب تحديد تاريخ البدء",
     "no_campaign_end_date_message": "يجب تحديد تاريخ الانتهاء",
-    "invalid_campaign_budget_message": " يجب تحديد ميزانية أكبر من 10$",
+    "invalid_campaign_budget_message": " يجب تحديد ميزانية أكبر من 5$",
     "no_campaign_country_message": "يجب تحديد الدولة المستهدفة",
     "no_campaign_photo_message": "يجب رفع صورة للإعلان",
     "no_campaign_link_message": "يجب اضافة رابط",
