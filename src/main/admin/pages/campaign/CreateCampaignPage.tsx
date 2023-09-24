@@ -119,9 +119,9 @@ function CreateCampaignPage({}: Props) {
         }
         if (
             isNaN(Number(campaignInfo.budget)) ||
-            Number(campaignInfo.budget) < 10
+            Number(campaignInfo.budget) < 5
         ) {
-            setErrorMessage("budget must be greater than 10");
+            setErrorMessage("budget must be greater than 5");
             return false;
         }
         if (

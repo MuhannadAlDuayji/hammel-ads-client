@@ -173,7 +173,7 @@ function CreateCampaignPage({}: Props) {
         }
         if (
             isNaN(Number(campaignInfo.budget)) ||
-            Number(campaignInfo.budget) < 10
+            Number(campaignInfo.budget) < 5
         ) {
             const message = t("invalid_campaign_budget_message");
             setErrorMessage(message);
