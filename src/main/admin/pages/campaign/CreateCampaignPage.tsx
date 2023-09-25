@@ -55,9 +55,10 @@ function CreateCampaignPage({}: Props) {
     const onDrop = useCallback((acceptedFiles: any) => {
         handlePhotoUpload(acceptedFiles[0]);
     }, []);
-    const { getRootProps, isDragActive } = useDropzone({
+    const { getRootProps, isDragActive, open } = useDropzone({
         onDrop,
         maxFiles: 1,
+        noClick: true,
     });
 
     const [showSuccessUpdate, setShowSuccessUpdate] = useState(false);
@@ -347,7 +348,11 @@ function CreateCampaignPage({}: Props) {
                                     </div>
                                 </div>
 
-                                <div className="" {...getRootProps()}>
+                                <div
+                                    className=""
+                                    {...getRootProps()}
+                                    onClick={open}
+                                >
                                     <label
                                         htmlFor="cover-photo"
                                         className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
