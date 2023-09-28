@@ -10,6 +10,7 @@ import CampaignsAPI from "./api";
 import PreviewComponent from "./components/PreviewComponent";
 import { useDropzone } from "react-dropzone";
 import Select from "react-select";
+import { isMobile } from "react-device-detect";
 
 type Props = {};
 
@@ -45,6 +46,29 @@ function isValidHttpUrl(string: string) {
     return url.protocol === "http:" || url.protocol === "https:";
 }
 
+function MobileFileInput({
+    onFileSelect,
+}: {
+    onFileSelect: (file: File) => void;
+}) {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            onFileSelect(file);
+        }
+    };
+
+    return (
+        <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+            id="mobile-file-input"
+        />
+    );
+}
+
 function CreateCampaignPage({}: Props) {
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
@@ -78,6 +102,93 @@ function CreateCampaignPage({}: Props) {
     });
 
     const [showSuccessUpdate, setShowSuccessUpdate] = useState(false);
+
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+    const handleMobileFileSelect = (file: File) => {
+        handlePhotoUpload(file);
+    };
+
+    // Function to trigger file input click for mobile devices
+    const openMobileFileInput = () => {
+        const fileInput = document.getElementById("mobile-file-input");
+        if (fileInput) {
+            fileInput.click();
+        }
+    };
+
+    const renderFileInput = () => {
+        if (isMobile) {
+            return (
+                <div
+                    className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center"
+                    onClick={openMobileFileInput}
+                >
+                    <MobileFileInput onFileSelect={handleMobileFileSelect} />
+                    {/* Render your custom file input UI here */}
+                    <div className="text-center">
+                        {/* Your custom file input UI */}
+                        <label
+                            htmlFor="mobile-file-input"
+                            className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        >
+                            Upload an Image (Mobile)
+                        </label>
+                        fdsafdfdsafdsafdsafd
+                        {/* ... (additional UI elements) */}
+                    </div>
+                </div>
+            );
+        } else {
+            // Render the desktop file input using react-dropzone
+            return (
+                <div
+                    className={`flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 h-46 mt-10 ${
+                        isDragActive ? "bg-green-50" : ""
+                    }`}
+                >
+                    {photoUploadPending ? (
+                        <LoadingSpinner />
+                    ) : (
+                        <div
+                            className="space-y-1 text-center "
+                            style={{
+                                minWidth: "200px",
+                            }}
+                        >
+                            <svg
+                                className="mx-auto h-12 w-12 text-gray-400"
+                                stroke="currentColor"
+                                fill="none"
+                                viewBox="0 0 48 48"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                    strokeWidth={2}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                            <div className="flex text-sm text-gray-600">
+                                <label
+                                    htmlFor="file-upload"
+                                    className="relative cursor-pointer rounded-md bg-white font-medium text-[#60b0bd] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#60b0bd] focus-within:ring-offset-2 hover:text-[#60b0bd]"
+                                >
+                                    <span className="px-1">
+                                        {t("upload_image")}
+                                    </span>
+                                </label>
+                            </div>
+                            <p className="text-xs text-gray-500">
+                                2090*1284 PNG, JPG, JPEG up to 4MB
+                            </p>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+    };
 
     const getCountryList = async () => {
         try {
@@ -565,60 +676,10 @@ function CreateCampaignPage({}: Props) {
                                     >
                                         {t("campaign_image")}
                                     </label>
-                                    <div className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center">
-                                        <div
-                                            className={`flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 h-46 mt-10 ${
-                                                isDragActive
-                                                    ? "bg-green-50"
-                                                    : ""
-                                            }`}
-                                        >
-                                            {photoUploadPending ? (
-                                                <LoadingSpinner />
-                                            ) : (
-                                                <div
-                                                    className="space-y-1 text-center "
-                                                    style={{
-                                                        minWidth: "200px",
-                                                    }}
-                                                >
-                                                    <svg
-                                                        className="mx-auto h-12 w-12 text-gray-400"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        viewBox="0 0 48 48"
-                                                        aria-hidden="true"
-                                                    >
-                                                        <path
-                                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                            strokeWidth={2}
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
-                                                    <div className="flex text-sm text-gray-600">
-                                                        <label
-                                                            htmlFor="file-upload"
-                                                            className="relative cursor-pointer rounded-md bg-white font-medium text-[#60b0bd] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#60b0bd] focus-within:ring-offset-2 hover:text-[#60b0bd]"
-                                                        >
-                                                            <span className="px-1">
-                                                                {t(
-                                                                    "upload_image"
-                                                                )}
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                    <p className="text-xs text-gray-500">
-                                                        2090*1284 PNG, JPG, JPEG
-                                                        up to 4MB
-                                                    </p>
-                                                </div>
-                                            )}
-                                        </div>
-                                        <PreviewComponent
-                                            photoPath={campaignInfo.photoPath}
-                                        />
-                                    </div>
+                                    {renderFileInput()}
+                                    <PreviewComponent
+                                        photoPath={campaignInfo.photoPath}
+                                    />
                                 </div>
 
                                 <div className="block text-sm font-medium text-gray-700">
