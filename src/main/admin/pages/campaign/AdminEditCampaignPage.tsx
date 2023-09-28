@@ -105,7 +105,7 @@ function AdminEditCampaignPage({}: Props) {
     const onDrop = useCallback((acceptedFiles: any) => {
         handlePhotoUpload(acceptedFiles[0]);
     }, []);
-    const { getRootProps, isDragActive, open } = useDropzone({
+    const { getRootProps, isDragActive, open, getInputProps } = useDropzone({
         onDrop,
         maxFiles: 1,
         noClick: true,
@@ -639,7 +639,10 @@ function AdminEditCampaignPage({}: Props) {
                                                             htmlFor="file-upload"
                                                             className="relative cursor-pointer rounded-md bg-white font-medium text-[#60b0bd] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#60b0bd] focus-within:ring-offset-2 hover:text-[#60b0bd]"
                                                         >
-                                                            <span className="px-1">
+                                                            <span
+                                                                className="px-1"
+                                                                {...getInputProps()}
+                                                            >
                                                                 upload an image
                                                             </span>
                                                         </label>
