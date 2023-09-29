@@ -719,6 +719,7 @@ function EditCampaignPage({}: Props) {
                                         {renderFileInput()}
                                         <PreviewComponent
                                             photoPath={campaignInfo.photoPath}
+                                            loading={photoUploadPending}
                                         />
                                     </div>
                                 </div>
