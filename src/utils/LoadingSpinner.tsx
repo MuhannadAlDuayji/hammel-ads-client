@@ -1,6 +1,8 @@
 import "./LoadingSpinner.css";
 
-export default function LoadingSpinner() {
+interface LoadingSpinnerProps {}
+
+export default function LoadingSpinner({}: LoadingSpinnerProps) {
     return (
         <div className="spinner-container">
             <div className="loading-spinner"></div>
