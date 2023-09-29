@@ -52,6 +52,7 @@ function MobileFileInput({
     onFileSelect: (file: File) => void;
 }) {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log("changed");
         const file = e.target.files?.[0];
         if (file) {
             onFileSelect(file);
@@ -63,7 +64,7 @@ function MobileFileInput({
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            style={{ display: "none" }}
+            className=" hidden "
             id="mobile-file-input"
         />
     );
@@ -103,8 +104,6 @@ function CreateCampaignPage({}: Props) {
 
     const [showSuccessUpdate, setShowSuccessUpdate] = useState(false);
 
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
     const handleMobileFileSelect = (file: File) => {
         handlePhotoUpload(file);
     };
@@ -120,23 +119,19 @@ function CreateCampaignPage({}: Props) {
     const renderFileInput = () => {
         if (isMobile) {
             return (
-                <div
-                    className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center"
-                    onClick={openMobileFileInput}
-                >
+                <div className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center">
+                    <label
+                        htmlFor="mobile-file-input"
+                        className="block text-md text-gray-800 bg-[#7cbdc8] w-[80px] text-center py-2 mt-3 rounded-md shadow-sm"
+                    >
+                        {t("upload_image")}
+                    </label>
                     <MobileFileInput onFileSelect={handleMobileFileSelect} />
-                    {/* Render your custom file input UI here */}
-                    <div className="text-center">
-                        {/* Your custom file input UI */}
-                        <label
-                            htmlFor="mobile-file-input"
-                            className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-                        >
-                            Upload an Image (Mobile)
-                        </label>
-                        fdsafdfdsafdsafdsafd
-                        {/* ... (additional UI elements) */}
-                    </div>
+                    {/* <div className="text-center">
+                        
+                        
+                        
+                    </div> */}
                 </div>
             );
         } else {
@@ -146,6 +141,7 @@ function CreateCampaignPage({}: Props) {
                     className={`flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6 h-46 mt-10 ${
                         isDragActive ? "bg-green-50" : ""
                     }`}
+                    {...getRootProps()}
                 >
                     {photoUploadPending ? (
                         <LoadingSpinner />
@@ -665,11 +661,7 @@ function CreateCampaignPage({}: Props) {
                                     <></>
                                 )}
 
-                                <div
-                                    className=""
-                                    {...getRootProps()}
-                                    onClick={open}
-                                >
+                                <div className="">
                                     <label
                                         htmlFor="cover-photo"
                                         className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
