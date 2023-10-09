@@ -45,11 +45,11 @@ function statusStyles(status: string): string {
         case "active":
             return "text-green-800 bg-green-100";
         case "in review":
-            return "text-orange-800 bg-orange-100 w-[85px]";
+            return "text-orange-800 bg-orange-100 ";
         case "waiting for funds":
-            return "text-orange-800 bg-orange-100 w-[80px]";
+            return "text-orange-800 bg-orange-100 ";
         case "waiting for edit":
-            return "text-orange-800 bg-orange-100 w-[90px]";
+            return "text-orange-800 bg-orange-100 ";
 
         case "stopped":
         case "ended":
@@ -160,9 +160,9 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
 
             {/* // status */}
 
-            <td className="whitspace-nowrap px-3 py-4 text-sm text-gray-500">
+            <td className="whitspace-nowrap px-3 py-4 text-sm text-gray-500 bg-red-100">
                 <span
-                    className={`inline-flex nowrap rounded-full px-2 text-xs font-semibold leading-5 ${statusStyles(
+                    className={`inline-flex nowrap whitespace-nowrap rounded-full px-2 text-xs font-semibold leading-5 ${statusStyles(
                         campaign.status
                     )} `}
                 >
@@ -171,7 +171,7 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                 <span
                     className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-red-100 text-red-700 `}
                 >
-                    {!campaign.adminMessage ? "" : t("action_required")}
+                    {campaign.adminMessage ? "" : t("action_required")}
                 </span>
             </td>
             <td className="relative  whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 ">
