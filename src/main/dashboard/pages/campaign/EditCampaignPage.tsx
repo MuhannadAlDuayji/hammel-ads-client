@@ -118,7 +118,7 @@ function EditCampaignPage({}: Props) {
     const onDrop = useCallback((acceptedFiles: any) => {
         handlePhotoUpload(acceptedFiles[0]);
     }, []);
-    const { getRootProps, isDragActive, open } = useDropzone({
+    const { getInputProps, getRootProps, isDragActive, open } = useDropzone({
         onDrop,
         maxFiles: 1,
         noClick: true,
@@ -168,6 +168,12 @@ function EditCampaignPage({}: Props) {
                                 minWidth: "200px",
                             }}
                         >
+                            {/* Add the invisible input */}
+                            <input
+                                {...getInputProps()}
+                                style={{ display: "none" }}
+                            />
+
                             <svg
                                 className="mx-auto h-12 w-12 text-gray-400"
                                 stroke="currentColor"
@@ -187,9 +193,13 @@ function EditCampaignPage({}: Props) {
                                     htmlFor="file-upload"
                                     className="relative cursor-pointer rounded-md bg-white font-medium text-[#60b0bd] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#60b0bd] focus-within:ring-offset-2 hover:text-[#60b0bd]"
                                 >
-                                    <span className="px-1">
+                                    <button
+                                        type="button"
+                                        className="px-1"
+                                        onClick={open}
+                                    >
                                         {t("upload_image")}
-                                    </span>
+                                    </button>
                                 </label>
                             </div>
                             <p className="text-xs text-gray-500">
