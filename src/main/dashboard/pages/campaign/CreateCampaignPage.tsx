@@ -96,7 +96,7 @@ function CreateCampaignPage({}: Props) {
     const onDrop = useCallback((acceptedFiles: any) => {
         handlePhotoUpload(acceptedFiles[0]);
     }, []);
-    const { getRootProps, isDragActive, open } = useDropzone({
+    const { getInputProps, getRootProps, isDragActive, open } = useDropzone({
         onDrop,
         maxFiles: 1,
         noClick: true,
@@ -147,6 +147,12 @@ function CreateCampaignPage({}: Props) {
                                 minWidth: "200px",
                             }}
                         >
+                            {/* Add the invisible input */}
+                            <input
+                                {...getInputProps()}
+                                style={{ display: "none" }}
+                            />
+
                             <svg
                                 className="mx-auto h-12 w-12 text-gray-400"
                                 stroke="currentColor"
