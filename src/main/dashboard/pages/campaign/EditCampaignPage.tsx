@@ -143,16 +143,11 @@ function EditCampaignPage({}: Props) {
                 <div className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center">
                     <label
                         htmlFor="mobile-file-input"
-                        className="block text-md text-gray-800 bg-[#7cbdc8] w-[80px] text-center py-2 mt-3 rounded-md shadow-sm"
+                        className="block text-md text-gray-600 border-2 border-gray-600 w-[150px] text-center py-2 mt-3 rounded-md shadow-lg bg-white active:bg-gray-200 hover:bg-gray-100 bg-white"
                     >
                         {t("upload_image")}
                     </label>
                     <MobileFileInput onFileSelect={handleMobileFileSelect} />
-                    {/* <div className="text-center">
-                        
-                        
-                        
-                    </div> */}
                 </div>
             );
         } else {
@@ -715,13 +710,11 @@ function EditCampaignPage({}: Props) {
                                     >
                                         {t("campaign_image")}
                                     </label>
-                                    <div className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center">
-                                        {renderFileInput()}
-                                        <PreviewComponent
-                                            photoPath={campaignInfo.photoPath}
-                                            loading={photoUploadPending}
-                                        />
-                                    </div>
+                                    {renderFileInput()}
+                                    <PreviewComponent
+                                        photoPath={campaignInfo.photoPath}
+                                        loading={photoUploadPending}
+                                    />
                                 </div>
 
                                 <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">

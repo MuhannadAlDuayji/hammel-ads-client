@@ -122,16 +122,11 @@ function CreateCampaignPage({}: Props) {
                 <div className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center">
                     <label
                         htmlFor="mobile-file-input"
-                        className="block text-md text-gray-800 bg-[#7cbdc8] w-[80px] text-center py-2 mt-3 rounded-md shadow-sm"
+                        className="block text-md text-gray-600 border-2 border-gray-600 w-[150px] text-center py-2 mt-3 rounded-md shadow-lg bg-white active:bg-gray-200 hover:bg-gray-100 bg-white"
                     >
                         {t("upload_image")}
                     </label>
                     <MobileFileInput onFileSelect={handleMobileFileSelect} />
-                    {/* <div className="text-center">
-                        
-                        
-                        
-                    </div> */}
                 </div>
             );
         } else {
@@ -171,9 +166,13 @@ function CreateCampaignPage({}: Props) {
                                     htmlFor="file-upload"
                                     className="relative cursor-pointer rounded-md bg-white font-medium text-[#60b0bd] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#60b0bd] focus-within:ring-offset-2 hover:text-[#60b0bd]"
                                 >
-                                    <span className="px-1">
+                                    <button
+                                        type="button"
+                                        className="px-1"
+                                        onClick={open}
+                                    >
                                         {t("upload_image")}
-                                    </span>
+                                    </button>
                                 </label>
                             </div>
                             <p className="text-xs text-gray-500">
@@ -371,8 +370,6 @@ function CreateCampaignPage({}: Props) {
         setLoading(false);
     }, [token]);
 
-    // if country !== all countries || select country get cities list
-
     useEffect(() => {
         const country = countryList.find(
             (country) => country.name === campaignInfo.country
@@ -406,8 +403,9 @@ function CreateCampaignPage({}: Props) {
                 </div>
             ) : (
                 <form
-                    className="space-y-8 divide-y divide-gray-200 m-20"
+                    className="space-y-8 divide-y divide-gray-200 m-20 m-4 lg:m-20 md:m-10 "
                     dir={i18n.language === "ar" ? "rtl" : "ltr"}
+                    action="bla.html"
                     onChange={(e) => {
                         e.preventDefault();
                         setErrorMessage("");

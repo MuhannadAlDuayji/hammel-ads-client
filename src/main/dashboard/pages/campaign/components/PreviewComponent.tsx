@@ -11,56 +11,38 @@ type Props = {
 function PreviewComponent({ photoPath, loading }: Props) {
     const { t, i18n } = useTranslation();
     return (
-        <div className="relative">
-            <img
-                src={preview}
-                style={{
-                    minWidth: "462px",
-                    minHeight: "768px",
-                }}
-            />
+        <div className="relative ">
+            <div className="relative w-[350px] my-4">
+                <img src={preview} className="w-[100%] h-[100%]"></img>
 
-            {!loading ? (
-                <img
-                    src={photoPath}
-                    className={`absolute rounded-lg ${
-                        i18n.language == "ar" ? "right-[118px]" : "left-[131px]"
-                    }`}
-                    style={{
-                        height: "348px",
-                        width: "213px",
-                        top: "190px",
-                        display: !photoPath ? "none" : "inherit",
-                    }}
-                />
-            ) : (
-                <div
-                    style={{
-                        height: "348px",
-                        width: "213px",
-                        top: "190px",
-                        display: !photoPath ? "none" : "inherit",
-                    }}
-                    className={`absolute rounded-lg ${
-                        i18n.language == "ar" ? "right-[118px]" : "left-[131px]"
-                    } bg-gray-50 flex justify-center pt-[23%]`}
-                >
-                    <LoadingSpinner />
-                </div>
-            )}
-
-            <img
-                src={closeIcon}
-                className={`absolute ${
-                    i18n.language == "ar" ? "right-[120px]" : "left-[325px]"
-                }`}
-                style={{
-                    height: "15px",
-                    width: "15px",
-                    top: "193px",
-                    display: !photoPath ? "none" : "inherit",
-                }}
-            />
+                {!loading ? (
+                    <div className="absolute h-[90%] w-[100%] top-[6.7%] flex justify-center items-center overflow-hidden ">
+                        <img
+                            src={photoPath}
+                            className={`rounded-lg w-[70%]`}
+                            style={{
+                                display: !photoPath ? "none" : "inherit",
+                            }}
+                        />
+                    </div>
+                ) : (
+                    <div
+                        style={{
+                            height: "348px",
+                            width: "213px",
+                            top: "190px",
+                            display: !photoPath ? "none" : "inherit",
+                        }}
+                        className={`absolute rounded-lg ${
+                            i18n.language == "ar"
+                                ? "right-[118px]"
+                                : "left-[131px]"
+                        } bg-gray-50 flex justify-center pt-[23%]`}
+                    >
+                        <LoadingSpinner />
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
