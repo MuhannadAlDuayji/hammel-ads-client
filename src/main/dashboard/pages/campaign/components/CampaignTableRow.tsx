@@ -160,19 +160,24 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
 
             {/* // status */}
 
-            <td className="whitspace-nowrap px-3 py-4 text-sm text-gray-500 bg-red-100">
+            <td className="py-4 h-[70px] text-sm text-gray-500 flex flex-col gap-2 justify-center">
                 <span
-                    className={`inline-flex nowrap whitespace-nowrap rounded-full px-2 text-xs font-semibold leading-5 ${statusStyles(
+                    className={`inline-flex whitespace-nowrap rounded-full px-2 text-xs font-semibold leading-5 h-5 w-20 ${statusStyles(
                         campaign.status
                     )} `}
                 >
                     {t(campaign.status)}
                 </span>
-                <span
-                    className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-red-100 text-red-700 `}
-                >
-                    {campaign.adminMessage ? "" : t("action_required")}
-                </span>
+
+                {!campaign.adminMessage ? (
+                    ""
+                ) : (
+                    <span
+                        className={`inline-flex text-center rounded-full px-2 text-xs font-semibold leading-5 bg-red-100 text-red-700 h-5 `}
+                    >
+                        {t("action_required").toUpperCase()}
+                    </span>
+                )}
             </td>
             <td className="relative  whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 ">
                 {/* <Link

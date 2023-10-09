@@ -157,9 +157,9 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
 
             {/* // status */}
 
-            <td className="whitspace-nowrap px-3 py-4 text-sm text-gray-500">
+            <td className="py-4 h-[70px] text-sm text-gray-500 flex flex-col gap-2 justify-center">
                 <span
-                    className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${statusStyles(
+                    className={`inline-flex whitespace-nowrap rounded-full px-2 text-xs font-semibold leading-5 h-5 w-20 ${statusStyles(
                         campaign.status
                     )} `}
                 >
