@@ -39,6 +39,12 @@ function dateFormater(date: Date, separator: string) {
     return dayString + separator + monthString + separator + String(year);
 }
 
+function formatFetchedDate(date: Date) {
+    const dateString = String(date);
+    // 2023-01-09T23:00:00.000Z for example to yyyy-mm-dd
+    return dateString.split("T")[0];
+}
+
 function statusStyles(status: string): string {
     switch (status) {
         case "ready":
@@ -80,6 +86,8 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             const response = await CampaignsAPI.updateCampaign(
                 {
                     ...campaign,
+                    startDate: formatFetchedDate(campaign.startDate),
+                    endDate: formatFetchedDate(campaign.endDate),
                     status: "stopped",
                 },
                 campaign._id,
@@ -95,8 +103,8 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
             const response = await CampaignsAPI.updateCampaign(
                 {
                     ...campaign,
-                    startDate: campaign.startDate,
-                    endDate: campaign.endDate,
+                    startDate: formatFetchedDate(campaign.startDate),
+                    endDate: formatFetchedDate(campaign.endDate),
                     status: "ready",
                 },
                 campaign._id,
