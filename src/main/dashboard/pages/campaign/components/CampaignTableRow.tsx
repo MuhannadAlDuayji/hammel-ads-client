@@ -170,20 +170,20 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
 
             <td className="py-4 h-[70px] text-sm text-gray-500 flex flex-col gap-2 justify-center">
                 <span
-                    className={`inline-flex whitespace-nowrap rounded-full px-2 text-xs font-semibold leading-5 h-5 w-20 ${statusStyles(
+                    className={`inline-flex whitespace-nowrap rounded-full px-1 text-xs font-semibold leading-5 h-5 flex justify-center items-center ${statusStyles(
                         campaign.status
                     )} `}
                 >
-                    {t(campaign.status)}
+                    <p>{t(campaign.status)}</p>
                 </span>
 
                 {!campaign.adminMessage ? (
                     ""
                 ) : (
                     <span
-                        className={`inline-flex text-center rounded-full px-2 text-xs font-semibold leading-5 bg-red-100 text-red-700 h-5 `}
+                        className={`inline-flex text-center rounded-full px-1 text-xs font-semibold leading-5 bg-red-100 text-red-700 h-5 flex justify-center items-center `}
                     >
-                        {t("action_required").toUpperCase()}
+                        <p>{t("action_required").toUpperCase()}</p>
                     </span>
                 )}
             </td>
