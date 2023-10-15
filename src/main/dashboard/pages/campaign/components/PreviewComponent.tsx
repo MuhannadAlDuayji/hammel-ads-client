@@ -21,9 +21,6 @@ function PreviewComponent({ photoPath, loading }: Props) {
                     <div className="absolute h-[90%] w-[100%] top-[6.7%] flex justify-center items-center overflow-hidden ">
                         <div className="relative w-[70%] rounded-xl border-4 border-white">
                             <div className="opacity-40 w-[100%] h-10 absolute top-0 flex items-center justify-between px-4 text-white">
-                                <div className="bg-black  rounded-xl px-3 py-1 text-xs">
-                                    اعلان
-                                </div>
                                 <div className="p-1 bg-black rounded-[50%] border-white border-[1px]">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -39,6 +36,9 @@ function PreviewComponent({ photoPath, loading }: Props) {
                                             d="M6 18L18 6M6 6l12 12"
                                         />
                                     </svg>
+                                </div>
+                                <div className="bg-black  rounded-xl px-3 py-1 text-xs">
+                                    اعلان
                                 </div>
                             </div>
 
