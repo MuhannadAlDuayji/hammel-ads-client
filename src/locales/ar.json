@@ -971,7 +971,7 @@
     "Bekalta": "بقالطة",
     "Beni Khiar": "بني خيار",
     "Bechri": "بشري",
-    "select_all_locations": "جميع الجهات",
+    "select_all_locations": "جميع المناطق",
     "no_options_message": "لا يوجد خيارات",
     "budget_message_part_1": "سعر الالف مشاهدة",
     "budget_message_part_2": "وبناءً على الميزانية الحالية سيكون عدد المشاهدات المتوقع",
@@ -981,8 +981,8 @@
     "action_required": "مطلوب التعديل",
     "whatsapp_only": "واتساب فقط",
     "filter_by_city": "الجهة",
-    "all_cities": "جميع الجهات",
-    "All Regions": "جميع الجهات",
+    "all_cities": "جميع المناطق",
+    "All Regions": "جميع المناطق",
     "average_click_watchtime": "معدل مدة المشاهدة قبل فتح الاعلان",
     "average_close_watchtime": "معدل نسبة المشاهدة قبل غلق الاعلان"
 }
