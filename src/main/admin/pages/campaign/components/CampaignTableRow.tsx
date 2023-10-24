@@ -166,6 +166,25 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                     {campaign.status.toUpperCase()}
                 </span>
             </td>
+            <td className="py-4 h-[70px] text-sm text-gray-500 flex flex-col gap-2 justify-center">
+                <span
+                    className={`inline-flex whitespace-nowrap rounded-full px-1 text-xs font-semibold leading-5 h-5 flex justify-center items-center ${statusStyles(
+                        campaign.status
+                    )} `}
+                >
+                    <p>{campaign.status}</p>
+                </span>
+
+                {!campaign.adminMessage ? (
+                    ""
+                ) : (
+                    <span
+                        className={`inline-flex text-center rounded-full px-1 text-xs font-semibold leading-5 bg-red-100 text-red-700 h-5 flex justify-center items-center `}
+                    >
+                        <p>Action Required</p>
+                    </span>
+                )}
+            </td>
             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-6">
                 <Link
                     to={`/admin/dashboard/campaigns/${campaign._id}`}
