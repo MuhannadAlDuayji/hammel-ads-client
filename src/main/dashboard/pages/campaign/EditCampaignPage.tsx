@@ -147,6 +147,9 @@ function EditCampaignPage({}: Props) {
                     >
                         {t("upload_image")}
                     </label>
+                    <p className="text-xs text-gray-500 mt-2">
+                        2090*1284 PNG, JPG, JPEG (4MB Max)
+                    </p>
                     <MobileFileInput onFileSelect={handleMobileFileSelect} />
                 </div>
             );
@@ -203,7 +206,7 @@ function EditCampaignPage({}: Props) {
                                 </label>
                             </div>
                             <p className="text-xs text-gray-500">
-                                2090*1284 PNG, JPG, JPEG up to 4MB
+                                2090*1284 PNG, JPG, JPEG (4MB Max)
                             </p>
                         </div>
                     )}
