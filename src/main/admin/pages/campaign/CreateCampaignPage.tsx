@@ -9,6 +9,7 @@ import CampaignsAPI from "./api";
 import PreviewComponent from "./PreviewComponent";
 import { useDropzone } from "react-dropzone";
 import { t } from "i18next";
+import { isMobile } from "react-device-detect";
 
 type Props = {};
 
@@ -80,7 +81,7 @@ function CreateCampaignPage({}: Props) {
     };
 
     const renderFileInput = () => {
-        if (false) {
+        if (isMobile) {
             return (
                 <div
                     className="mt-1 sm:col-span-2 sm:mt-0 flex-col items-center justify-center"
@@ -96,6 +97,9 @@ function CreateCampaignPage({}: Props) {
                         >
                             UPLOAD
                         </label>
+                        <p className="text-xs text-gray-500 mt-2">
+                            2090*1284 PNG, JPG, JPEG (4MB Max)
+                        </p>
                         {/* ... (additional UI elements) */}
                         <PreviewComponent photoPath={campaignInfo.photoPath} />
                     </div>
@@ -144,7 +148,7 @@ function CreateCampaignPage({}: Props) {
                                     </label>
                                 </div>
                                 <p className="text-xs text-gray-500">
-                                    2090*1284 PNG, JPG, JPEG up to 4MB
+                                    2090*1284 PNG, JPG, JPEG (4MB Max)
                                 </p>
                             </div>
                         )}
