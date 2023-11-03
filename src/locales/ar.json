@@ -984,5 +984,10 @@
     "all_cities": "جميع الجهات",
     "All Regions": "جميع الجهات",
     "average_click_watchtime": "معدل مدة المشاهدة قبل فتح الاعلان",
-    "average_close_watchtime": "معدل نسبة المشاهدة قبل غلق الاعلان"
+    "average_close_watchtime": "معدل نسبة المشاهدة قبل غلق الاعلان",
+    "filter_by_gender": "الجنس",
+    "male": "ذكر",
+    "female": "انثى",
+    "all": "الكل",
+    "gender": "الجنس"
 }

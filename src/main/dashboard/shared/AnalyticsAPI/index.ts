@@ -22,8 +22,8 @@ const AnalyticsAPI = {
         to: string,
         country: string | null = null,
         city: string | null = null,
-
-        campaignId: string | null = null
+        campaignId: string | null = null,
+        gender: "male" | "female" | "all" | null = null
     ) {
         return axios.post(
             `${process.env.REACT_APP_API_URL}/analytics/user-analytics`,
@@ -34,6 +34,7 @@ const AnalyticsAPI = {
                 country,
                 city,
                 campaignId,
+                gender,
             },
             {
                 headers: {
