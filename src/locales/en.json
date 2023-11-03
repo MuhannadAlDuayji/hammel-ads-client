@@ -980,5 +980,10 @@
     "filter_by_city": "Filter by region",
     "all_cities": "All Regions",
     "average_click_watchtime": "Average Click Watchtime",
-    "average_close_watchtime": "Average Close Watchtime"
+    "average_close_watchtime": "Average Close Watchtime",
+    "filter_by_gender": "Filter By Gender",
+    "male": "Male",
+    "female": "Female",
+    "all": "All",
+    "gender": "Gender"
 }

@@ -28,6 +28,7 @@ interface CampaignInfo {
     photoPath: string;
     link: string;
     testDeviceId: string;
+    gender: string;
 }
 interface City {
     label: string;
@@ -88,6 +89,11 @@ function EditCampaignPage({}: Props) {
     const token = useSelector((state: any) => state.auth.token);
     const [countryList, setCountryList] = useState<Country[]>([]);
     const [citiesList, setCitiesList] = useState<City[]>([]);
+    const genderList = [
+        { name: t("all"), value: "all" },
+        { name: t("male"), value: "male" },
+        { name: t("female"), value: "female" },
+    ];
     const [loading, setLoading] = useState(true);
     const [photoUploadPending, setPhotoUploadPending] = useState(false);
 
@@ -114,6 +120,7 @@ function EditCampaignPage({}: Props) {
         photoPath: "",
         link: "",
         testDeviceId: "",
+        gender: t("all"),
     });
     const onDrop = useCallback((acceptedFiles: any) => {
         handlePhotoUpload(acceptedFiles[0]);
@@ -298,6 +305,11 @@ function EditCampaignPage({}: Props) {
                         country.value.toLowerCase() ===
                         fetchedCampaign.country.toLowerCase()
                 )?.name,
+                gender: genderList.find(
+                    (gender) =>
+                        gender.value.toLowerCase() ===
+                        fetchedCampaign.gender.toLowerCase()
+                )?.name,
             });
         } catch (err: any) {
             console.log(err);
@@ -382,6 +394,9 @@ function EditCampaignPage({}: Props) {
                 endDate: campaignInfo.endDate,
                 country: countryList.find(
                     (country) => country.name === campaignInfo.country
+                )?.value,
+                gender: genderList.find(
+                    (gender) => gender.name === campaignInfo.gender
                 )?.value,
             };
             const response = await CampaignsAPI.updateCampaign(
@@ -625,6 +640,36 @@ function EditCampaignPage({}: Props) {
                                                     )})`}
                                             </p>
                                         )}
+                                    </div>
+                                </div>
+                                <div className="block text-sm font-medium text-gray-700">
+                                    <label
+                                        htmlFor="gender"
+                                        className="block text-sm font-medium text-gray-700"
+                                    >
+                                        {t("gender")}
+                                    </label>
+                                    <br></br>
+                                    <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                        <select
+                                            id="gender"
+                                            name="gender"
+                                            autoComplete="gender"
+                                            value={campaignInfo.gender}
+                                            onChange={(e) =>
+                                                setCampaignInfo({
+                                                    ...campaignInfo,
+                                                    gender: e.target.value,
+                                                })
+                                            }
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
+                                        >
+                                            {genderList.map((gender, i) => (
+                                                <option key={i}>
+                                                    {gender.name}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">

@@ -172,9 +172,9 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                 <span
                     className={`inline-flex whitespace-nowrap rounded-full px-1 text-xs font-semibold leading-5 h-5 flex justify-center items-center ${statusStyles(
                         campaign.status
-                    )} `}
+                    )} w-[100%] `}
                 >
-                    <p>{t(campaign.status)}</p>
+                    <p>{t(campaign.status).toUpperCase()}</p>
                 </span>
 
                 {!campaign.adminMessage ? (

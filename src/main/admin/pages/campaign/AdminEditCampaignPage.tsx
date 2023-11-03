@@ -30,6 +30,7 @@ interface CampaignInfo {
     photoPath: string;
     link: string;
     testDeviceId: string;
+    gender: string;
 }
 
 interface City {
@@ -70,6 +71,11 @@ function AdminEditCampaignPage({}: Props) {
 
     const token = useSelector((state: any) => state.auth.token);
     const [countryList, setCountryList] = useState<Country[]>([]);
+    const genderList = [
+        { name: "all", value: "all" },
+        { name: "male", value: "male" },
+        { name: "female", value: "female" },
+    ];
     const [citiesList, setCitiesList] = useState<City[]>([]);
 
     const [loading, setLoading] = useState(true);
@@ -88,6 +94,7 @@ function AdminEditCampaignPage({}: Props) {
         status: "",
         adminMessage: "",
         userId: "",
+        gender: "all",
     });
     const [campaignInfo, setCampaignInfo] = useState<CampaignInfo>({
         title: "",
@@ -100,6 +107,7 @@ function AdminEditCampaignPage({}: Props) {
         link: "",
         adminMessage: "",
         testDeviceId: "",
+        gender: "all",
     });
 
     const onDrop = useCallback((acceptedFiles: any) => {
@@ -285,6 +293,9 @@ function AdminEditCampaignPage({}: Props) {
                 endDate: campaignInfo.endDate,
                 country: countryList.find(
                     (country) => country.name === campaignInfo.country
+                )?.value,
+                gender: genderList.find(
+                    (gender) => gender.name === campaignInfo.gender
                 )?.value,
                 status: selectedStatus,
             };
@@ -500,6 +511,36 @@ function AdminEditCampaignPage({}: Props) {
                                                 })`}
                                             </p>
                                         )}
+                                    </div>
+                                </div>
+                                <div className="block text-sm font-medium text-gray-700">
+                                    <label
+                                        htmlFor="gender"
+                                        className="block text-sm font-medium text-gray-700"
+                                    >
+                                        Gender
+                                    </label>
+                                    <br></br>
+                                    <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                        <select
+                                            id="gender"
+                                            name="gender"
+                                            autoComplete="gender"
+                                            value={campaignInfo.gender}
+                                            onChange={(e) =>
+                                                setCampaignInfo({
+                                                    ...campaignInfo,
+                                                    gender: e.target.value,
+                                                })
+                                            }
+                                            className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-[#60b0bd] focus:ring-[#60b0bd]"
+                                        >
+                                            {genderList.map((gender, i) => (
+                                                <option key={i}>
+                                                    {gender.name}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="">

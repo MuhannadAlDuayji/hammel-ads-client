@@ -7,12 +7,15 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useTranslation } from "react-i18next";
 
+type Gender = "male" | "female" | "all";
 interface Props {
     fromDate: Date;
     toDate: Date;
     campaignIdFilter: string;
     countryFilter: string;
     cityFilter: string;
+    genderFilter: Gender;
+    setGenderFilter: (gender: Gender) => void;
     setFromDate: (date: Date) => void;
     setToDate: (date: Date) => void;
     setCampaignIdFilter: (name: string) => void;
@@ -49,6 +52,8 @@ const Header: React.FC<Props> = ({
     setCountryFilter,
     cityFilter,
     setCityFilter,
+    genderFilter,
+    setGenderFilter,
 }) => {
     const token = useSelector((state: any) => state.auth.token);
     const { t, i18n } = useTranslation();
@@ -119,12 +124,12 @@ const Header: React.FC<Props> = ({
     return (
         <div className=" shadow  bg-gray-50 mg-20 mb-10">
             <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-around flex-col sm:flex-row ">
-                <div className=" lg:w-1/3 mb-4 lg:mb-0 mx-4">
+                <div className=" lg:w-1/6 mb-4 lg:mb-0 ">
                     <span className="text-sm font-medium leading-6 text-gray-500">
                         {t("filter_by_date")}
                     </span>
-                    <div className="flex mt-2">
-                        <div className="mr-2">
+                    <div className=" mt-2">
+                        <div>
                             <DatePicker
                                 // minDate={new Date("01-05-2023")}
                                 selected={fromDate}
@@ -134,9 +139,10 @@ const Header: React.FC<Props> = ({
                                 className="border-gray-100 relative w-52 cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] sm:text-sm sm:leading-6"
                             />
                         </div>
-                        <h3 className="mx-2 mt-2 align-center text-sm font-medium leading-6 text-gray-400">
+                        <h3 className="mx-2 my-1 align-center text-sm font-medium leading-6 text-gray-400">
                             {t("to")}
                         </h3>
+
                         <div>
                             <DatePicker
                                 selected={toDate}
@@ -279,6 +285,90 @@ const Header: React.FC<Props> = ({
                     )}
                 </Listbox>
 
+                {/* gender Filter */}
+
+                <Listbox value={genderFilter} onChange={setGenderFilter}>
+                    {({ open }) => (
+                        <div className="ml-2">
+                            <Listbox.Label className="text-sm font-medium leading-6 text-gray-500">
+                                {t("filter_by_gender")}
+                            </Listbox.Label>
+
+                            <div className="relative mt-2">
+                                <Listbox.Button className="relative w-52 cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#60b0bd] sm:text-sm sm:leading-6">
+                                    <span className="block truncate">
+                                        {t(genderFilter)}
+                                    </span>
+                                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                        <ChevronUpDownIcon
+                                            className="h-5 w-5 text-gray-400"
+                                            aria-hidden="true"
+                                        />
+                                    </span>
+                                </Listbox.Button>
+
+                                <Transition
+                                    show={open}
+                                    as={Fragment}
+                                    leave="transition ease-in duration-100"
+                                    leaveFrom="opacity-100"
+                                    leaveTo="opacity-0"
+                                >
+                                    <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                        {["all", "male", "female"].map(
+                                            (gender, i) => (
+                                                <Listbox.Option
+                                                    key={i}
+                                                    className={({ active }) =>
+                                                        classNames(
+                                                            active
+                                                                ? "bg-[#60b0bd] text-white"
+                                                                : "text-gray-900",
+                                                            "relative cursor-default select-none py-2 pl-3 pr-9"
+                                                        )
+                                                    }
+                                                    value={gender}
+                                                >
+                                                    {({ selected, active }) => (
+                                                        <>
+                                                            <span
+                                                                className={classNames(
+                                                                    selected
+                                                                        ? "font-semibold"
+                                                                        : "font-normal",
+                                                                    "block truncate"
+                                                                )}
+                                                            >
+                                                                {t(gender)}
+                                                            </span>
+
+                                                            {selected ? (
+                                                                <span
+                                                                    className={classNames(
+                                                                        active
+                                                                            ? "text-white"
+                                                                            : "text-[#60b0bd]",
+                                                                        "absolute inset-y-0 right-0 flex items-center pr-4"
+                                                                    )}
+                                                                >
+                                                                    <CheckIcon
+                                                                        className="h-5 w-5"
+                                                                        aria-hidden="true"
+                                                                    />
+                                                                </span>
+                                                            ) : null}
+                                                        </>
+                                                    )}
+                                                </Listbox.Option>
+                                            )
+                                        )}
+                                    </Listbox.Options>
+                                </Transition>
+                            </div>
+                        </div>
+                    )}
+                </Listbox>
+
                 {/* select for country */}
                 <div className="flex flex-col ">
                     <Listbox
@@ -290,7 +380,7 @@ const Header: React.FC<Props> = ({
                         }}
                     >
                         {({ open }) => (
-                            <div className="ml-5">
+                            <div className="ml-2">
                                 <Listbox.Label className="text-sm font-medium leading-6 text-gray-500">
                                     {t("filter_by_country")}
                                 </Listbox.Label>
@@ -378,7 +468,7 @@ const Header: React.FC<Props> = ({
                     {!countryFilter.toLowerCase().includes("all countries") ? (
                         <Listbox value={cityFilter} onChange={setCityFilter}>
                             {({ open }) => (
-                                <div className="ml-5">
+                                <div className="ml-2">
                                     {/* <Listbox.Label className="text-sm font-medium leading-6 text-gray-500">
                                         {t("filter_by_city")}
                                     </Listbox.Label> */}

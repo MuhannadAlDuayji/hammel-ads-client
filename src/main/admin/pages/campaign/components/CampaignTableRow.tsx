@@ -157,7 +157,7 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
 
             {/* // status */}
 
-            <td className="py-4 h-[70px] text-sm text-gray-500 flex flex-col gap-2 justify-center">
+            {/* <td className="py-4 h-[70px] text-sm text-gray-500 flex flex-col gap-2 justify-center">
                 <span
                     className={`inline-flex whitespace-nowrap rounded-full px-2 text-xs font-semibold leading-5 h-5 w-20 ${statusStyles(
                         campaign.status
@@ -165,14 +165,14 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                 >
                     {campaign.status.toUpperCase()}
                 </span>
-            </td>
+            </td> */}
             <td className="py-4 h-[70px] text-sm text-gray-500 flex flex-col gap-2 justify-center">
                 <span
                     className={`inline-flex whitespace-nowrap rounded-full px-1 text-xs font-semibold leading-5 h-5 flex justify-center items-center ${statusStyles(
                         campaign.status
-                    )} `}
+                    )} w-[100%] `}
                 >
-                    <p>{campaign.status}</p>
+                    <p>{campaign.status.toUpperCase()}</p>
                 </span>
 
                 {!campaign.adminMessage ? (
@@ -181,7 +181,7 @@ export default function CampaignTableRow({ campaign }: CampaignsTableRowProps) {
                     <span
                         className={`inline-flex text-center rounded-full px-1 text-xs font-semibold leading-5 bg-red-100 text-red-700 h-5 flex justify-center items-center `}
                     >
-                        <p>Action Required</p>
+                        <p>ACTION REQUIRED</p>
                     </span>
                 )}
             </td>

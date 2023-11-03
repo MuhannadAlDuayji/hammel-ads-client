@@ -20,6 +20,8 @@ interface Data {
     closeAverageWatchtime: any;
 }
 
+type Gender = "male" | "female" | "all";
+
 function formatDate(date: Date): string {
     return date.toLocaleString("en-US", {
         month: "short",
@@ -89,6 +91,7 @@ export default function Analytics({}: AnalyticsProps) {
     const [campaignIdFilter, setCampaignIdFilter] = useState("");
     const [countryFilter, setCountryFilter] = useState("All Countries");
     const [cityFilter, setCityFilter] = useState("All Regions");
+    const [genderFilter, setGenderFilter] = useState<Gender>("all");
 
     const [data, setData] = useState<Data>({
         views: {
@@ -120,7 +123,8 @@ export default function Analytics({}: AnalyticsProps) {
                     ? null
                     : countryFilter,
                 cityFilter.toLowerCase() === "all regions" ? null : cityFilter,
-                campaignIdFilter === "" ? null : campaignIdFilter
+                campaignIdFilter === "" ? null : campaignIdFilter,
+                genderFilter === "all" ? null : genderFilter
             );
             const closes = await AnalyticsAPI.getTotalAnalytics(
                 token,
@@ -131,7 +135,8 @@ export default function Analytics({}: AnalyticsProps) {
                     ? null
                     : countryFilter,
                 cityFilter.toLowerCase() === "all regions" ? null : cityFilter,
-                campaignIdFilter === "" ? null : campaignIdFilter
+                campaignIdFilter === "" ? null : campaignIdFilter,
+                genderFilter === "all" ? null : genderFilter
             );
 
             const views = await AnalyticsAPI.getTotalAnalytics(
@@ -143,7 +148,8 @@ export default function Analytics({}: AnalyticsProps) {
                     ? null
                     : countryFilter,
                 cityFilter.toLowerCase() === "all regions" ? null : cityFilter,
-                campaignIdFilter === "" ? null : campaignIdFilter
+                campaignIdFilter === "" ? null : campaignIdFilter,
+                genderFilter === "all" ? null : genderFilter
             );
 
             setData({
@@ -172,7 +178,14 @@ export default function Analytics({}: AnalyticsProps) {
 
     useEffect(() => {
         getData();
-    }, [fromDate, toDate, countryFilter, campaignIdFilter, cityFilter]);
+    }, [
+        fromDate,
+        toDate,
+        countryFilter,
+        campaignIdFilter,
+        cityFilter,
+        genderFilter,
+    ]);
 
     return (
         <>
@@ -202,6 +215,8 @@ export default function Analytics({}: AnalyticsProps) {
                         setCountryFilter={setCountryFilter}
                         cityFilter={cityFilter}
                         setCityFilter={setCityFilter}
+                        genderFilter={genderFilter}
+                        setGenderFilter={setGenderFilter}
                     />
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-around flex-col sm:flex-row gap-5 bg-gray-50 flex-wrap">
                         <div className="sm:w-2/5">
